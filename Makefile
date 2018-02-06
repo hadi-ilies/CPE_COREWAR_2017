@@ -5,35 +5,29 @@
 ## Makefile
 ##
 
-SRC	=	$(SRC_DIR)main.c
+COREWAR_DIR	=	corewar/
 
-SRC_DIR	=	src/
+ASM_DIR	=	asm/
 
-LIB_DIR	=	lib/
+all:
 
-INC_DIR	=	include/
+		make -C $(ASM_DIR)
+		make -C $(COREWAR_DIR)
 
-OBJ	=	$(SRC:.c=.o)
+asm:
+		make -C $(ASM_DIR)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -I $(INC_DIR) -g
+corewar:
+		make -C $(COREWAR_DIR)
 
-LDFLAGS	=	-L $(LIB_DIR) -lmy
-
-NAME	=	a.out
-
-all:		$(NAME)
-
-$(NAME):	$(OBJ)
-		make -C $(LIB_DIR)
-		gcc -o $(NAME) $(OBJ) $(LDFLAGS)
 clean:
-		rm -f $(OBJ)
-		make clean -C $(LIB_DIR)
+		make clean -C $(ASM_DIR)
+		make clean -C $(COREWAR_DIR)
 
-fclean:		clean
-		rm -f $(NAME)
-		make fclean -C $(LIB_DIR)
+fclean:	clean
+		make fclean -C $(ASM_DIR)
+		make fclean -C $(COREWAR_DIR)
 
 re: 		fclean all
 
-.PHONY:	all re clean fclean
+.PHONY:	all corewar asm re clean fclean
