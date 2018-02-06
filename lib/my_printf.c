@@ -6,6 +6,7 @@
 */
 
 #include <stdarg.h>
+#include <stddef.h>
 #include "proto.h"
 
 void what_modulo(const char *format, size_t i, va_list arg)
