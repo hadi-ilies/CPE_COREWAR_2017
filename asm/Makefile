@@ -7,6 +7,7 @@
 
 SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)h_option.c	\
+			$(SRC_DIR)open_asm.c	\
 			$(SRC_DIR)create_champ_file.c
 
 SRC_DIR		=	src/
@@ -17,7 +18,7 @@ INC_DIR		=	../include/
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		=	-W -Wall -Wextra -Werror -I $(INC_DIR) -fdiagnostics-color
+CFLAGS		=	-W -Wall -Wextra -Werror -I $(INC_DIR) -fdiagnostics-color -g
 
 LDFLAGS		=	-L $(LIB_DIR) -lmy
 

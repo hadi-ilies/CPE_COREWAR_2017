@@ -27,5 +27,9 @@ char *get_champ_name(char *path)
 
 int create_champ_file(char *path)
 {
-	return (open(get_champ_name(path), FLAGS, MODE));
+	char *champ_name = get_champ_name(path);
+	int fd = open(champ_name, FLAGS, MODE);
+
+	free(champ_name);
+	return (fd);
 }
