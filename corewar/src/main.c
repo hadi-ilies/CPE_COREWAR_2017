@@ -5,7 +5,7 @@
 ** main
 */
 
-#include "proto.h"
+#include "my.h"
 
 int main()
 {
