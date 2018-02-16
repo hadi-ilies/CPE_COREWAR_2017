@@ -8,7 +8,8 @@
 SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)h_option.c	\
 			$(SRC_DIR)open_asm.c	\
-			$(SRC_DIR)create_champ_file.c
+			$(SRC_DIR)create_champ_file.c	\
+			$(SRC_DIR)op.c
 
 SRC_DIR		=	src/
 
@@ -29,6 +30,7 @@ all:		$(NAME)
 $(NAME):	$(OBJ)
 		@make -C $(LIB_DIR) --no-print-directory
 		@gcc -o $(NAME) $(OBJ) $(LDFLAGS)
+
 clean:
 		@rm -f $(OBJ)
 		@make clean -C $(LIB_DIR) --no-print-directory
