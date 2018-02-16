@@ -6,7 +6,8 @@
 ##
 
 SRC		=	$(SRC_DIR)main.c	\
-			$(SRC_DIR)h_option.c
+			$(SRC_DIR)h_option.c	\
+			$(SRC_DIR)create_champ_file.c
 
 SRC_DIR		=	src/
 

@@ -10,7 +10,9 @@ SRC	=	my_putchar.c	\
 		my_putstr.c	\
 		my_strlen.c	\
 		my_printf.c	\
-		get_next_line.c
+		get_next_line.c	\
+		my_strcat.c	\
+		my_strdup.c
 
 INC_DIR	=	../include
 

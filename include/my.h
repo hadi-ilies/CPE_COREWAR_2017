@@ -15,3 +15,5 @@ void my_putstr(char const *str);
 int my_strlen(char const *str);
 int my_printf(char const *format, ...);
 char *get_next_line(int fd);
+char *my_strcat(char *recept, char *new);
+char *my_strdup(char const *src);

@@ -34,7 +34,7 @@ char *concat(char *recept, char *new)
 	return (new_str);
 }
 
-char *my_strdup(char *src, size_t n, char *tofree)
+char *my_strdu(char *src, size_t n, char *tofree)
 {
 	size_t i = 0;
 	char *new_str = malloc(sizeof(char) * (my_strlen(src) + 1));
@@ -80,11 +80,11 @@ char *get_next_line(int fd)
 		}
 		if (tmp == NULL || tmp[0] == '\0')
 			return (NULL);
-		rest_line = my_strdup(tmp, my_strlen(tmp), tmp);
+		rest_line = my_strdu(tmp, my_strlen(tmp), tmp);
 		tmp = NULL;
 		return (rest_line);
 	}
-	rest_line = my_strdup(tmp, pos_back_n, NULL);
-	tmp = my_strdup(tmp + pos_back_n + 1, my_strlen(tmp + pos_back_n), tmp);
+	rest_line = my_strdu(tmp, pos_back_n, NULL);
+	tmp = my_strdu(tmp + pos_back_n + 1, my_strlen(tmp + pos_back_n), tmp);
 	return (rest_line);
 }
