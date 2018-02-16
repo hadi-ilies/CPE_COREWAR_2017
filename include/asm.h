@@ -7,7 +7,10 @@
 
 #pragma once
 
-typedef struct{
+typedef struct
+{
 	int src_fd;
 	int dest_fd;
 } asm_t;
+
+void h_option(char *binary_name, char *arg);

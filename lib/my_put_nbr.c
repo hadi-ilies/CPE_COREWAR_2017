@@ -5,7 +5,7 @@
 ** task07
 */
 
-#include "proto.h"
+#include "my.h"
 
 void my_put_nbr(int nb)
 {

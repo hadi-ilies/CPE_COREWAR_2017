@@ -5,7 +5,7 @@
 ** task02
 */
 
-#include "proto.h"
+#include "my.h"
 
 void my_putstr(char const *str)
 {

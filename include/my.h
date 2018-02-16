@@ -14,3 +14,4 @@ void my_put_nbr(int nb);
 void my_putstr(char const *str);
 int my_strlen(char const *str);
 int my_printf(char const *format, ...);
+char *get_next_line(int fd);

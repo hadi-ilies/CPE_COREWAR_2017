@@ -10,22 +10,22 @@ COREWAR_DIR	=	corewar/
 ASM_DIR	=	asm/
 
 all:
-		@make -C $(ASM_DIR)
-		@make -C $(COREWAR_DIR)
+		@make -C $(ASM_DIR) --no-print-directory
+		@make -C $(COREWAR_DIR) --no-print-directory
 
 asm:
-		@make -C $(ASM_DIR)
+		@make -C $(ASM_DIR) --no-print-directory
 
 corewar:
-		@make -C $(COREWAR_DIR)
+		@make -C $(COREWAR_DIR) --no-print-directory
 
 clean:
-		@make clean -C $(ASM_DIR)
-		@make clean -C $(COREWAR_DIR)
+		@make clean -C $(ASM_DIR) --no-print-directory
+		@make clean -C $(COREWAR_DIR) --no-print-directory
 
 fclean:		clean
-		@make fclean -C $(ASM_DIR)
-		@make fclean -C $(COREWAR_DIR)
+		@make fclean -C $(ASM_DIR) --no-print-directory
+		@make fclean -C $(COREWAR_DIR) --no-print-directory
 
 re:		fclean all
 
