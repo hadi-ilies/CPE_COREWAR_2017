@@ -7,6 +7,9 @@
 
 #pragma once
 
+#define MODE (O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
+#define RIGHTS (S_IROTH | S_IWGRP | S_IRUSR | S_IWUSR | S_IRGRP)
+
 typedef struct
 {
 	int src_fd;
