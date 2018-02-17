@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <stddef.h>
+
 #define MEM_SIZE                (6*1024)
 #define IDX_MOD                 512   /* modulo of the index < */
 #define MAX_ARGS_NUMBER         4     /* this may not be changed 2^*IND_SIZE */
@@ -52,16 +54,16 @@ extern op_t op_tab[];
 ** header
 */
 
-#define PROG_NAME_LENGTH        128
-#define COMMENT_LENGTH          2048
-#define COREWAR_EXEC_MAGIC      0xea83f3        /* why not */
+#define PROG_NAME_LEN	128
+#define COMMENT_LEN	2048
+#define COREWAR_EXEC_MAGIC	0xea83f3        /* why not */
 
 typedef struct
 {
-	int  magic;
-	char prog_name[PROG_NAME_LENGTH + 1];
-	int  prog_size;
-	char comment[COMMENT_LENGTH + 1];
+	int	magic;
+	char	prog_name[PROG_NAME_LEN + 1];
+	size_t	prog_size;
+	char	comment[COMMENT_LEN + 1];
 } header_t;
 
 /*

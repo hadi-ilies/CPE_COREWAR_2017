@@ -17,3 +17,4 @@ int my_printf(char const *format, ...);
 char *get_next_line(int fd);
 char *my_strcat(char *recept, char *new);
 char *my_strdup(char const *src);
+bool my_write(int fd, const char *buf);

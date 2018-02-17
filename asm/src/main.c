@@ -15,6 +15,11 @@ int main(int argc, char **argv)
 
 	if (!h_option(argc, argv) || !init_struct(&asm_s, argv[1]))
 		return (EXIT_FAILURE);
-	my_put_nbr(asm_s.champ_fd);
-	return (0);
+	if (!compile_asm(&asm_s)) {
+		my_printf("%s, %s, Line : %d", *argv, argv[1], asm_s.err_line);
+		return (EXIT_FAILURE);
+	}
+	if (write_header(&asm_s) == false)
+		return (false);
+	return (EXIT_SUCCESS);
 }
