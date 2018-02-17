@@ -60,7 +60,7 @@ extern op_t op_tab[];
 
 typedef struct
 {
-	int	magic;
+	size_t	magic;
 	char	prog_name[PROG_NAME_LEN + 1];
 	size_t	prog_size;
 	char	comment[COMMENT_LEN + 1];
