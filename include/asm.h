@@ -16,8 +16,8 @@ typedef struct
 {
 	int asm_fd;
 	int champ_fd;
+	char *prog_name;
 } asm_t;
 
-bool h_option(char *binary_name, char *arg);
-int create_champ_file(char *path);
-int open_asm(char *path);
+bool h_option(int argc, char **argv);
+bool init_struct(asm_t *asm_s, char *path);

@@ -7,9 +7,10 @@
 
 SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)h_option.c	\
-			$(SRC_DIR)open_asm.c	\
-			$(SRC_DIR)create_champ_file.c	\
-			$(SRC_DIR)op.c
+			$(SRC_DIR)init_struct.c	\
+			$(SRC_DIR)op.c	\
+			$(SRC_DIR)compile_asm.c	\
+			$(SRC_DIR)parsing.c
 
 SRC_DIR		=	src/
 
