@@ -1,12 +1,12 @@
 /*
 ** EPITECH PROJECT, 2018
-** create_champ_file
+** init_struct
 ** File description:
-** create_champ_file
+** init_struct
 */
 
-#include <fcntl.h>
 #include <stdlib.h>
+#include <fcntl.h>
 #include "asm.h"
 #include "my.h"
 
@@ -32,4 +32,13 @@ int create_champ_file(char *path)
 
 	free(champ_name);
 	return (fd);
+}
+
+bool init_struct(asm_t *asm_s, char *path)
+{
+	if ((asm_s->asm_fd = open(path, O_RDONLY)) < 0)
+		return (false);
+	if ((asm_s->champ_fd = create_champ_file(path)) < 0)
+		return (false);
+	return (true);
 }
