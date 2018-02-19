@@ -6,6 +6,7 @@
 */
 
 #include <string.h>
+#include <unistd.h>
 #include "asm.h"
 #include "my.h"
 
@@ -38,16 +39,15 @@ bool init_header_struct(asm_t *asm_s)
 	return (true);
 }
 
-bool write_string(asm_t *asm_s, char *str, int max)
+size_t file_size(char **tab)
 {
-	int b = 0;
+	size_t size = 0;
 
-	if (my_write(asm_s->champ_fd, str) == false)
-		return (false);
-	for (int i = max - my_strlen(str); i >= 0; i--)
-		if (my_write(asm_s->champ_fd, &b) == false)
-			return (false);
-	return (true);
+	if (tab == NULL)
+		return (-1);
+	for (int i = 0; tab[i] != NULL; i++)
+		size += my_strlen(tab[i]);
+	return (size);
 }
 
 /*
@@ -58,16 +58,9 @@ bool write_string(asm_t *asm_s, char *str, int max)
 bool write_header(asm_t *asm_s)
 {
 	asm_s->header.magic = COREWAR_EXEC_MAGIC;
-	asm_s->header.prog_size = my_tablen(asm_s->prog_code);
+	asm_s->header.prog_size = file_size(asm_s->prog_code) - sizeof(header_t);
 	if (!init_header_struct(asm_s))
 		return (false);
-	if (!WRITE_NUMBER(asm_s->champ_fd, &asm_s->header.magic))
-		return (false);
-	if (!write_string(asm_s, asm_s->header.prog_name, PROG_NAME_LEN))
-		return (false);
-	if (!WRITE_NUMBER(asm_s->champ_fd, ADD_PROG_SIZE - sizeof(header_t)))
-		return (false);
-	if (!write_string(asm_s, asm_s->header.comment, COMMENT_LEN))
-		return (false);
+	write(asm_s->champ_fd, &asm_s->header, sizeof(header_t));
 	return (true);
 }
