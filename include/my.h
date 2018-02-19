@@ -9,6 +9,7 @@
 
 #include <stdarg.h>
 #include <stdbool.h>
+#include <stddef.h>
 
 void my_putchar(char c);
 void my_put_nbr(int nb);
@@ -19,3 +20,5 @@ char *get_next_line(int fd);
 char *my_strcat(char *recept, char *new);
 char *my_strdup(char const *src);
 bool my_write(int fd, const void *buf);
+size_t my_tablen(char **tab);
+void my_free_tab(char **tab);

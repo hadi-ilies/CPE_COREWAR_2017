@@ -13,13 +13,16 @@ SRC	=	my_putchar.c	\
 		get_next_line.c	\
 		my_strcat.c	\
 		my_strdup.c	\
-		my_write.c
+		my_write.c	\
+		my_free_tab.c	\
+		my_strcat_to_tab.c	\
+		my_tablen.c
 
 INC_DIR	=	../include
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -I $(INC_DIR) -g
+CFLAGS	=	-W -Wall -Wextra -Werror -I $(INC_DIR)
 
 NAME	=	libmy.a
 
