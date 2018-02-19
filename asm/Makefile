@@ -8,20 +8,27 @@
 SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)h_option.c	\
 			$(SRC_DIR)init_struct.c	\
-			$(SRC_DIR)op.c	\
 			$(SRC_DIR)write_header.c	\
 			$(SRC_DIR)compile_asm.c	\
 			$(SRC_DIR)parsing.c
+
+SRC		+=	../$(COMMON_DIR)$(SRC_DIR)op.c
+
+COMMON_DIR	=	common/
 
 SRC_DIR		=	src/
 
 LIB_DIR		=	../lib/
 
-INC_DIR		=	../include/
+INC_DIR		=	include/
+
+COMMON_INC_DIR		=	../$(COMMON_DIR)include/
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		=	-W -Wall -Wextra -Werror -I $(INC_DIR) -fdiagnostics-color -g
+CFLAGS		=	-W -Wall -Wextra -Werror -fdiagnostics-color -g
+
+CFLAGS		+=  -I $(INC_DIR) -I $(COMMON_INC_DIR)
 
 LDFLAGS		=	-L $(LIB_DIR) -lmy
 

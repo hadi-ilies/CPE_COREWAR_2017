@@ -12,6 +12,8 @@
 
 #define FLAGS	(O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
 #define MODE	(S_IROTH | S_IWGRP | S_IRUSR | S_IWUSR | S_IRGRP)
+#define ADD_PROG_SIZE	&asm_s->header.prog_size
+#define PROG_CODE asm_s->prog_code
 
 typedef struct
 {
@@ -19,7 +21,7 @@ typedef struct
 	int	asm_fd;
 	int	champ_fd;
 	size_t	err_line;
-	char	*prog_code;
+	char	**prog_code;
 } asm_t;
 
 bool h_option(int argc, char **argv);

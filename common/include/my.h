@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2017
-** proto
+** my
 ** File description:
-** proto
+** my
 */
 
 #pragma once
@@ -22,3 +22,4 @@ char *my_strdup(char const *src);
 bool my_write(int fd, const void *buf);
 size_t my_tablen(char **tab);
 void my_free_tab(char **tab);
+char **my_strcat_to_tab(char **tab, char *new_line);

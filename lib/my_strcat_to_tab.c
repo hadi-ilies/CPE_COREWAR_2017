@@ -18,7 +18,7 @@ char **my_strcat_to_tab(char **tab, char *new_line)
 	for (; tab[i] != NULL; i++)
 		new_tab[i] = tab[i];
 	new_tab[i] = new_line;
-	new_tab[i + 1] = NULL;
+	new_tab[++i] = NULL;
 	my_free_tab(tab);
 	return (new_tab);
 }

@@ -18,7 +18,9 @@ SRC	=	my_putchar.c	\
 		my_strcat_to_tab.c	\
 		my_tablen.c
 
-INC_DIR	=	../include
+COMMON_DIR	=	common/
+
+INC_DIR	=	../$(COMMON_DIR)include/
 
 OBJ	=	$(SRC:.c=.o)
 

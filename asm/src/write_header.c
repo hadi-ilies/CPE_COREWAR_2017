@@ -18,17 +18,11 @@ void fill_rest_0(char *str, int i, int max)
 bool init_header_struct(asm_t *asm_s)
 {
 	int i = 0;
-	char *name = get_next_line(asm_s->asm_fd);
-	char *comment = get_next_line(asm_s->asm_fd);
+	char *name = PROG_CODE[0];
+	char *comment = PROG_CODE[1];
 
-	if (name == NULL) {
-		my_putstr("name\n");
+	if (name == NULL || comment == NULL)
 		return (false);
-	}
-	if (comment == NULL) {
-		my_putstr("comment\n");
-		return (false);
-	}
 	for (; name[i] != '\0'; i++)
 		asm_s->header.prog_name[i] = name[i];
 	fill_rest_0(asm_s->header.prog_name, i, PROG_NAME_LEN);
@@ -60,21 +54,21 @@ bool write_string(asm_t *asm_s, char *str, int max)
 }
 
 /*
-** In the header of .cor : COREWAR_EXEC_MAGIC, NAME, COMMENT, SIZE
+** In the header of .cor : COREWAR_EXEC_MAGIC, NAME, PROG_SIZE - HEADER_SIZE, COMMENT
 ** PS : A confirmer auprès de Freddou
 */
 
 bool write_header(asm_t *asm_s)
 {
 	asm_s->header.magic = COREWAR_EXEC_MAGIC;
-	asm_s->header.prog_size = my_strlen(asm_s->prog_code);
+	asm_s->header.prog_size = my_tablen(asm_s->prog_code);
 	if (!init_header_struct(asm_s))
 		return (false);
 	if (!write_number(asm_s->champ_fd, &asm_s->header.magic))
 		return (false);
 	if (!write_string(asm_s, asm_s->header.prog_name, PROG_NAME_LEN))
 		return (false);
-	if (!write_number(asm_s->champ_fd, &asm_s->header.prog_size))
+	if (!write_number(asm_s->champ_fd, ADD_PROG_SIZE - sizeof(header_t)))
 		return (false);
 	if (!write_string(asm_s, asm_s->header.comment, COMMENT_LEN))
 		return (false);

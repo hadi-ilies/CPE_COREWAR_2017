@@ -7,15 +7,23 @@
 
 SRC		=	$(SRC_DIR)main.c
 
+SRC             +=      ../$(COMMON_DIR)$(SRC_DIR)op.c
+
+COMMON_DIR	=	common/
+
 SRC_DIR		=	src/
 
 LIB_DIR		=	../lib/
+
+COMMON_INC_DIR          =       ../$(COMMON_DIR)include/
 
 INC_DIR		=	../include/
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		=	-W -Wall -Wextra -Werror -I $(INC_DIR) -g -fdiagnostics-color
+CFLAGS		=	-W -Wall -Wextra -Werror -g -fdiagnostics-color
+
+CFLAGS          +=  -I $(INC_DIR) -I $(COMMON_INC_DIR)
 
 LDFLAGS		=	-L $(LIB_DIR) -lmy
 
