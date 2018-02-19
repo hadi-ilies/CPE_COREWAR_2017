@@ -19,7 +19,7 @@ INC_DIR	=	../include
 
 OBJ	=	$(SRC:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -I $(INC_DIR)
+CFLAGS	=	-W -Wall -Wextra -Werror -I $(INC_DIR) -g
 
 NAME	=	libmy.a
 
