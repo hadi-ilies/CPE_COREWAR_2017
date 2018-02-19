@@ -11,6 +11,7 @@ SRC	=	my_putchar.c	\
 		my_strlen.c	\
 		my_printf.c	\
 		get_next_line.c	\
+		my_strcmp.c	\
 		my_strcat.c	\
 		my_strdup.c	\
 		my_write.c	\

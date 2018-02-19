@@ -17,6 +17,7 @@ void my_putstr(char const *str);
 int my_strlen(char const *str);
 int my_printf(char const *format, ...);
 char *get_next_line(int fd);
+int my_strcmp(char const *str_a, char const *str_b);
 char *my_strcat(char *recept, char *new);
 char *my_strdup(char const *src);
 bool my_write(int fd, const void *buf);

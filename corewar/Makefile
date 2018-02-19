@@ -21,7 +21,7 @@ INC_DIR		=	../include/
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		=	-W -Wall -Wextra -Werror -g -fdiagnostics-color
+CFLAGS		=	-W -Wall -Wextra -g -fdiagnostics-color
 
 CFLAGS          +=  -I $(INC_DIR) -I $(COMMON_INC_DIR)
 
