@@ -1,5 +1,5 @@
 .name "Tyron"
-.comment "just a basic pompes, traction program"
+.comment "Just a basic pompes, traction program"
 
 	sti r1, %:hi, %1
 hi:	live %123

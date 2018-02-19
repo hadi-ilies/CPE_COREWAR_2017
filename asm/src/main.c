@@ -21,5 +21,6 @@ int main(int argc, char **argv)
 	}
 	if (write_header(&asm_s) == false)
 		return (EXIT_FAILURE);
+	my_free_tab(asm_s.prog_code);
 	return (EXIT_SUCCESS);
 }

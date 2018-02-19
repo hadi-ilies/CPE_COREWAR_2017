@@ -5,43 +5,51 @@
 ** write_header
 */
 
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 #include "asm.h"
 #include "my.h"
 
-void fill_rest_0(char *str, int i, int max)
+void my_memset(char *str, int max)
 {
-	for (; i < max; i++)
+	for (int i = 0; i < max; i++)
 		str[i] = 0;
 }
 
-bool init_header_struct(asm_t *asm_s)
+bool fill_name_header(asm_t *asm_s)
 {
 	int i = 0;
 	char *name = get_str_entrecote(PROG_CODE[0]);
-	char *comment = get_str_entrecote(PROG_CODE[1]);
 
-	if (name == NULL || comment == NULL)
+	if (name == NULL || strncmp(PROG_CODE[0], NAME_CMD_STRING, 5))
 		return (false);
-	for (; name[i] != '\0'; i++)
+	my_memset(asm_s->header.prog_name, COMMENT_LEN);
+	for (i = 0; name[i] != '\0'; i++)
 		asm_s->header.prog_name[i] = name[i];
-	fill_rest_0(asm_s->header.prog_name, i, PROG_NAME_LEN);
 	asm_s->err_line++;
-	if (!strncmp(asm_s->header.prog_name, NAME_CMD_STRING, 5))
-		return (false);
-	for (i = 0; comment[i] != '\0'; i++)
-		asm_s->header.comment[i] = comment[i];
-	fill_rest_0(asm_s->header.prog_name, i, COMMENT_LEN);
-	asm_s->err_line++;
-	if (!strncmp(asm_s->header.comment, COMMENT_CMD_STRING, 8))
-		return (false);
+	free(name);
 	return (true);
 }
 
-size_t file_size(char **tab)
+bool fill_comment_header(asm_t *asm_s)
 {
-	size_t size = 0;
+	int i = 0;
+	char *comment = get_str_entrecote(PROG_CODE[1]);
+
+	if (comment == NULL || strncmp(PROG_CODE[1], COMMENT_CMD_STRING, 8))
+		return (false);
+	my_memset(asm_s->header.comment, COMMENT_LEN);
+	for (i = 0; comment[i] != '\0'; i++)
+		asm_s->header.comment[i] = comment[i];
+	asm_s->err_line++;
+	free(comment);
+	return (true);
+}
+
+int file_len(char **tab)
+{
+	int size = 0;
 
 	if (tab == NULL)
 		return (-1);
@@ -57,9 +65,10 @@ size_t file_size(char **tab)
 
 bool write_header(asm_t *asm_s)
 {
-	asm_s->header.magic = COREWAR_EXEC_MAGIC;
-	asm_s->header.prog_size = file_size(asm_s->prog_code) - sizeof(header_t);
-	if (!init_header_struct(asm_s))
+	asm_s->header.magic = REV_ENDIAN(COREWAR_EXEC_MAGIC);
+	PROG_SIZE = REV_ENDIAN(file_len(PROG_CODE) - sizeof(header_t));
+	PROG_SIZE = (PROG_SIZE < 0) ? 0 : PROG_SIZE;
+	if (!fill_name_header(asm_s) || !fill_comment_header(asm_s))
 		return (false);
 	write(asm_s->champ_fd, &asm_s->header, sizeof(header_t));
 	return (true);
