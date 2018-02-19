@@ -6,6 +6,7 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "my.h"
 
 char **my_strcat_to_tab(char **tab, char *new_line)
@@ -15,10 +16,12 @@ char **my_strcat_to_tab(char **tab, char *new_line)
 
 	if (new_tab == NULL)
 		return (NULL);
-	for (; tab[i] != NULL; i++)
-		new_tab[i] = tab[i];
+	if (tab != NULL)
+		for (; tab[i] != NULL; i++)
+			new_tab[i] = tab[i];
 	new_tab[i] = new_line;
-	new_tab[++i] = NULL;
-	my_free_tab(tab);
+	printf("new line : %s\n", new_tab[i]);
+	new_tab[i + 1] = NULL;
+	free(tab);
 	return (new_tab);
 }
