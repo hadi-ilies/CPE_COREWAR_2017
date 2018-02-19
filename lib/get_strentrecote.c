@@ -10,7 +10,6 @@ int len_entrecote(char *str)
 
 char *get_strentrecote(char *str)
 {
-	int i = 1;
 	int j = 0;
 	char *tmp;
 
@@ -20,10 +19,15 @@ char *get_strentrecote(char *str)
 	tmp = malloc(sizeof(char) * (len_entrecote(str) + 2));
 	if (tmp == NULL)
 		return (NULL);
-	for (; str[i] != '"' && str[i] != '\0'; i++) {
-		tmp[j] = str[i];
+	for (++str; str[0] != '"' && str[0] != '\0'; str++) {
+		tmp[j] = str[0];
 		j++;
 	}
 	tmp[j] = '\0';
 	return (tmp);
+}
+
+int main(void) {
+	printf("%s\n", get_strentrecote("efzef \"bitefe\" fe"));
+	return (0);
 }
