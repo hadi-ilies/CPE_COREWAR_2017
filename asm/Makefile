@@ -8,6 +8,7 @@
 SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)h_option.c	\
 			$(SRC_DIR)init_struct.c	\
+			$(SRC_DIR)get_str_entrecote.c	\
 			$(SRC_DIR)write_header.c	\
 			$(SRC_DIR)compile_asm.c	\
 			$(SRC_DIR)parsing.c
