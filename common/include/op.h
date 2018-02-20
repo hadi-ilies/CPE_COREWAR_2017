@@ -60,9 +60,9 @@ extern op_t op_tab[];
 
 typedef struct
 {
-	size_t	magic;
+	int	magic;
 	char	prog_name[PROG_NAME_LEN + 1];
-	size_t	prog_size;
+	int	prog_size;
 	char	comment[COMMENT_LEN + 1];
 } header_t;
 
