@@ -5,6 +5,8 @@
 ** my_atoi
 */
 
+#include "my.h"
+
 bool my_atoi(int *nb, char *str)
 {
 	size_t i = 0;

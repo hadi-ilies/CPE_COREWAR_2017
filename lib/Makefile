@@ -12,12 +12,14 @@ SRC	=	my_putchar.c	\
 		my_printf.c	\
 		get_next_line.c	\
 		my_strcmp.c	\
+		my_strncmp.c	\
 		my_strcat.c	\
 		my_strdup.c	\
 		my_write.c	\
 		my_free_tab.c	\
 		my_strcat_to_tab.c	\
-		my_tablen.c
+		my_tablen.c \
+		my_atoi.c \
 
 COMMON_DIR	=	common/
 
