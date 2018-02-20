@@ -20,16 +20,21 @@ char *get_champ_name(char *path)
 	i = my_strlen(cor);
 	if (cor[i - 2] == '.' && cor[i - 1] == 's')
 		cor[i - 1] = '\0';
-	else
+	else {
+		free(cor);
 		return (NULL);
+	}
 	return (my_strcat(cor, "cor"));
 }
 
 int create_champ_file(char *path)
 {
 	char *champ_name = get_champ_name(path);
-	int fd = open(champ_name, FLAGS, MODE);
+	int fd = 0;
 
+	if (champ_name == NULL)
+		return (-1);
+	fd = open(champ_name, FLAGS, MODE);
 	free(champ_name);
 	return (fd);
 }
