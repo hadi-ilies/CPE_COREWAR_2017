@@ -19,8 +19,10 @@ int main(int argc, char **argv)
 		my_printf("%s, %s, Line : %d", *argv, argv[1], asm_s.err_line);
 		return (EXIT_FAILURE);
 	}
-	if (write_header(&asm_s) == false)
+	if (fill_header(&asm_s) == false)
 		return (EXIT_FAILURE);
-	my_free_tab(asm_s.prog_code);
+	if (write_binary_code(&asm_s) == false)
+		return (EXIT_FAILURE);
+	my_free_tab(asm_s.asm_code);
 	return (EXIT_SUCCESS);
 }

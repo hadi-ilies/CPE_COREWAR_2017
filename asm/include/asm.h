@@ -12,7 +12,7 @@
 
 #define FLAGS		(O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
 #define MODE		(S_IROTH | S_IWGRP | S_IRUSR | S_IWUSR | S_IRGRP)
-#define PROG_CODE	asm_s->prog_code
+#define ASM_CODE	asm_s->asm_code
 #define PROG_SIZE	asm_s->header.prog_size
 
 #define REV_ENDIAN(x)							\
@@ -25,7 +25,8 @@ typedef struct
 	int		asm_fd;
 	int		champ_fd;
 	size_t		err_line;
-	char		**prog_code;
+	char		**asm_code;
+	char		*champ_code;
 } asm_t;
 
 bool h_option(int argc, char **argv);
@@ -33,4 +34,5 @@ bool init_struct(asm_t *asm_s, char *path);
 bool compile_asm(asm_t *asm_s);
 char *get_str_entrecote(char *str);
 void erase_comment(char *line);
-bool write_header(asm_t *asm_s);
+bool fill_header(asm_t *asm_s);
+bool write_binary_code(asm_t *asm_s);
