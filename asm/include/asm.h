@@ -15,7 +15,6 @@
 #define PROG_CODE	asm_s->prog_code
 #define PROG_SIZE	asm_s->header.prog_size
 
-#define WRITE_NUMBER(fd, number) my_write(fd, number)
 #define REV_ENDIAN(x)							\
 	((((x) & 0xFF000000) >> 24) | (((x) & 0x00FF0000) >> 8)		\
 	 | (((x) & 0x0000FF00) << 8) | (((x) & 0x000000FF) << 24))

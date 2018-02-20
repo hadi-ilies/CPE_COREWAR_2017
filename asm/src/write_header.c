@@ -6,25 +6,18 @@
 */
 
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include "asm.h"
 #include "my.h"
-
-void my_memset(char *str, int max)
-{
-	for (int i = 0; i < max; i++)
-		str[i] = 0;
-}
 
 bool fill_name_header(asm_t *asm_s)
 {
 	int i = 0;
 	char *name = get_str_entrecote(PROG_CODE[0]);
 
-	if (name == NULL || strncmp(PROG_CODE[0], NAME_CMD_STRING, 5))
+	if (name == NULL || my_strncmp(PROG_CODE[0], NAME_CMD_STRING, 5))
 		return (false);
-	my_memset(asm_s->header.prog_name, COMMENT_LEN);
+	my_memset(asm_s->header.prog_name, 0, PROG_NAME_LEN);
 	for (i = 0; name[i] != '\0'; i++)
 		asm_s->header.prog_name[i] = name[i];
 	asm_s->err_line++;
@@ -37,9 +30,9 @@ bool fill_comment_header(asm_t *asm_s)
 	int i = 0;
 	char *comment = get_str_entrecote(PROG_CODE[1]);
 
-	if (comment == NULL || strncmp(PROG_CODE[1], COMMENT_CMD_STRING, 8))
+	if (comment == NULL || my_strncmp(PROG_CODE[1], COMMENT_CMD_STRING, 8))
 		return (false);
-	my_memset(asm_s->header.comment, COMMENT_LEN);
+	my_memset(asm_s->header.comment, 0, COMMENT_LEN);
 	for (i = 0; comment[i] != '\0'; i++)
 		asm_s->header.comment[i] = comment[i];
 	asm_s->err_line++;
@@ -65,9 +58,10 @@ int file_len(char **tab)
 
 bool write_header(asm_t *asm_s)
 {
+	my_memset(&asm_s->header, 0, sizeof(header_t));
 	asm_s->header.magic = REV_ENDIAN(COREWAR_EXEC_MAGIC);
 	PROG_SIZE = REV_ENDIAN(file_len(PROG_CODE) - sizeof(header_t));
-	PROG_SIZE = (PROG_SIZE < 0) ? 0 : PROG_SIZE;
+	PROG_SIZE = REV_ENDIAN(22);
 	if (!fill_name_header(asm_s) || !fill_comment_header(asm_s))
 		return (false);
 	write(asm_s->champ_fd, &asm_s->header, sizeof(header_t));
