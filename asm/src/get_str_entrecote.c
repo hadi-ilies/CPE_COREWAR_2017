@@ -12,10 +12,9 @@ int get_cote_number(char *str)
 {
 	int cote_de_porc = 0;
 
-	for (int i = 0; str[i] != '\0'; i++) {
+	for (int i = 0; str[i] != '\0'; i++)
 		if (str[i] == '\"')
 			cote_de_porc++;
-	}
 	return (cote_de_porc);
 }
 
@@ -33,10 +32,8 @@ char *get_str_entrecote(char *str)
 
 	if (str == NULL || !is_les_cote_valide(str))
 		return (NULL);
-	for (i = 0; str[i] != '\"' && str[i] != '\0'; i++);
-	if (str[i] == '\0' || str[my_strlen(str) - 1] != '\"')
-		return (NULL);
-	tmp = my_strdup(str + i + 1);
+	for (; *str != '\"' && *str != '\0'; str++);
+	tmp = my_strdup(str + 1);
 	if (tmp == NULL)
 		return (NULL);
 	for (i = 0; tmp[i] != '\"' && tmp[i] != '\0'; i++);
