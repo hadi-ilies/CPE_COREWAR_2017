@@ -59,6 +59,7 @@ int main(int nb_arg, char **arg_tab)
 			address = tmp;
 			n += 2;
 		}
+		player[i].offset = address;
 		printf(".cor : %s\n", arg_tab[n]);
 		if (arg_tab[n] == NULL)
 			return (84);
