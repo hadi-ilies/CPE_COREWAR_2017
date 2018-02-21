@@ -11,6 +11,8 @@ bool my_atoi(int *nb, char *str)
 {
 	size_t i = 0;
 
+	if (nb == NULL || str == NULL)
+		return (false);
 	for (; str[i] != '\0'; i++) {
 		bool tmp = false;
 

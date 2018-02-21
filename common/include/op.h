@@ -12,6 +12,7 @@
 #define MEM_SIZE                (6*1024)
 #define IDX_MOD                 512   /* modulo of the index < */
 #define MAX_ARGS_NUMBER         4     /* this may not be changed 2^*IND_SIZE */
+#define MAX_NB_PLAYER           4
 
 #define COMMENT_CHAR            '#'
 #define LABEL_CHAR              ':'

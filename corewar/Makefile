@@ -5,7 +5,12 @@
 ## Makefile
 ##
 
-SRC		=	$(SRC_DIR)main.c
+SRC		=	$(SRC_DIR)main.c \
+			$(SRC_DIR)help.c \
+			$(SRC_DIR)corewar.c \
+			$(SRC_DIR)get_nb_player.c \
+			$(SRC_DIR)test_header.c \
+			$(SRC_DIR)cor_to_tab.c \
 
 SRC             +=      ../$(COMMON_DIR)$(SRC_DIR)op.c
 
@@ -15,7 +20,9 @@ SRC_DIR		=	src/
 
 LIB_DIR		=	../lib/
 
-COMMON_INC_DIR          =       ../$(COMMON_DIR)include/
+COMMON_INC_DIR	=	../$(COMMON_DIR)include/
+
+INCLUDE		=	include/
 
 INC_DIR		=	../include/
 
@@ -23,7 +30,7 @@ OBJ		=	$(SRC:.c=.o)
 
 CFLAGS		=	-W -Wall -Wextra -g -fdiagnostics-color
 
-CFLAGS          +=  -I $(INC_DIR) -I $(COMMON_INC_DIR)
+CFLAGS          +=	-I $(INC_DIR) -I $(COMMON_INC_DIR) -I $(INCLUDE)
 
 LDFLAGS		=	-L $(LIB_DIR) -lmy
 
