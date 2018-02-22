@@ -13,6 +13,7 @@
 #define FLAGS		(O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
 #define MODE		(S_IROTH | S_IWGRP | S_IRUSR | S_IWUSR | S_IRGRP)
 #define ASM_CODE	asm_s->asm_code
+#define ASM_LABELS	asm_s->labels
 #define PROG_SIZE	asm_s->header.prog_size
 
 #define REV_ENDIAN(x)							\
@@ -26,6 +27,7 @@ typedef struct
 	int		champ_fd;
 	size_t		err_line;
 	char		**asm_code;
+	char		**labels;
 	char		*champ_code;
 } asm_t;
 

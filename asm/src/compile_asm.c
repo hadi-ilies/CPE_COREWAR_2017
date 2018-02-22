@@ -21,5 +21,8 @@ bool compile_asm(asm_t *asm_s)
 			free(line);
 		asm_s->err_line++;
 	}
+	ASM_LABELS = get_labels(ASM_CODE);
+	for (int i = 0; ASM_LABELS[i] != NULL; i++)
+		my_printf("%s\n", ASM_LABELS[i]);
 	return (true);
 }
