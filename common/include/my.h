@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include <stdarg.h>
 #include <stdbool.h>
-#include <stddef.h>
+#include <stdlib.h>
 
-void my_putchar(char c);
+ssize_t my_putchar(char c);
 void my_put_nbr(int nb);
+ssize_t my_putnb_base(int nb, char *base);
 void my_putstr(char const *str);
 int my_strlen(char const *str);
 int my_printf(char const *format, ...);
