@@ -9,8 +9,12 @@
 
 ssize_t my_putnb_base(int nb, char *base)
 {
-	if (nb / 10 > 0)
-		my_putnb_base(nb / 10, base);
-	my_putchar(nb % 10 + *base);
-	return (23);
+	ssize_t size = 0;
+
+	if (base == NULL)
+		return (-1);
+	if (nb / my_strlen(base) > 0)
+		size += my_putnb_base(nb / my_strlen(base), base);
+	size += my_putchar(base[nb % my_strlen(base)]);
+	return (size);
 }

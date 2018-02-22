@@ -23,7 +23,7 @@ void what_modulo(const char *format, size_t i, va_list arg)
 		return;
 	}
 	if (format[i + 1] == 'b') {
-		my_putnb_base(va_arg(arg, int), "01");
+		my_putnb_base(va_arg(arg, int));
 		return;
 	}
 }
