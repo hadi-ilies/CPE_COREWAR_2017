@@ -15,6 +15,7 @@ SRC		=	$(SRC_DIR)main.c \
 			$(SRC_DIR)$(PLA_DIR)player_destroy.c \
 
 SRC             +=      ../$(COMMON_DIR)$(SRC_DIR)op.c
+SRC             +=      ../$(COMMON_DIR)$(SRC_DIR)full_error.c
 
 COMMON_DIR	=	common/
 

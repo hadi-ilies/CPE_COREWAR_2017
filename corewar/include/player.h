@@ -21,5 +21,5 @@ typedef struct {
 	size_t cycle;
 } player_t;
 
-player_t player_create(size_t num, size_t offset, char *name_file);
+player_t player_create(size_t num, size_t offset, char *file_name);
 void player_destroy(player_t *player);

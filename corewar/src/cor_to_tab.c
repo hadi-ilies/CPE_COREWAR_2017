@@ -23,10 +23,8 @@ bool cor_to_tab(char tab[MEM_SIZE], char *file_name, int address)
 	do {
 		n = read(fd, tab + i++, sizeof(char));
 		i >= MEM_SIZE ? i = 0 : 0;
-		if (n < 0) {
-			close(fd);
+		if (n < 0)
 			return (false);
-		}
 	}
 	while (n == sizeof(char));
 	close(fd);
