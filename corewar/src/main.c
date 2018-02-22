@@ -14,13 +14,15 @@
 
 int main(int nb_arg, char **arg_tab)
 {
-	int nbr_cycle = CYCLE_TO_DIE;
-	int n = 1;
+	size_t nbr_cycle = CYCLE_TO_DIE;
 	size_t nb_player = get_nb_player(nb_arg, arg_tab);
 	player_t *player = malloc(sizeof(player_t) * nb_player);
-	char *tab = malloc(sizeof(char) * MEM_SIZE);
+	char tab[MEM_SIZE] = {0};
+	size_t num = 0;
+	size_t address = 0;
 
-	printf("nb_player : %ld\n", nb_player);
+	if (player == NULL)
+		return (84);
 	if (nb_player > MAX_NB_PLAYER)
 		return (84);
 	for (size_t i = 0; i < MEM_SIZE; i++)
@@ -29,51 +31,46 @@ int main(int nb_arg, char **arg_tab)
 		help(arg_tab[0]);
 		return (0);
 	}
-	//for (size_t i = 0; i < nb_arg; i++)
-	if (!my_strcmp(arg_tab[1], "-dump") && nb_arg > 1 + 1) {
-		if (!my_atoi(&nbr_cycle, arg_tab[2]) || nbr_cycle <= 0)
-			return (84);
-		printf("nb : %d\n", nbr_cycle);
-		n += 2;
-	}
-	printf("ok0\n");
-	for (size_t i = 0; n < nb_arg; i++) {
-		size_t num = i;
-		size_t address = MEM_SIZE / nb_player * num;
-
-		printf("address : %ld\n", address);
-		if (!my_strcmp(arg_tab[n], "-n") && nb_arg > n + 1) {
+	for (size_t i = 1; (int)i < nb_arg; i++) {
+		if (!my_strcmp(arg_tab[i], "-dump") && nb_arg > (int)i + 1) {
 			int tmp;
 
-			if (my_atoi(&tmp, arg_tab[n + 1]) == false && tmp >= 0)
+			if (!my_atoi(&tmp, arg_tab[++i]) || nbr_cycle <= 0)
+				return (84);
+			nbr_cycle = tmp;
+			printf("dump : %ld\n", nbr_cycle);
+		}
+		else if (!my_strcmp(arg_tab[i], "-n") && nb_arg > (int)i + 1) {
+			int tmp;
+
+			if (my_atoi(&tmp, arg_tab[++i]) == false || tmp < 0)
 				return (84);
 			num = tmp;
-			n += 2;
 		}
-		printf("ok\n");
-		if (!my_strcmp(arg_tab[n], "-a") && nb_arg > n + 1) {
+		else if (!my_strcmp(arg_tab[i], "-a") && nb_arg > (int)i + 1) {
 			int tmp;
 
-			if (my_atoi(&tmp, arg_tab[n + 1]) == false && tmp >= 0)
+			if (my_atoi(&tmp, arg_tab[++i]) == false || tmp < 0 || tmp >= MEM_SIZE)
 				return (84);
 			address = tmp;
-			n += 2;
 		}
-		player[i].offset = address;
-		printf(".cor : %s\n", arg_tab[n]);
-		if (arg_tab[n] == NULL)
-			return (84);
-		printf("ok4\n");
-		/*if (test_header(arg_tab[n]) == false)
-		  return (84);*/
-		printf("ok5\n");
-		if (cor_to_tab(tab, arg_tab[n], address) == false)
-			return (84);
-		printf("ok6\n");
-		n++;
+		else {
+			printf("num : %ld\n", num);
+			printf("address : %ld\n", address);
+			player[i].offset = address;
+			printf(".cor : %s\n", arg_tab[i]);
+			if ((int)i >= nb_arg)
+				return (84);
+			/*if (test_header(arg_tab[i]) == false)
+			  return (84);*/
+			if (cor_to_tab(tab, arg_tab[i], address) == false)
+				return (84);
+			num++;
+			address += MEM_SIZE / nb_player;
+			address >= MEM_SIZE ? address -= MEM_SIZE : 0;
+		}
 	}
 	corewar(tab, nb_player, player);
-	free(tab);
 	free(player);
 	return (0);
 }

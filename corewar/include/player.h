@@ -16,4 +16,6 @@ typedef struct {
 	char reg[REG_NUMBER];
 	size_t offset;
 	bool carry;
+	bool alive;
+	size_t cycle;
 } player_t;

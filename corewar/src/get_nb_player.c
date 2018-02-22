@@ -11,7 +11,7 @@ size_t get_nb_player(int nb_arg, char **arg_tab)
 {
 	size_t nb_player = nb_arg - 1;
 
-	for (int i = 0; i < nb_arg; i++) {
+	for (size_t i = 0; (int)i < nb_arg; i++) {
 		if (!my_strcmp(arg_tab[i], "-dump"))
 			nb_player -= 2;
 		if (!my_strcmp(arg_tab[i], "-n"))

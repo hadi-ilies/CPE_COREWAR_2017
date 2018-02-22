@@ -22,15 +22,15 @@ LIB_DIR		=	../lib/
 
 COMMON_INC_DIR	=	../$(COMMON_DIR)include/
 
-INCLUDE		=	include/
+MALLOC_ERROR	=	../$(COMMON_DIR)src/malloc_error.c
 
-INC_DIR		=	../include/
+INC_DIR		=	include/
 
 OBJ		=	$(SRC:.c=.o)
 
 CFLAGS		=	-W -Wall -Wextra -g -fdiagnostics-color
 
-CFLAGS          +=	-I $(INC_DIR) -I $(COMMON_INC_DIR) -I $(INCLUDE)
+CFLAGS          +=	-I $(INC_DIR) -I $(COMMON_INC_DIR)
 
 LDFLAGS		=	-L $(LIB_DIR) -lmy
 
@@ -48,6 +48,10 @@ clean:
 fclean:		clean
 		@rm -f $(NAME)
 		@make fclean -C $(LIB_DIR) --no-print-directory
+
+malloc_error:	$(OBJ)
+		@make -C $(LIB_DIR) --no-print-directory
+		@gcc -o $(NAME) $(OBJ) $(MALLOC_ERROR) $(LDFLAGS) -I $(SRC_DIR)
 
 re:		fclean all
 
