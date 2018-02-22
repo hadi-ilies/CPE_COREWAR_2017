@@ -9,28 +9,24 @@
 
 //typedef void (*op)(char *tab, player_t *player) op_t;
 
-void loop_coorwar(char *tab, size_t nb_player, player_t *player, int *i)
+void player_play(char *tab, player_t *player)
 {
-	if (player[i].cycle == 0) {
-		op_tab[player[i]->offset].function(tab, player);
-		player[i].cycle = op_tab[player[i]->offset].nbr_cycles;
-		player[i]->offset++; //
-		if (player[i]->offset >= MEM_SIZE)
-			player[i]->offset = 0;
+	if (player->cycle == 0) {
+		//op_tab[player->offset].function(tab, player);
+		player->cycle = op_tab[player->offset].nbr_cycles;
+		player->offset++; //
+		if (player->offset >= MEM_SIZE)
+			player->offset = 0;
 	}
+	player->cycle--;
 }
 
 int corewar(char *tab, size_t nb_player, player_t *player)
 {
-	(void)tab;
-	(void)nb_player;
-	(void)player;
-
 	while (1) {
-		for (int i = 0; i < nb_player; i++) {
-			loop_coorwar(tab, nb_player, player, &i);
-			player[i].cycle--;
-		}
+		for (size_t i = 0; i < nb_player; i++)
+			player_play(tab, player + i);
+		for (size_t i = 0; i < nb_player; i++)
 	}
 	return (0);
 }
