@@ -8,8 +8,7 @@
 #include <stdio.h> /* tmp */
 #include "prototype.h"
 
-//op_tab[player->offset].function(tab, player);
-//player->cycle = op_tab[player->offset].nbr_cycles;
+
 
 void play(char *tab, player_t *player, size_t nb_player, size_t player_num)
 {
@@ -28,7 +27,61 @@ void play(char *tab, player_t *player, size_t nb_player, size_t player_num)
 			for (size_t i = 0; i < nb_player; i++)
 				if (num == player[i].num)
 					printf("Le joueur %ld (%s) est en vie.\n", num, player[i].name);
-			player[player_num].cycle += 10;
+			player[player_num].cycle = 10;
+		}
+		else if (tab[player[player_num].offset] == 2) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 3) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 4) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 5) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 6) {
+			///
+		}
+		else if (tab[player[player_num].offset] == 7) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 8) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 9) {
+			int num = tab[++player[player_num].offset];
+
+			my_printf("num bin : [%b]\n", num);
+			player[player_num].offset++;
+			num <<= 8;
+			num = tab[player[player_num].offset++];
+			printf("num : %d\n", num);
+			//if (player[player_num].carry)
+			player[player_num].offset += -5;
+			player[player_num].cycle = 20;
+		}
+		else if (tab[player[player_num].offset] == 10) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 11) {
+			///
+		}
+		else if (tab[player[player_num].offset] == 12) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 13) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 14) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 15) {
+			//
+		}
+		else if (tab[player[player_num].offset] == 16) {
+			//
 		}
 		else
 			player[player_num].offset++;
@@ -57,7 +110,7 @@ int corewar(char *tab, size_t nb_player, player_t *player)
 		for (size_t i = 0; i < nb_player; i++)
 			play(tab, player, nb_player, i);
 		adjust_player_cycle(nb_player, player);
-		return (0); /* tmp */
+		//return (0); /* tmp */
 	}
 	return (0);
 }
