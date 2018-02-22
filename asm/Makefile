@@ -10,6 +10,7 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)init_struct.c	\
 			$(SRC_DIR)get_str_entrecote.c	\
 			$(SRC_DIR)fill_header.c	\
+			$(SRC_DIR)get_labels.c	\
 			$(SRC_DIR)compile_asm.c	\
 			$(SRC_DIR)erase_comment.c	\
 			$(SRC_DIR)parsing.c	\
