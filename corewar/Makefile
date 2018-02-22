@@ -11,6 +11,8 @@ SRC		=	$(SRC_DIR)main.c \
 			$(SRC_DIR)get_nb_player.c \
 			$(SRC_DIR)test_header.c \
 			$(SRC_DIR)cor_to_tab.c \
+			$(SRC_DIR)$(PLA_DIR)player_create.c \
+			$(SRC_DIR)$(PLA_DIR)player_destroy.c \
 
 SRC             +=      ../$(COMMON_DIR)$(SRC_DIR)op.c
 
@@ -18,11 +20,11 @@ COMMON_DIR	=	common/
 
 SRC_DIR		=	src/
 
+PLA_DIR		=	player/
+
 LIB_DIR		=	../lib/
 
 COMMON_INC_DIR	=	../$(COMMON_DIR)include/
-
-MALLOC_ERROR	=	../$(COMMON_DIR)src/malloc_error.c
 
 INC_DIR		=	include/
 
@@ -48,10 +50,6 @@ clean:
 fclean:		clean
 		@rm -f $(NAME)
 		@make fclean -C $(LIB_DIR) --no-print-directory
-
-malloc_error:	$(OBJ)
-		@make -C $(LIB_DIR) --no-print-directory
-		@gcc -o $(NAME) $(OBJ) $(MALLOC_ERROR) $(LDFLAGS) -I $(SRC_DIR)
 
 re:		fclean all
 

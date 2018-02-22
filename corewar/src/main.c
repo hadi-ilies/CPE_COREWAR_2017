@@ -20,6 +20,7 @@ int main(int nb_arg, char **arg_tab)
 	char tab[MEM_SIZE] = {0};
 	size_t num = 0;
 	size_t address = 0;
+	size_t player_index = 0;
 
 	if (player == NULL)
 		return (84);
@@ -65,12 +66,15 @@ int main(int nb_arg, char **arg_tab)
 			  return (84);*/
 			if (cor_to_tab(tab, arg_tab[i], address) == false)
 				return (84);
+			player[player_index++] = player_create(num, address, arg_tab[i]);
 			num++;
 			address += MEM_SIZE / nb_player;
 			address >= MEM_SIZE ? address -= MEM_SIZE : 0;
 		}
 	}
 	corewar(tab, nb_player, player);
+	for (size_t i = 0; i < nb_player; i++)
+		player_destroy(player + i);
 	free(player);
 	return (0);
 }

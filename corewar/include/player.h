@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <stddef.h>
 #include <stdbool.h>
 #include "op.h"
 
@@ -19,3 +20,6 @@ typedef struct {
 	bool alive;
 	size_t cycle;
 } player_t;
+
+player_t player_create(size_t num, size_t offset, char *name_file);
+void player_destroy(player_t *player);
