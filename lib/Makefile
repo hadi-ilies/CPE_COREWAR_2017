@@ -19,7 +19,8 @@ SRC	=	my_putchar.c	\
 		my_strcat_to_tab.c	\
 		my_tablen.c	\
 		my_atoi.c	\
-		my_memset.c
+		my_memset.c	\
+		my_strndup.c
 
 COMMON_DIR	=	common/
 
