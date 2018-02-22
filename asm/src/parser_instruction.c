@@ -10,6 +10,8 @@
 
 bool parser_instruction(asm_t *asm_s)
 {
-	(void) asm_s;
+	for (int i = 0; ASM_CODE[i] != NULL) {
+		i++;
+	}
 	return (true);
 }

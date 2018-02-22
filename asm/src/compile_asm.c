@@ -21,6 +21,8 @@ bool compile_asm(asm_t *asm_s)
 			free(line);
 		asm_s->err_line++;
 	}
-	ASM_LABELS = get_labels(ASM_CODE);
+	game->labels = get_labels(ASM_CODE);
+	if (parser_instruction(asm_s) == false)
+		return (false);
 	return (true);
 }
