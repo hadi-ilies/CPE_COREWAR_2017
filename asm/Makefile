@@ -13,7 +13,7 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)get_labels.c	\
 			$(SRC_DIR)compile_asm.c	\
 			$(SRC_DIR)erase_comment.c	\
-			$(SRC_DIR)parsing.c	\
+			$(SRC_DIR)parser_instruction.c	\
 			$(SRC_DIR)write_binary_code.c
 
 SRC		+=	../$(COMMON_DIR)$(SRC_DIR)op.c

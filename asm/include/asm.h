@@ -35,6 +35,6 @@ bool h_option(int argc, char **argv);
 bool init_struct(asm_t *asm_s, char *path);
 bool compile_asm(asm_t *asm_s);
 char *get_str_entrecote(char *str);
-void erase_comment(char *line);
+void erase_comment(char *line, size_t error_line);
 bool fill_header(asm_t *asm_s);
 bool write_binary_code(asm_t *asm_s);

@@ -14,7 +14,7 @@ bool compile_asm(asm_t *asm_s)
 	char *line;
 
 	while ((line = get_next_line(asm_s->asm_fd)) != NULL) {
-		erase_comment(line);
+		erase_comment(line, asm_s->err_line);
 		if (*line != '\0')
 			ASM_CODE = my_strcat_to_tab(ASM_CODE, line);
 		else

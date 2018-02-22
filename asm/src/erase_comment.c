@@ -7,11 +7,11 @@
 
 #include <stddef.h>
 
-void erase_comment(char *line)
+void erase_comment(char *line, size_t error_line)
 {
 	size_t i = 0;
 
-	if (line == NULL)
+	if (line == NULL || error_line < 3)
 		return;
 	for (;line[i] != '#' && line[i] != '\0'; i++);
 	line[i] = '\0';
