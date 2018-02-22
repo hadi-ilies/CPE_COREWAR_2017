@@ -1,0 +1,12 @@
+#include <stdlib.h>
+
+void *malloc(size_t size)
+{
+	return (NULL);
+}
+
+gcc -fpic -c malloc.c
+
+gcc -shared malloc.o -o malloc.so
+
+LD_PRELOAD=./malloc.so ./asm zork.s
