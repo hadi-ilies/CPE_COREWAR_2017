@@ -8,6 +8,8 @@
 #pragma once
 
 #include <stddef.h>
+#include "macros.h"
+#include "player.h"
 
 #define MEM_SIZE                (6*1024)
 #define IDX_MOD                 512   /* modulo of the index < */
@@ -24,7 +26,7 @@
 #define NAME_CMD_STRING         ".name"
 #define COMMENT_CMD_STRING      ".comment"
 
-#define REG_NUMBER      16              /* r1 <--> rx */
+//#define REG_NUMBER      16              /* r1 <--> rx */
 
 typedef char args_type_t;
 
@@ -34,20 +36,6 @@ typedef char args_type_t;
 				   ( ld 1,r1 put what's in the address (1+pc)
 						      into r1 (4 bytes )) */
 #define T_LAB           8       /* LABEL */
-
-#define IND_SIZE        2
-#define DIR_SIZE        4
-#define REG_SIZE        DIR_SIZE
-
-/*
-** header
-*/
-
-#define PROG_NAME_LEN	128
-#define COMMENT_LEN	2048
-#define COREWAR_EXEC_MAGIC	0xea83f3        /* why not */
-
-#include "player.h"
 
 typedef struct
 {
@@ -60,7 +48,19 @@ typedef struct
 	//void         (*function)(char *, player_t *, size_t, size_t);
 } op_t;
 
+#define IND_SIZE        2
+#define DIR_SIZE        4
+#define REG_SIZE        DIR_SIZE
+
 extern op_t op_tab[];
+
+/*
+** header
+*/
+
+//#define PROG_NAME_LEN	128
+#define COMMENT_LEN	2048
+#define COREWAR_EXEC_MAGIC	0xea83f3        /* why not */
 
 typedef struct
 {

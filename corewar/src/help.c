@@ -6,6 +6,7 @@
 */
 
 #include "prototype.h"
+#include "my.h"
 
 void help(char *exe)
 {

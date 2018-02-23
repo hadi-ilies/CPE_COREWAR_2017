@@ -7,6 +7,8 @@
 
 #include <stdio.h> /* tmp */
 #include "prototype.h"
+#include "op.h"
+#include "my.h"
 
 void play(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {

@@ -8,7 +8,6 @@
 #pragma once
 
 #include "player.h"
-#include "my.h"
 
 void help(char *exe);
 int corewar(char tab[], size_t nb_player, player_t *player);

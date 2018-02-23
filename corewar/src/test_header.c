@@ -8,6 +8,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "prototype.h"
+#include "op.h"
 
 bool test_header(char *file_name)
 {

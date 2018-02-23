@@ -9,7 +9,7 @@
 
 #include <stddef.h>
 #include <stdbool.h>
-#include "op.h"
+#include "macros.h"
 
 typedef struct {
 	size_t num;

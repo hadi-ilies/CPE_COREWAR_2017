@@ -9,6 +9,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include "prototype.h"
+#include "op.h"
 
 bool cor_to_tab(char tab[], char *file_name, int address)
 {

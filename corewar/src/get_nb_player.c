@@ -6,6 +6,7 @@
 */
 
 #include "prototype.h"
+#include "my.h"
 
 size_t get_nb_player(int nb_arg, char **arg_tab)
 {
