@@ -6,6 +6,7 @@
 */
 
 #include "asm.h"
+#include "my.h"
 
 /*
 ** Returns the id of the instruction on the line. If a label is declared
@@ -13,7 +14,7 @@
 ** if it exists
 */
 
-char get_id_instruct(label_t *labels, char **line)
+char get_id_instruct(label_t *labels, char **line, size_t nline)
 {
 	int i = 0;
 	char *mnemo = NULL;
@@ -24,8 +25,8 @@ char get_id_instruct(label_t *labels, char **line)
 		i++;
 	if (labels[i].line == nline)
 		*line += my_strlen(labels[i].label);
-	*line += clean_str(line);
-	for (int i = 0; op_tab[i].mnemonic != NULL; i++) {
+	*line += clean_str(*line);
+	for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
 		mnemo = op_tab[i].mnemonique;
 		if (!my_strncmp(mnemo, *line, my_strlen(mnemo))) {
 			*line += my_strlen(mnemo);

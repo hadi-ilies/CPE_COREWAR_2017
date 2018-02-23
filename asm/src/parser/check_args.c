@@ -18,7 +18,10 @@ char check_args(char **line, char *instruct)
 {
 	char coding_byte = 0;
 
-	if (**str == 'r')
+	if (**line == 'r')
 		is_reg(line);
+	if (**line == DIRECT_CHAR)
+		is_dir(line);
+//	if (**line == )
 	return (coding_byte);
 }

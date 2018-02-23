@@ -8,6 +8,7 @@
 #pragma once
 
 #include <stdbool.h>
+#include <stddef.h>
 #include "op.h"
 
 #define FLAGS		(O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
@@ -53,6 +54,10 @@ label_t *get_labels(char **tab);
 size_t clean_str(char *line);
 
 bool parser_instruction(asm_t *asm_s);
-char get_id_instruct(label_t *labels, char **line);
+char get_id_instruct(label_t *labels, char **line, size_t i);
 bool check_nbr_arg(char id, char *line);
 char check_args(char **line, char *instruct);
+
+char is_reg(char **line);
+char is_dir(char **line);
+char is_ind(char **line);
