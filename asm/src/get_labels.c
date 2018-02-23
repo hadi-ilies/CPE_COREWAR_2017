@@ -44,25 +44,28 @@ int get_label_nb(char **tab)
 	return (nb);
 }
 
-label_t **get_labels(char **tab)
+label_t *get_labels(char **tab)
 {
 	int pos = 0;
-	label_t **labels;
+	label_t *labels;
 	int k = 0;
 
 	if (tab == NULL)
 		return (NULL);
-	if ((labels = malloc(sizeof(label_t *) * (get_label_nb(tab) + 1))) == NULL)
+	labels = malloc(sizeof(label_t) * (get_label_nb(tab) + 1));
+	if (labels == NULL)
 		return (NULL);
 	for (int i = 0; tab[i] != NULL; i++)
 		if ((pos = is_label(tab[i])) != -1) {
-			labels[k] = malloc(sizeof(label_t));
-			labels[k]->label = my_strndup(tab[i], pos);
-			labels[k]->line = i;
-			if (labels[k]->label == NULL || !is_valid_label(labels[k]->label))
+			labels[k].label = my_strndup(tab[i], pos);
+			labels[k].line = i;
+			if (labels[k].label == NULL )
+				return (NULL);
+			if (!is_valid_label(labels[k].label))
 				return (NULL);
 			k++;
 		}
-	labels[k] = NULL;
+	labels[k].label = NULL;
+	labels[k].line = 0;
 	return (labels);
 }
