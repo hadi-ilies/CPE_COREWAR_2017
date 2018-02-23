@@ -10,12 +10,15 @@
 /*
 ** Vérifie si les arguments passés sont bons en fonction du premier caractère
 ** après la virgule
-** Une fois que les arguments sont correctes, on calcule le coding byte et hop
+** Une fois que les arguments sont correctes, on calcule le coding byte et
+** on écrit les arguments dans la chaine 'instruct'
 */
 
-char check_args(char **line)
+char check_args(char **line, char *instruct)
 {
 	char coding_byte = 0;
 
+	if (**str == 'r')
+		is_reg(line);
 	return (coding_byte);
 }

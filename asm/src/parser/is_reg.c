@@ -7,38 +7,36 @@
 
 #include "op.h"
 #include "my.h"
-#include <stdbool.h>
-#define IS_NUM(x) (!(x <= '9' && x >= '0')) ? true : false
 
-bool is_reg_in_range(char *reg)
+int is_valid_reg(char *reg)
 {
 	int nb = 0;
 
-	if (!my_atoi(&nb, reg))
+	if (my_atoi(&nb, reg) == false)
 		return (false);
-	return ((!(nb <= REG_NUMBER && nb > 0)) ? nb : -1);
+	return (nb > 0 && nb < REG_NUMBER)) ? nb : -1);
 }
 
-int is_correct_arg(char *reg)
+bool is_correct_arg(char *reg)
 {
-	return (((op_tab[index].type[index2] & T_REG) == 1) ? true : false);
+	return ((op_tab[index].type[index2] & T_REG) == 1);
 }
 
-int is_reg(char **str)
+char is_reg(char **line)
 {
 	int i = 0;
-	int nb = 0;
+	char reg = 0;
 	char *tmp;
 
-	if (**str != 'r')
+	if (**line != 'r')
 		return (-1);
-	*str += 1;
-	for (; IS_NUM(*str[i]); i++);
-	tmp = my_strndup(*str, i);
-	*str += i;
-	if (tmp == NULL || (nb = is_reg_in_range(tmp)) == -1)
+	*line += 1;
+	for (; IS_NUM(*line[i]); i++);
+	tmp = my_linendup(*line, i);
+	*line += i;
+	if (tmp == NULL || (reg = is_reg_in_range(tmp)) == -1)
 		return (-1);
 	if (!is_correct_arg(tmp))
 		return (-1);
-	return (nb);
+	return (reg);
 }

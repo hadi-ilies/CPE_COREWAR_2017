@@ -17,6 +17,7 @@
 #define ASM_LABELS	asm_s->labels
 #define CHAMP_CODE	asm_s->champ_code
 
+#define IS_NUM(x) (x >= '0' && x <= '9')
 #define SIZE_ARG_MAX(x, y, z) (x > y ? (x > z ? x : z) : (y > z ? y : z))
 #define REV_ENDIAN(x)							\
 	((((x) & 0xFF000000) >> 24) | (((x) & 0x00FF0000) >> 8)		\
@@ -47,9 +48,11 @@ void erase_comment(char *line, size_t error_line);
 bool fill_header(asm_t *asm_s);
 bool write_binary_code(asm_t *asm_s);
 
-bool parser_instruction(asm_t *asm_s);
+label_t *get_labels(char **tab);
+
 size_t clean_str(char *line);
+
+bool parser_instruction(asm_t *asm_s);
 char get_id_instruct(label_t *labels, char **line);
 bool check_nbr_arg(char id, char *line);
-
-label_t *get_labels(char **tab);
+char check_args(char **line, char *instruct);
