@@ -9,8 +9,8 @@
 
 void op_sti(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	(void)tab;
-	(void)player;
+	char coding_byte = tab[player[player_num].offset + 1];
+
 	(void)nb_player;
-	(void)player_num;
+	//
 }

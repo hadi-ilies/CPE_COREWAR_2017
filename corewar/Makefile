@@ -41,6 +41,7 @@ SRC		=	$(SRC_DIR)main.c \
 			$(OP_DIR)op_lfork.c \
 			$(OP_DIR)op_aff.c \
 			$(COMMON_DIR)$(SRC_DIR)op.c \
+			$(SRC_DIR)op_functions.c \
 
 OBJ		=	$(SRC:.c=.o)
 

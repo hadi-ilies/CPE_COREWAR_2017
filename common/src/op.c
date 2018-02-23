@@ -6,7 +6,6 @@
 */
 
 #include "op.h"
-#include "op_functions.h"
 
 op_t op_tab[] =
 {
