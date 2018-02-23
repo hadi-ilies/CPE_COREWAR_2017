@@ -14,19 +14,24 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)compile_asm.c	\
 			$(SRC_DIR)erase_comment.c	\
 			$(SRC_DIR)parser_instruction.c	\
+			$(PARSER_DIR)clean_str.c	\
+			$(PARSER_DIR)get_coding_byte.c	\
+			$(PARSER_DIR)get_id_instruct.c	\
+			$(PARSER_DIR)is_dir.c	\
+			$(PARSER_DIR)is_ind.c	\
+			$(PARSER_DIR)is_reg.c	\
 			$(SRC_DIR)write_binary_code.c
 
 SRC		+=	../$(COMMON_DIR)$(SRC_DIR)op.c
 
-COMMON_DIR	=	common/
-
 SRC_DIR		=	src/
+PARSER_DIR	=	$(SRC_DIR)parser/
 
 LIB_DIR		=	../lib/
 
 INC_DIR		=	include/
-
-COMMON_INC_DIR		=	../$(COMMON_DIR)include/
+COMMON_DIR	=	common/
+COMMON_INC_DIR	=	../$(COMMON_DIR)include/
 
 OBJ		=	$(SRC:.c=.o)
 
