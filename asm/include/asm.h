@@ -13,7 +13,6 @@
 #define FLAGS		(O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
 #define MODE		(S_IROTH | S_IWGRP | S_IRUSR | S_IWUSR | S_IRGRP)
 #define ASM_CODE	asm_s->asm_code
-#define ASM_LABELS	asm_s->labels
 #define PROG_SIZE	asm_s->header.prog_size
 
 #define REV_ENDIAN(x)							\
@@ -35,6 +34,6 @@ bool h_option(int argc, char **argv);
 bool init_struct(asm_t *asm_s, char *path);
 bool compile_asm(asm_t *asm_s);
 char *get_str_entrecote(char *str);
-void erase_comment(char *line);
+void erase_comment(char *line, size_t error_line);
 bool fill_header(asm_t *asm_s);
 bool write_binary_code(asm_t *asm_s);

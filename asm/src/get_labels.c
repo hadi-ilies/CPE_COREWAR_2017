@@ -6,12 +6,29 @@
 */
 
 #include <stdlib.h>
+#include <op.h>
 #include "my.h"
+
+bool is_valid_char(char c)
+{
+	for (int i = 0; LABEL_CHARS[i] != '\0'; i++)
+		if (c == LABEL_CHARS[i])
+			return (true);
+	return (false);
+}
+
+bool is_valid_label(char *str)
+{
+	for (int i = 0; str[i] != '\0'; i++)
+		if (!is_valid_char(str[i]))
+			return (false);
+	return (true);
+}
 
 int is_label(char *str)
 {
 	for (int j = 0; str[j] != '\0'; j++)
-		if (str[j + 1] == ':' && str[j] != '%' && j > 0)
+		if (str[j + 1] == LABEL_CHAR && str[j] != '%' && j > 0)
 			return (j + 1);
 	return (-1);
 }
@@ -39,7 +56,7 @@ char **get_labels(char **tab)
 	for (int i = 0; tab[i] != NULL; i++)
 		if ((pos = is_label(tab[i])) != -1) {
 			labels[k] = my_strndup(tab[i], pos);
-			if (labels[k] == NULL)
+			if (labels[k] == NULL || !is_valid_label(labels[k]))
 				return (NULL);
 			k++;
 		}
