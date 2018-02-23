@@ -13,23 +13,24 @@
 ** if it exists
 */
 
-char get_id_instruct(asm_t *asm_s, int nline)
+char get_id_instruct(label_t *labels, char **line)
 {
 	int i = 0;
-	char *line = ASM_CODE[nline];
 	char *mnemo = NULL;
 
 	if (line == NULL)
 		return (-1);
-	while (ASM_LABELS[i].label != NULL && ASM_LABELS[i].line != nline)
+	while (labels[i].label != NULL && labels[i].line != nline)
 		i++;
-	if (ASM_LABELS[i].line == nline)
-		line += my_strlen(ASM_LABELS[i].label);
-	line += clean_str(line);
+	if (labels[i].line == nline)
+		*line += my_strlen(labels[i].label);
+	*line += clean_str(line);
 	for (int i = 0; op_tab[i].mnemonic != NULL; i++) {
 		mnemo = op_tab[i].mnemonique;
-		if (!my_strncmp(mnemo, line, my_strlen(mnemo)))
+		if (!my_strncmp(mnemo, *line, my_strlen(mnemo))) {
+			*line += my_strlen(mnemo);
 			return (op_tab[0].code);
+		}
 	}
 	return (-1);
 }
