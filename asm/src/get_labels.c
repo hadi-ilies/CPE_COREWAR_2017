@@ -6,9 +6,9 @@
 */
 
 #include <stdlib.h>
-#include <op.h>
 #include "asm.h"
 #include "my.h"
+#include "op.h"
 
 bool is_valid_char(char c)
 {

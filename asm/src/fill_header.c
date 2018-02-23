@@ -52,7 +52,8 @@ int file_len(char **tab)
 }
 
 /*
-** In the header of .cor : COREWAR_EXEC_MAGIC, NAME, ASM_SIZE - HEADER_SIZE, COMMENT
+** In the header of .cor : COREWAR_EXEC_MAGIC, NAME, ASM_SIZE - HEADER_SIZE
+** , COMMENT
 ** PS : A confirmer auprès d'un AER ou d'un mec fort qui a réussi l'ASM
 */
 

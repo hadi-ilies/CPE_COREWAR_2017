@@ -20,7 +20,8 @@
 	((((x) & 0xFF000000) >> 24) | (((x) & 0x00FF0000) >> 8)		\
 	 | (((x) & 0x0000FF00) << 8) | (((x) & 0x000000FF) << 24))
 
-typedef struct {
+typedef struct
+{
 	header_t	header;
 	int		asm_fd;
 	int		champ_fd;
@@ -30,9 +31,10 @@ typedef struct {
 	char		*champ_code;
 } asm_t;
 
-typedef struct {
-	char *label;
-	int line;
+typedef struct
+{
+	char	*label;
+	size_t	line;
 } label_t;
 
 bool h_option(int argc, char **argv);
@@ -43,7 +45,8 @@ void erase_comment(char *line, size_t error_line);
 bool fill_header(asm_t *asm_s);
 bool write_binary_code(asm_t *asm_s);
 
+bool parser_instruction(asm_t *asm_s);
 size_t clean_str(char *line);
-char get_mnemonic_instruc(asm_t *asm_s, int nline);
+char get_id_instruct(asm_t *asm_s, int nline);
 
 label_t **get_labels(char **tab);
