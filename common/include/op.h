@@ -9,7 +9,7 @@
 
 #include <stddef.h>
 #include "macros.h"
-#include "macros.h"
+#include "player.h"
 
 #define MEM_SIZE                (6*1024)
 #define IDX_MOD                 512   /* modulo of the index < */
@@ -25,8 +25,6 @@
 
 #define NAME_CMD_STRING         ".name"
 #define COMMENT_CMD_STRING      ".comment"
-
-//#define REG_NUMBER      16              /* r1 <--> rx */
 
 typedef char args_type_t;
 
@@ -45,7 +43,7 @@ typedef struct
 	char         code;
 	int          nbr_cycles;
 	char         *comment;
-	//void         (*function)(char *, player_t *, size_t, size_t);
+	void         (*function)(char *, player_t *, size_t, size_t);
 } op_t;
 
 #define IND_SIZE        2
@@ -58,7 +56,6 @@ extern op_t op_tab[];
 ** header
 */
 
-//#define PROG_NAME_LEN	128
 #define COMMENT_LEN	2048
 #define COREWAR_EXEC_MAGIC	0xea83f3        /* why not */
 

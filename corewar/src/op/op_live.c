@@ -7,7 +7,7 @@
 
 #include "player.h"
 
-void live(char tab[], player_t *player, size_t nb_player, size_t player_num)
+void op_live(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
 	size_t num = tab[++player[player_num].offset];
 

@@ -11,7 +11,7 @@ SRC_DIR		=	src/
 INC_DIR		=	include/
 COMMON_DIR	=	../common/
 LIB_DIR		=	../lib/
-PLAY_DIR	=	$(COMMON_DIR)$(SRC_DIR)player/
+PLAY_DIR	=	$(SRC_DIR)player/
 OP_DIR		=	$(SRC_DIR)op/
 COMMON_SRC_DIR	=	$(COMMON_DIR)$(SRC_DIR)
 COMMON_INC_DIR	=	$(COMMON_DIR)$(INC_DIR)
@@ -24,22 +24,22 @@ SRC		=	$(SRC_DIR)main.c \
 			$(SRC_DIR)cor_to_tab.c \
 			$(PLAY_DIR)player_create.c \
 			$(PLAY_DIR)player_destroy.c \
-			$(OP_DIR)live.c \
-			$(OP_DIR)ld.c \
-			$(OP_DIR)st.c \
-			$(OP_DIR)add.c \
-			$(OP_DIR)sub.c \
-			$(OP_DIR)and.c \
-			$(OP_DIR)or.c \
-			$(OP_DIR)xor.c \
-			$(OP_DIR)zjmp.c \
-			$(OP_DIR)ldi.c \
-			$(OP_DIR)sti.c \
-			$(OP_DIR)fork.c \
-			$(OP_DIR)lld.c \
-			$(OP_DIR)lldi.c \
-			$(OP_DIR)lfork.c \
-			$(OP_DIR)aff.c \
+			$(OP_DIR)op_live.c \
+			$(OP_DIR)op_ld.c \
+			$(OP_DIR)op_st.c \
+			$(OP_DIR)op_add.c \
+			$(OP_DIR)op_sub.c \
+			$(OP_DIR)op_and.c \
+			$(OP_DIR)op_or.c \
+			$(OP_DIR)op_xor.c \
+			$(OP_DIR)op_zjmp.c \
+			$(OP_DIR)op_ldi.c \
+			$(OP_DIR)op_sti.c \
+			$(OP_DIR)op_fork.c \
+			$(OP_DIR)op_lld.c \
+			$(OP_DIR)op_lldi.c \
+			$(OP_DIR)op_lfork.c \
+			$(OP_DIR)op_aff.c \
 			$(COMMON_DIR)$(SRC_DIR)op.c \
 
 OBJ		=	$(SRC:.c=.o)
