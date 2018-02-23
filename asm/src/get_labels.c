@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <op.h>
+#include "asm.h"
 #include "my.h"
 
 bool is_valid_char(char c)
@@ -43,20 +44,22 @@ int get_label_nb(char **tab)
 	return (nb);
 }
 
-char **get_labels(char **tab)
+label_t **get_labels(char **tab)
 {
 	int pos = 0;
-	char **labels;
+	label_t **labels;
 	int k = 0;
 
 	if (tab == NULL)
 		return (NULL);
-	if ((labels = malloc(sizeof(char *) * (get_label_nb(tab) + 1))) == NULL)
+	if ((labels = malloc(sizeof(label_t *) * (get_label_nb(tab) + 1))) == NULL)
 		return (NULL);
 	for (int i = 0; tab[i] != NULL; i++)
 		if ((pos = is_label(tab[i])) != -1) {
-			labels[k] = my_strndup(tab[i], pos);
-			if (labels[k] == NULL || !is_valid_label(labels[k]))
+			labels[k] = malloc(sizeof(label_t));
+			labels[k]->label = my_strndup(tab[i], pos);
+			labels[k]->line = i;
+			if (labels[k]->label == NULL || !is_valid_label(labels[k]->label))
 				return (NULL);
 			k++;
 		}

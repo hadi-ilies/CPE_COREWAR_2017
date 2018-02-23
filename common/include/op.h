@@ -9,7 +9,7 @@
 
 #include <stddef.h>
 #include "macros.h"
-#include "player.h"
+#include "macros.h"
 
 #define MEM_SIZE                (6*1024)
 #define IDX_MOD                 512   /* modulo of the index < */

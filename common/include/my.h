@@ -27,5 +27,3 @@ void my_free_tab(char **tab);
 char **my_strcat_to_tab(char **tab, char *new_line);
 bool my_atoi(int *nb, char *str);
 void *my_memset(void *s, int c, size_t n);
-
-char **get_labels(char **tab);

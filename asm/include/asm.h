@@ -20,8 +20,7 @@
 	((((x) & 0xFF000000) >> 24) | (((x) & 0x00FF0000) >> 8)		\
 	 | (((x) & 0x0000FF00) << 8) | (((x) & 0x000000FF) << 24))
 
-typedef struct
-{
+typedef struct {
 	header_t	header;
 	int		asm_fd;
 	int		champ_fd;
@@ -30,6 +29,11 @@ typedef struct
 	char		**labels;
 	char		*champ_code;
 } asm_t;
+
+typedef struct {
+	char *label;
+	int line;
+} label_t;
 
 bool h_option(int argc, char **argv);
 bool init_struct(asm_t *asm_s, char *path);
@@ -41,3 +45,5 @@ bool write_binary_code(asm_t *asm_s);
 
 size_t clean_str(char *line);
 char get_mnemonic_instruc(asm_t *asm_s, int nline);
+
+label_t **get_labels(char **tab);
