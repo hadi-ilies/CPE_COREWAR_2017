@@ -39,4 +39,5 @@ void erase_comment(char *line, size_t error_line);
 bool fill_header(asm_t *asm_s);
 bool write_binary_code(asm_t *asm_s);
 
+size_t clean_str(char *line);
 char get_mnemonic_instruc(asm_t *asm_s, int nline);
