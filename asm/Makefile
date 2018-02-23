@@ -32,7 +32,7 @@ OBJ		=	$(SRC:.c=.o)
 
 CFLAGS		=	-W -Wall -Wextra -Werror -fdiagnostics-color -g
 
-CFLAGS		+=  -I $(INC_DIR) -I $(COMMON_INC_DIR)
+CFLAGS		+=	-I $(INC_DIR) -I $(COMMON_INC_DIR)
 
 LDFLAGS		=	-L $(LIB_DIR) -lmy
 
