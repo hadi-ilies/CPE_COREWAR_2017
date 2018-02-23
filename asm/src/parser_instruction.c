@@ -10,7 +10,10 @@
 
 bool parser_instruction(asm_t *asm_s)
 {
-	for (int i = 0; ASM_CODE[i] != NULL) {
+	char mnemonic = 0;
+
+	for (int i = 2; ASM_CODE[i] != NULL) {
+		mnemonic = get_mneminic_instruct(asm_s, i);
 		i++;
 	}
 	return (true);
