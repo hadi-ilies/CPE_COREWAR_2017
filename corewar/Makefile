@@ -22,6 +22,7 @@ SRC		=	$(SRC_DIR)main.c \
 			$(SRC_DIR)get_nb_player.c \
 			$(SRC_DIR)test_header.c \
 			$(SRC_DIR)cor_to_tab.c \
+			$(SRC_DIR)get_type_from_coding_byte.c \
 			$(PLAY_DIR)player_create.c \
 			$(PLAY_DIR)player_destroy.c \
 			$(OP_DIR)op_live.c \
@@ -41,6 +42,7 @@ SRC		=	$(SRC_DIR)main.c \
 			$(OP_DIR)op_lfork.c \
 			$(OP_DIR)op_aff.c \
 			$(COMMON_DIR)$(SRC_DIR)op.c \
+			$(SRC_DIR)op_functions.c \
 
 OBJ		=	$(SRC:.c=.o)
 
