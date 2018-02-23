@@ -35,21 +35,9 @@ typedef char args_type_t;
 						      into r1 (4 bytes )) */
 #define T_LAB           8       /* LABEL */
 
-typedef struct
-{
-	char         *mnemonique;
-	char         nbr_args;
-	args_type_t  type[MAX_ARGS_NUMBER];
-	char         code;
-	int          nbr_cycles;
-	char         *comment;
-} op_t;
-
 #define IND_SIZE        2
 #define DIR_SIZE        4
 #define REG_SIZE        DIR_SIZE
-
-extern op_t op_tab[];
 
 /*
 ** header
@@ -58,6 +46,21 @@ extern op_t op_tab[];
 #define PROG_NAME_LEN	128
 #define COMMENT_LEN	2048
 #define COREWAR_EXEC_MAGIC	0xea83f3        /* why not */
+
+#include "player.h"
+
+typedef struct
+{
+	char         *mnemonique;
+	char         nbr_args;
+	args_type_t  type[MAX_ARGS_NUMBER];
+	char         code;
+	int          nbr_cycles;
+	char         *comment;
+	//void         (*function)(char *, player_t *, size_t, size_t);
+} op_t;
+
+extern op_t op_tab[];
 
 typedef struct
 {

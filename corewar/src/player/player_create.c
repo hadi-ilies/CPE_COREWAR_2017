@@ -30,7 +30,7 @@ player_t player_create(size_t num, size_t offset, char *file_name)
 	player_t player;
 
 	player.num = num;
-	player.name = get_name(file_name);
+	//player.name = get_name(file_name);
 	for (size_t i = 0; i < REG_NUMBER; i++)
 		player.reg[i] = 0;
 	player.offset = offset;

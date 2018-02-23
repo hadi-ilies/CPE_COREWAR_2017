@@ -10,7 +10,7 @@
 #include <fcntl.h>
 #include "prototype.h"
 
-bool cor_to_tab(char tab[MEM_SIZE], char *file_name, int address)
+bool cor_to_tab(char tab[], char *file_name, int address)
 {
 	int fd = open(file_name, O_RDONLY);
 	int n;
