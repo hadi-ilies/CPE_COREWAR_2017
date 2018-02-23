@@ -29,7 +29,7 @@ bool is_valid_label(char *str)
 int is_label(char *str)
 {
 	for (int j = 0; str[j] != '\0'; j++)
-		if (str[j + 1] == LABEL_CHAR && str[j] != '%' && j > 0)
+		if (str[j + 1] == LABEL_CHAR && str[j] != '%')
 			return (j + 1);
 	return (-1);
 }
@@ -49,10 +49,11 @@ label_t *get_labels(char **tab)
 	int pos = 0;
 	label_t *labels;
 	int k = 0;
+	int nb_label = get_label_nb(tab);
 
-	if (tab == NULL)
+	if (tab == NULL || nb_label == 0)
 		return (NULL);
-	labels = malloc(sizeof(label_t) * (get_label_nb(tab) + 1));
+	labels = malloc(sizeof(label_t) * (nb_label + 1));
 	if (labels == NULL)
 		return (NULL);
 	for (int i = 0; tab[i] != NULL; i++)

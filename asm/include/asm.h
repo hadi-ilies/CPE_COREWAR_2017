@@ -12,13 +12,21 @@
 
 #define FLAGS		(O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
 #define MODE		(S_IROTH | S_IWGRP | S_IRUSR | S_IWUSR | S_IRGRP)
+#define PROG_SIZE	asm_s->header.prog_size
 #define ASM_CODE	asm_s->asm_code
 #define ASM_LABELS	asm_s->labels
-#define PROG_SIZE	asm_s->header.prog_size
+#define CHAMP_CODE	asm_s->champ_code
 
+#define SIZE_ARG_MAX(x, y, z) (x > y ? (x > z ? x : z) : (y > z ? y : z))
 #define REV_ENDIAN(x)							\
 	((((x) & 0xFF000000) >> 24) | (((x) & 0x00FF0000) >> 8)		\
 	 | (((x) & 0x0000FF00) << 8) | (((x) & 0x000000FF) << 24))
+
+typedef struct
+{
+	char	*label;
+	size_t	line;
+} label_t;
 
 typedef struct
 {
@@ -27,15 +35,9 @@ typedef struct
 	int		champ_fd;
 	size_t		err_line;
 	char		**asm_code;
-	char		**labels;
+	label_t		*labels;
 	char		*champ_code;
 } asm_t;
-
-typedef struct
-{
-	char	*label;
-	size_t	line;
-} label_t;
 
 bool h_option(int argc, char **argv);
 bool init_struct(asm_t *asm_s, char *path);
@@ -47,6 +49,7 @@ bool write_binary_code(asm_t *asm_s);
 
 bool parser_instruction(asm_t *asm_s);
 size_t clean_str(char *line);
-char get_id_instruct(asm_t *asm_s, int nline);
+char get_id_instruct(label_t *labels, char **line);
+bool check_nbr_arg(char id, char *line);
 
-label_t **get_labels(char **tab);
+label_t *get_labels(char **tab);

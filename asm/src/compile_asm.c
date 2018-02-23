@@ -12,9 +12,7 @@
 bool compile_asm(asm_t *asm_s)
 {
 	char *line;
-	label_t **labels;
 
-	(void)labels;
 	while ((line = get_next_line(asm_s->asm_fd)) != NULL) {
 		erase_comment(line, asm_s->err_line);
 		if (*line != '\0')
@@ -23,7 +21,7 @@ bool compile_asm(asm_t *asm_s)
 			free(line);
 		asm_s->err_line++;
 	}
-	labels = get_labels(ASM_CODE);
+	ASM_LABELS = get_labels(ASM_CODE);
 	if (parser_instruction(asm_s) == false)
 		return (false);
 	return (true);
