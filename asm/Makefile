@@ -17,6 +17,8 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(PARSER_DIR)clean_str.c	\
 			$(PARSER_DIR)get_coding_byte.c	\
 			$(PARSER_DIR)get_id_instruct.c	\
+			$(PARSER_DIR)check_nbr_arg.c	\
+			$(PARSER_DIR)check_args.c	\
 			$(PARSER_DIR)is_dir.c	\
 			$(PARSER_DIR)is_ind.c	\
 			$(PARSER_DIR)is_reg.c	\
