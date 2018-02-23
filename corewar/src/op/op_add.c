@@ -16,6 +16,7 @@ void op_add(char tab[], player_t *player, size_t nb_player, size_t player_num)
 
 	(void)tab;
 	(void)player;
+	(void)nb_player;
 	(*registre_3) = (*registre_1) + (*registre_2);
 	if ((*registre_3) == 0)
 		(*carry) = ((*carry) ? false : true);
