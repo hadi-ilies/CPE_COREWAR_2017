@@ -16,7 +16,8 @@ int main(int argc, char **argv)
 	if (!h_option(argc, argv) || !init_struct(&asm_s, argv[1]))
 		return (EXIT_FAILURE);
 	if (!compile_asm(&asm_s)) {
-		my_printf("%s, %s, Line : %d", *argv, argv[1], asm_s.err_line);
+		my_printf("%s, %s, ", *argv, argv[1]);
+		my_printf("Line : %d\n", asm_s.err_line);
 		return (EXIT_FAILURE);
 	}
 	if (fill_header(&asm_s) == false)
