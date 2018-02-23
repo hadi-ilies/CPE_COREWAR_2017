@@ -7,7 +7,7 @@
 
 #include "player.h"
 
-void sub(char *tab, player_t *player, size_t nb_player, size_t player_num)
+void sub(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
 	char *registre_1 = &tab[player[player_num].offset + 1];
 	char *registre_2 = &tab[player[player_num].offset + 2];
