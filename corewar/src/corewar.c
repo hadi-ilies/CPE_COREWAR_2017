@@ -8,9 +8,7 @@
 #include <stdio.h> /* tmp */
 #include "prototype.h"
 
-
-
-void play(char *tab, player_t *player, size_t nb_player, size_t player_num)
+void play(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
 	if (player[player_num].cycle == 0) {
 		if (tab[player[player_num].offset] == 1) {

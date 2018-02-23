@@ -13,7 +13,7 @@
 
 typedef struct {
 	size_t num;
-	char *name;
+	char name[PROG_NAME_LEN + 1];
 	char reg[REG_NUMBER];
 	size_t offset;
 	bool carry;

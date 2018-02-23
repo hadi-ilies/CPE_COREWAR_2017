@@ -7,7 +7,7 @@
 
 COREWAR_DIR	=	corewar/
 
-ASM_DIR	=	asm/
+ASM_DIR		=	asm/
 
 all:
 		@make -C $(ASM_DIR) --no-print-directory
