@@ -22,6 +22,7 @@ SRC		=	$(SRC_DIR)main.c \
 			$(SRC_DIR)get_nb_player.c \
 			$(SRC_DIR)test_header.c \
 			$(SRC_DIR)cor_to_tab.c \
+			$(SRC_DIR)get_type_from_coding_byte.c \
 			$(PLAY_DIR)player_create.c \
 			$(PLAY_DIR)player_destroy.c \
 			$(OP_DIR)op_live.c \

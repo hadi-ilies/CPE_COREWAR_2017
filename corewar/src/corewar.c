@@ -33,7 +33,7 @@ void play(char tab[], player_t *player, size_t nb_player, size_t player_num)
 
 int corewar(char *tab, size_t nb_player, player_t *player)
 {
-	player[0].offset += 15;
+	//player[0].offset += 15;
 	player[1].offset += 15;
 	while (1) {
 		for (size_t i = 0; i < nb_player; i++)
