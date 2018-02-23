@@ -17,5 +17,5 @@ char check_args(char **line)
 {
 	char coding_byte = 0;
 
-	return (true);
+	return (coding_byte);
 }
