@@ -39,7 +39,7 @@ size_t len_clean_str(char *str, char *delim)
 	return (size);
 }
 
-char *make_str_clean_again(char *str, char *delim)
+char *make_str_clean_again(char *str, const char *delim)
 {
 	size_t j = 0;
 	bool tmp = false;
@@ -59,5 +59,6 @@ char *make_str_clean_again(char *str, char *delim)
 			tmp = false;
 		}
 	clean_str[(clean_str[j - 1] == ' ') ? j - 1 : j] = '\0';
+	free(str);
 	return (clean_str);
 }

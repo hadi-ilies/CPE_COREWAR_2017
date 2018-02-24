@@ -8,6 +8,10 @@
 #include "op.h"
 #include "my.h"
 
+/*
+** Returns the number of the register written after the 'r' if it is valid
+*/
+
 int is_valid_reg(char *reg)
 {
 	int nb = 0;
@@ -17,25 +21,23 @@ int is_valid_reg(char *reg)
 	return (nb > 0 && nb < REG_NUMBER)) ? nb : -1);
 }
 
-bool is_correct_arg(char *reg)
+bool is_correct_arg(char *reg, int id, int nparam)
 {
-	return ((op_tab[index].type[index2] & T_REG) == 1);
+	return ((op_tab[(int)id].type[nparam] & T_REG) == 1);
 }
 
-char *is_reg(char **line)
+char is_reg(char **line, char id, int nparam)
 {
 	int i = 0;
 	char *tmp;
-	char *reg = malloc(sizeof(char) * T_REG);
+	char nb;
 
-	if (reg == NULL)
-		return (NULL);
 	for (; IS_NUM(*line[i]); i++);
 	tmp = my_strndup(*line, i);
 	*line += i;
-	if (tmp == NULL || (reg = is_reg_in_range(tmp)) == -1)
+	if (tmp == NULL || (nb = is_valid_reg(tmp)) == -1)
 		return (-1);
 	if (!is_correct_arg(tmp))
 		return (-1);
-	return (reg);
+	return (nb);
 }

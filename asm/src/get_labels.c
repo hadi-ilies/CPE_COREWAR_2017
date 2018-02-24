@@ -10,26 +10,10 @@
 #include "my.h"
 #include "op.h"
 
-bool is_valid_char(char c)
+int get_len_label(char *line)
 {
-	for (int i = 0; LABEL_CHARS[i] != '\0'; i++)
-		if (c == LABEL_CHARS[i])
-			return (true);
-	return (false);
-}
-
-bool is_valid_label(char *str)
-{
-	for (int i = 0; str[i] != '\0'; i++)
-		if (!is_valid_char(str[i]))
-			return (false);
-	return (true);
-}
-
-int is_label(char *str)
-{
-	for (int j = 0; str[j] != '\0'; j++)
-		if (str[j + 1] == LABEL_CHAR && str[j] != '%')
+	for (int j = 0; line[j] != '\0'; j++)
+		if (line[j + 1] == LABEL_CHAR && line[j] != DIRECT_CHAR)
 			return (j + 1);
 	return (-1);
 }
@@ -38,31 +22,46 @@ int get_label_nb(char **tab)
 {
 	int nb = 0;
 
+	if (tab == NULL)
+		return (0);
 	for (int i = 0; tab[i] != NULL; i++)
-		if (is_label(tab[i]) > 0)
+		if (get_len_label(tab[i]) > 0)
 			nb++;
 	return (nb);
 }
 
+bool is_valid_char(char c)
+{
+	for (int i = 0; LABEL_CHARS[i] != '\0'; i++)
+		if (c == LABEL_CHARS[i])
+			return (true);
+	return (false);
+}
+
+char *get_valid_label(char *line, int len)
+{
+	for (int i = 0; line[i] != '\0' && i < len; i++)
+		if (!is_valid_char(line[i]))
+			return (NULL);
+	return (my_strndup(line, len));
+}
+
 label_t *get_labels(char **tab)
 {
-	int pos = 0;
-	label_t *labels;
+	int len = 0;
 	int k = 0;
+	label_t *labels;
 	int nb_label = get_label_nb(tab);
 
 	if (tab == NULL || nb_label == 0)
 		return (NULL);
-	labels = malloc(sizeof(label_t) * (nb_label + 1));
-	if (labels == NULL)
+	if ((labels = malloc(sizeof(label_t) * (nb_label + 1))) == NULL)
 		return (NULL);
 	for (int i = 0; tab[i] != NULL; i++)
-		if ((pos = is_label(tab[i])) != -1) {
-			labels[k].label = my_strndup(tab[i], pos);
+		if ((len = get_len_label(tab[i])) != -1) {
 			labels[k].line = i;
-			if (labels[k].label == NULL )
-				return (NULL);
-			if (!is_valid_label(labels[k].label))
+			labels[k].label = get_valid_label(tab[i], len);
+			if (labels[k].label)
 				return (NULL);
 			k++;
 		}

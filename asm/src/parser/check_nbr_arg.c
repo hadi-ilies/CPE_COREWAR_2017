@@ -17,7 +17,7 @@ bool check_nbr_arg(char id, char *line)
 	if (id < 0 || line == NULL)
 		return (false);
 	while (line[i] != '\0') {
-		if (line[i] == SEPARATOR_CHAR)
+		if (line[i] == ' ')
 			nb_arg++;
 		i++;
 	}

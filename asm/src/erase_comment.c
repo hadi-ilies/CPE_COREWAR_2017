@@ -12,7 +12,7 @@ void erase_comment(char *line, size_t error_line)
 {
 	size_t i = 0;
 
-	if (line == NULL || error_line < 3)
+	if (error_line < 3)
 		return;
 	for (;line[i] != COMMENT_CHAR && line[i] != '\0'; i++);
 	line[i] = '\0';

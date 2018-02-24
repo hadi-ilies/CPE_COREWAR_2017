@@ -1,8 +1,8 @@
 /*
 ** EPITECH PROJECT, 2018
-** check_args
+** write_args
 ** File description:
-** check_args
+** write_args
 */
 
 #include "asm.h"
@@ -15,7 +15,7 @@
 ** on écrit les arguments dans la chaine 'instruct'
 */
 
-char check_args(char **line, char *instruct)
+char write_args(char **line, char *instruct)
 {
 	char *reg;
 	char *dir;
