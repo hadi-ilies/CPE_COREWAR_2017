@@ -22,17 +22,16 @@ bool is_correct_arg(char *reg)
 	return ((op_tab[index].type[index2] & T_REG) == 1);
 }
 
-char is_reg(char **line)
+char *is_reg(char **line)
 {
 	int i = 0;
-	char reg = 0;
 	char *tmp;
+	char *reg = malloc(sizeof(char) * T_REG);
 
-	if (**line != 'r')
-		return (-1);
-	*line += 1;
+	if (reg == NULL)
+		return (NULL);
 	for (; IS_NUM(*line[i]); i++);
-	tmp = my_linendup(*line, i);
+	tmp = my_strndup(*line, i);
 	*line += i;
 	if (tmp == NULL || (reg = is_reg_in_range(tmp)) == -1)
 		return (-1);

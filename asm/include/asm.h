@@ -58,6 +58,6 @@ char get_id_instruct(label_t *labels, char **line, size_t i);
 bool check_nbr_arg(char id, char *line);
 char check_args(char **line, char *instruct);
 
-char is_reg(char **line);
-char is_dir(char **line);
-char is_ind(char **line);
+char *is_reg(char **line);
+char *is_dir(char **line);
+char *is_ind(char **line);

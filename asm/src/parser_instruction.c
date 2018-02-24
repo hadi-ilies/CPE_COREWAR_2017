@@ -21,9 +21,9 @@ bool parser_instruction(asm_t *asm_s)
 	char coding_byte = 0;
 	char instruct[2 + (MAX_ARGS_NUMBER * SIZE_ARG_MAX(T_REG, T_DIR, T_IND))];
 
-	for (int i = 2; ASM_CODE[i] != NULL; i++) {
+	for (size_t i = 2; ASM_CODE[i] != NULL; i++) {
 		line = ASM_CODE[i];
-		id = get_id_instruct(ASM_LABELS, &line);
+		id = get_id_instruct(ASM_LABELS, &line, i);
 		if (check_nbr_arg(id, line) == false)
 			return (false);
 		if (*line != ' ' && *line != '\t')

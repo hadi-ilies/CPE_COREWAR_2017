@@ -5,6 +5,7 @@
 ** check_args
 */
 
+#include "asm.h"
 #include "op.h"
 
 /*
@@ -16,12 +17,17 @@
 
 char check_args(char **line, char *instruct)
 {
+	char *reg;
+	char *dir;
+	char *ind;
 	char coding_byte = 0;
 
 	if (**line == 'r')
-		is_reg(line);
+		if ((reg = is_reg(line)) == NULL)
+			return (-1);
 	if (**line == DIRECT_CHAR)
-		is_dir(line);
+		if ((dir = is_dir(line)) == NULL)
+			return (-1);
 //	if (**line == )
 	return (coding_byte);
 }

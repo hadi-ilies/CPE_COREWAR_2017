@@ -6,6 +6,7 @@
 */
 
 #include <stddef.h>
+#include "op.h"
 
 void erase_comment(char *line, size_t error_line)
 {
@@ -13,6 +14,6 @@ void erase_comment(char *line, size_t error_line)
 
 	if (line == NULL || error_line < 3)
 		return;
-	for (;line[i] != '#' && line[i] != '\0'; i++);
+	for (;line[i] != COMMENT_CHAR && line[i] != '\0'; i++);
 	line[i] = '\0';
 }
