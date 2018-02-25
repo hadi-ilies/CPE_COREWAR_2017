@@ -5,7 +5,7 @@
 ** is_reg
 */
 
-#include "op.h"
+#include "asm.h"
 #include "my.h"
 
 /*
@@ -18,12 +18,7 @@ int is_valid_reg(char *reg)
 
 	if (my_atoi(&nb, reg) == false)
 		return (false);
-	return (nb > 0 && nb < REG_NUMBER)) ? nb : -1);
-}
-
-bool is_correct_arg(char *reg, int id, int nparam)
-{
-	return ((op_tab[(int)id].type[nparam] & T_REG) == 1);
+	return ((nb > 0 && nb < REG_NUMBER) ? nb : -1);
 }
 
 char is_reg(char **line, char id, int nparam)
@@ -32,12 +27,14 @@ char is_reg(char **line, char id, int nparam)
 	char *tmp;
 	char nb;
 
+	if (!IS_CORRECT_PARAM(id, nparam, T_REG))
+		return (-1);
+	(*line)++;
 	for (; IS_NUM(*line[i]); i++);
 	tmp = my_strndup(*line, i);
 	*line += i;
 	if (tmp == NULL || (nb = is_valid_reg(tmp)) == -1)
 		return (-1);
-	if (!is_correct_arg(tmp))
-		return (-1);
+	free(tmp);
 	return (nb);
 }

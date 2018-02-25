@@ -22,7 +22,8 @@ bool write_instruct(size_t i, char **line, char *instruct, label_t *labels)
 		return (false);
 	if (check_nbr_arg(instruct[0], *line) == false)
 		return (false);
-	if ((instruct[1] = write_args(line, instruct)) == -1)
+	// *line  : 1er param
+	if ((instruct[1] = write_args(line, instruct[0], instruct + 2)) == -1)
 		return (false);
 	return (true);
 }
@@ -34,8 +35,10 @@ bool parser_instruction(asm_t *asm_s)
 
 	for (size_t i = 2; ASM_CODE[i] != NULL; i++) {
 		line = ASM_CODE[i];
+		asm_s->line_err = line;
 		if (write_instruct(i, &line, instruct, ASM_LABELS) == false)
 			return (false);
+		PROG_SIZE += my_strlen(instruct);
 		if (my_strcat(CHAMP_CODE, instruct) == NULL)
 			return (false);
 	}

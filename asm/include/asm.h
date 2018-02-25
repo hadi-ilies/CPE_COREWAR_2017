@@ -23,10 +23,11 @@
 #define IS_NUM(x)		(x >= '0' && x <= '9')
 #define BIGGEST(x, y, z)	(x > y ? (x > z ? x : z) : (y > z ? y : z))
 #define REV_ENDIAN(x)							\
-	((((x) & 0xFF000000) >> 24) | (((x) & 0x00FF0000) >> 8)		\
-	 | (((x) & 0x0000FF00) << 8) | (((x) & 0x000000FF) << 24))
+	((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |	\
+	 (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
+#define IS_CORRECT_PARAM(x, y, z)	((op_tab[(int)x].type[y] & z) == 1)
 
-const char DELIM[3] = {' ', '\t', SEPARATOR_CHAR};
+extern const char DELIM[3];
 
 typedef struct
 {
@@ -39,7 +40,7 @@ typedef struct
 	header_t	header;
 	int		asm_fd;
 	int		champ_fd;
-	size_t		err_line;
+	char		*line_err;
 	char		**asm_code;
 	label_t		*labels;
 	char		*champ_code;
@@ -60,8 +61,8 @@ size_t clean_str(char *line);
 bool parser_instruction(asm_t *asm_s);
 char get_id_instruct(label_t *labels, char **line, size_t i);
 bool check_nbr_arg(char id, char *line);
-char write_args(char **line, char *instruct);
+char write_args(char **line, char id, char *instruct);
 
-char is_reg(char **line);
-char *is_dir(char **line);
-char *is_ind(char **line);
+char is_reg(char **line, char id, int nparam);
+char *is_dir(char **line, char id, int nparam);
+char *is_ind(char **line, char id, int nparam);

@@ -12,7 +12,6 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)fill_header.c	\
 			$(SRC_DIR)get_labels.c	\
 			$(SRC_DIR)compile_asm.c	\
-			$(SRC_DIR)erase_comment.c	\
 			$(SRC_DIR)parser_instruction.c	\
 			$(PARSER_DIR)get_coding_byte.c	\
 			$(PARSER_DIR)get_id_instruct.c	\

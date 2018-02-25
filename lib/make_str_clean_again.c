@@ -9,7 +9,9 @@
 #include "op.h"
 #include "my.h"
 
-bool is_delim(char c, char *delim)
+const char DELIM[3] = {' ', '\t', SEPARATOR_CHAR};
+
+bool is_delim(char c, const char *delim)
 {
 	while (*delim != '\0') {
 		if (c == *delim)
@@ -19,7 +21,7 @@ bool is_delim(char c, char *delim)
 	return (false);
 }
 
-size_t len_clean_str(char *str, char *delim)
+size_t len_clean_str(char *str, const char *delim)
 {
 	size_t i = 0;
 	size_t size = 0;

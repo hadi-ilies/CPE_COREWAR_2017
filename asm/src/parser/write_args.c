@@ -15,7 +15,15 @@
 ** on écrit les arguments dans la chaine 'instruct'
 */
 
-char write_args(char **line, char *instruct)
+char is_valid_coding_byte(char coding_byte, char id)
+{
+	char valid_coding_byte = coding_byte;
+
+	(void) id;
+	return (valid_coding_byte);
+}
+
+char write_args(char **line, char id, char *instruct)
 {
 	int nparam = 0;
 	char coding_byte = 0;
@@ -24,13 +32,26 @@ char write_args(char **line, char *instruct)
 
 	while (**line != '\0') {
 		if (**line == 'r') {
-			if ((instruct[3] = is_reg(line)) == -1)
+			if ((*instruct = is_reg(line, id, nparam)) == -1)
 				return (-1);
+			instruct++;
+			coding_byte = (coding_byte + 1) << 2;
+			nparam++;
 		}
-		if (**line == DIRECT_CHAR)
-			if ((dir = is_dir(line)) == NULL)
+		if (**line == DIRECT_CHAR) {
+			if ((dir = is_dir(line, id, nparam)) == NULL)
 				return (-1);
-//	if (**line == )
+			instruct += DIR_SIZE;
+			coding_byte = (coding_byte + 2) << 2;
+			nparam++;
+		}
+		if (IS_NUM(**line)) {
+			if ((ind = is_ind(line, id, nparam)) == NULL)
+				return (-1);
+			instruct += IND_SIZE;
+			coding_byte = (coding_byte + 3) << 2;
+			nparam++;
+		}
 	}
-	return (coding_byte);
+	return (is_valid_coding_byte(coding_byte << 2, id));
 }

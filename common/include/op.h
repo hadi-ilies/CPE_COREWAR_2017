@@ -47,7 +47,7 @@ typedef struct
 #define DIR_SIZE        4
 #define REG_SIZE        DIR_SIZE
 
-extern op_t op_tab[];
+extern const op_t op_tab[];
 
 /*
 ** header
