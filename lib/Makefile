@@ -21,7 +21,8 @@ SRC	=	my_putchar.c	\
 		my_tablen.c	\
 		my_atoi.c	\
 		my_memset.c	\
-		my_strndup.c
+		my_strndup.c	\
+		make_str_clean_again.c
 
 COMMON_DIR	=	common/
 

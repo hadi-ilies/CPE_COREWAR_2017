@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!compile_asm(&asm_s)) {
 		my_printf("%s, %s, ", *argv, argv[1]);
-		my_printf("Line : %d\n", asm_s.err_line);
+		my_printf("Line : %d\n", asm_s.line_err);
 		return (EXIT_FAILURE);
 	}
 	if (fill_header(&asm_s) == false)

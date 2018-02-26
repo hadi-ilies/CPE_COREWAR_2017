@@ -7,8 +7,6 @@
 
 #pragma once
 
-#include <stddef.h>
-
 #define MEM_SIZE                (6*1024)
 #define IDX_MOD                 512   /* modulo of the index < */
 #define MAX_ARGS_NUMBER         4     /* this may not be changed 2^*IND_SIZE */
@@ -49,7 +47,7 @@ typedef struct
 #define DIR_SIZE        4
 #define REG_SIZE        DIR_SIZE
 
-extern op_t op_tab[];
+extern const op_t op_tab[];
 
 /*
 ** header
