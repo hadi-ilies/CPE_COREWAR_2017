@@ -5,6 +5,7 @@
 ** parser_instruction
 */
 
+#include <stdio.h>
 #include "asm.h"
 #include "my.h"
 

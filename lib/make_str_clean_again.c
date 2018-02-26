@@ -9,7 +9,7 @@
 #include "op.h"
 #include "my.h"
 
-const char DELIM[3] = {' ', '\t', SEPARATOR_CHAR};
+const char DELIM[4] = {' ', '\t', SEPARATOR_CHAR, '\0'};
 
 bool is_delim(char c, const char *delim)
 {
