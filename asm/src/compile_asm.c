@@ -24,7 +24,7 @@ bool stock_line_in_tab(asm_t *asm_s, char *line)
 {
 	if (*line != '\0') {
 		line = make_str_clean_again(line, DELIM);
-		printf("line : %s\n", line);
+//		printf("line : %s\n", line);
 		ASM_CODE = my_strcat_to_tab(ASM_CODE, line);
 		if (ASM_CODE == NULL)
 			return (false);
@@ -46,7 +46,6 @@ bool compile_asm(asm_t *asm_s)
 		i++;
 	}
 	ASM_LABELS = get_labels(ASM_CODE);
-//	printf("%s\n", ASM_CODE[2]);
 	if (parser_instruction(asm_s) == false)
 		return (false);
 	return (true);

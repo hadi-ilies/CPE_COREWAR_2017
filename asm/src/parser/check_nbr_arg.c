@@ -21,7 +21,7 @@ bool check_nbr_arg(char id, char *line)
 			nb_arg++;
 		i++;
 	}
-	if (op_tab[ (int) id].nbr_args != nb_arg + 1)
+	if (op_tab[ (int) id - 1].nbr_args != nb_arg + 1)
 		return (false);
 	return (true);
 }

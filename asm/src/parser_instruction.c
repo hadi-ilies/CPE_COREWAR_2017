@@ -17,15 +17,27 @@
 ** .cor		0b 68 01 00 0f 00 01
 */
 
-bool write_instruct(size_t i, char **line, char *instruct, label_t *labels)
+bool write_instruct(size_t i, char *line, char *instruct, label_t *labels)
 {
-	if ((instruct[0] = get_id_instruct(labels, line, i)) < 0)
+	int nparam = 0;
+	char reg = 0;
+	short ind = 0;
+	int dir = 0;
+
+	if ((instruct[0] = get_id_instruct(labels, &line, i)) < 0)
 		return (false);
-	if (check_nbr_arg(instruct[0], *line) == false)
+	if (check_nbr_arg(instruct[0], line) == false)
 		return (false);
-	// *line  : 1er param
-	if ((instruct[1] = write_args(line, instruct[0], instruct + 2)) == -1)
-		return (false);
+	for (int i = 0; line[i] != '\0'; i++) {
+		if ((reg = is_reg(line + i, instruct[0], nparam)) == -1)
+			return (-1);
+		if ((dir = is_dir(line + i, instruct[0], nparam)) == -1)
+			return (-1);
+		if ((ind = is_ind(line + i, instruct[0], nparam)) == -1)
+			return (-1);
+	}
+//	if ((instruct[1] = write_args(line, instruct[0], instruct + 2)) == -1)
+//		return (false);
 	return (true);
 }
 
@@ -37,7 +49,7 @@ bool parser_instruction(asm_t *asm_s)
 	for (size_t i = 2; ASM_CODE[i] != NULL; i++) {
 		line = ASM_CODE[i];
 		asm_s->line_err = line;
-		if (write_instruct(i, &line, instruct, ASM_LABELS) == false)
+		if (write_instruct(i, line, instruct, ASM_LABELS) == false)
 			return (false);
 		PROG_SIZE += my_strlen(instruct);
 		if (my_strcat(CHAMP_CODE, instruct) == NULL)

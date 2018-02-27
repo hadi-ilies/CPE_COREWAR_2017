@@ -12,18 +12,23 @@
 ** Returns the value written after DIRECT_CHAR ('%') if it is valid
 */
 
-char *is_dir(char **line, char id, int nparam)
+int is_dir(char *line, char id, int nparam)
 {
 	int i = 0;
+	int dir = 0;
 	char *nb;
 
-	if (!IS_CORRECT_PARAM(id, nparam, T_DIR))
-		return (NULL);
-	(*line)++;
-	for (; IS_NUM(*line[i]); i++);
-	nb = my_strndup(*line, i);
-	*line += i;
+	if (!IS_CORRECT_PARAM(id - 1, nparam, T_DIR))
+		return (-1);
+	*line += 1;
+	if (*line == LABEL_CHAR)
+		for (; IS_NUM(line[i]); i++);
+	nb = my_strndup(line, i);
+	*line += (i + 1);
 	if (nb == NULL)
-		return (NULL);
-	return (nb);
+		return (-1);
+	if (my_atoi(&dir, nb) == false)
+		return (-1);
+	free(nb);
+	return (dir);
 }

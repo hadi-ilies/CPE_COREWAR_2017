@@ -61,8 +61,8 @@ size_t clean_str(char *line);
 bool parser_instruction(asm_t *asm_s);
 char get_id_instruct(label_t *labels, char **line, size_t i);
 bool check_nbr_arg(char id, char *line);
-char write_args(char **line, char id, char *instruct);
+char write_args(char *line, char id, char *instruct);
 
-char is_reg(char **line, char id, int nparam);
-char *is_dir(char **line, char id, int nparam);
-char *is_ind(char **line, char id, int nparam);
+char is_reg(char *line, char id, int nparam);
+short is_ind(char *line, char id, int nparam);
+int is_dir(char *line, char id, int nparam);

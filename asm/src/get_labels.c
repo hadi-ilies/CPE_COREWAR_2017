@@ -57,14 +57,15 @@ label_t *get_labels(char **tab)
 		return (NULL);
 	if ((labels = malloc(sizeof(label_t) * (nb_label + 1))) == NULL)
 		return (NULL);
-	for (int i = 0; tab[i] != NULL; i++)
+	for (int i = 0; tab[i] != NULL; i++) {
 		if ((len = get_len_label(tab[i])) != -1) {
 			labels[k].line = i;
 			labels[k].label = get_valid_label(tab[i], len);
-			if (labels[k].label)
+			if (labels[k].label == NULL)
 				return (NULL);
 			k++;
 		}
+	}
 	labels[k].label = NULL;
 	labels[k].line = 0;
 	return (labels);

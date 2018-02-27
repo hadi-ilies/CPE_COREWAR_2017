@@ -12,17 +12,23 @@
 ** Returns the value if it is valid
 */
 
-char *is_ind(char **line, char id, int nparam)
+short is_ind(char *line, char id, int nparam)
 {
 	int i = 0;
+	short ind = 0;
+	int int_ind = 0;
 	char *nb;
 
 	if (!IS_CORRECT_PARAM(id, nparam, T_IND))
-		return (NULL);
-	for (; IS_NUM(*line[i]); i++);
-	nb = my_strndup(*line, i);
+		return (-1);
+	for (; IS_NUM(line[i]); i++);
+	nb = my_strndup(line, i);
 	*line += i;
 	if (nb == NULL)
-		return (NULL);
-	return (nb);
+		return (-1);
+	if (my_atoi(&int_ind, nb) == false)
+		return (-1);
+	ind = int_ind;
+	free(nb);
+	return (ind);
 }

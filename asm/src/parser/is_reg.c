@@ -21,18 +21,18 @@ int is_valid_reg(char *reg)
 	return ((nb > 0 && nb < REG_NUMBER) ? nb : -1);
 }
 
-char is_reg(char **line, char id, int nparam)
+char is_reg(char *line, char id, int nparam)
 {
 	int i = 0;
 	char *tmp;
 	char nb;
 
-	if (!IS_CORRECT_PARAM(id, nparam, T_REG))
+	if (!IS_CORRECT_PARAM(id - 1, nparam, T_REG))
 		return (-1);
-	(*line)++;
-	for (; IS_NUM(*line[i]); i++);
-	tmp = my_strndup(*line, i);
-	*line += i;
+	*line += 1;
+	for (; IS_NUM(line[i]); i++);
+	tmp = my_strndup(line, i);
+	*line += (i + 1);
 	if (tmp == NULL || (nb = is_valid_reg(tmp)) == -1)
 		return (-1);
 	free(tmp);

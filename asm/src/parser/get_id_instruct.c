@@ -14,6 +14,14 @@
 ** if it exists
 */
 
+int my_wordlen(char *str, char c)
+{
+	int i = 0;
+
+	for (; str[i] != '\0' && str[i] != c; i++);
+	return (i);
+}
+
 char get_id_instruct(label_t *labels, char **line, size_t nline)
 {
 	int i = 0;
@@ -21,14 +29,15 @@ char get_id_instruct(label_t *labels, char **line, size_t nline)
 
 	if (line == NULL)
 		return (-1);
-	for (;labels[i].label != NULL && labels[i].line != nline; i++);
+	while (labels[i].label != NULL && labels[i].line != nline)
+		i++;
 	if (labels[i].line == nline)
-		*line += my_strlen(labels[i].label) + 1;
+		*line += my_strlen(labels[i].label) + 2;
 	for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
 		mnemo = op_tab[i].mnemonique;
-		if (!my_strncmp(*line, mnemo, my_strlen(mnemo))) {
-			*line += my_strlen(mnemo) + 1;
-			return (op_tab[0].code);
+		if (!my_strncmp(*line, mnemo, my_wordlen(*line, ' '))) {
+			*line += my_wordlen(*line, ' ') + 1;
+			return (op_tab[i].code);
 		}
 	}
 	return (-1);
