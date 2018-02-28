@@ -10,13 +10,15 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)init_struct.c	\
 			$(SRC_DIR)get_str_entrecote.c	\
 			$(SRC_DIR)fill_header.c	\
-			$(SRC_DIR)get_labels.c	\
 			$(SRC_DIR)compile_asm.c	\
 			$(SRC_DIR)parser_instruction.c	\
-			$(PARSER_DIR)get_coding_byte.c	\
+			$(LABEL_DIR)get_labels.c	\
+			$(LABEL_DIR)get_pos_label.c	\
+			$(LABEL_DIR)is_valid_label_char.c	\
+			$(PARSER_DIR)get_next_arg.c	\
 			$(PARSER_DIR)get_id_instruct.c	\
 			$(PARSER_DIR)check_nbr_arg.c	\
-			$(PARSER_DIR)write_args.c	\
+			$(PARSER_DIR)get_coding_byte.c	\
 			$(PARSER_DIR)is_dir.c	\
 			$(PARSER_DIR)is_ind.c	\
 			$(PARSER_DIR)is_reg.c	\
@@ -26,6 +28,7 @@ SRC		+=	../$(COMMON_DIR)$(SRC_DIR)op.c
 
 SRC_DIR		=	src/
 PARSER_DIR	=	$(SRC_DIR)parser/
+LABEL_DIR	=	$(SRC_DIR)label/
 
 LIB_DIR		=	../lib/
 

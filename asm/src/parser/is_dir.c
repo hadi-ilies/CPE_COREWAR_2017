@@ -9,26 +9,49 @@
 #include "my.h"
 
 /*
-** Returns the value written after DIRECT_CHAR ('%') if it is valid
+** Return the value written after DIRECT_CHAR ('%') if it is valid
 */
 
-int is_dir(char *line, char id, int nparam)
+bool put_int_instruct(inst_t *instruct, int dir, char *buf)
+{
+	char tmp = 0;
+	int i = instruct->pos + sizeof(dir);
+	int rev_dir = REV_ENDIAN(dir);
+
+	while (instruct->pos < i) {
+		tmp = rev_dir & 255;
+		instruct->instruct[instruct->pos] = tmp;
+		rev_dir = rev_dir >> 8;
+		(instruct->pos)++;
+	}
+	if (instruct->pos >= END_INSTRUCT)
+		return (false);
+	free(buf);
+	return (true);
+}
+
+bool is_dir(char *line, inst_t *inst, asm_t *asm_s)
 {
 	int i = 0;
 	int dir = 0;
-	char *nb;
+	char *buf = NULL;
 
-	if (!IS_CORRECT_PARAM(id - 1, nparam, T_DIR))
-		return (-1);
-	*line += 1;
-	if (*line == LABEL_CHAR)
-		for (; IS_NUM(line[i]); i++);
-	nb = my_strndup(line, i);
-	*line += (i + 1);
-	if (nb == NULL)
-		return (-1);
-	if (my_atoi(&dir, nb) == false)
-		return (-1);
-	free(nb);
-	return (dir);
+	(void) asm_s;
+	if (!IS_CORRECT_PARAM(inst->instruct[0] - 1, inst->nparam, T_DIR))
+		return (false);
+	if (line[1] != LABEL_CHAR) {
+		for (; IS_NUM(line[i + 1]); i++);
+		if (!(buf = my_strndup(line + 1, i)) || !my_atoi(&dir, buf))
+			return (false);
+	} else if (line[1] == LABEL_CHAR) {
+		for (; IS_LABEL_CHAR(line[i + 2]); i++);
+		if (!(buf = my_strndup(line + 2, i)))
+			return (false);
+		dir = 15;
+		//récupérer la déclaration du label en question et soustraire
+		//leur "distance"
+	} else
+		return (false);
+	(inst->nparam)++;
+	return (put_int_instruct(inst, dir, buf));
 }

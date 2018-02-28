@@ -11,11 +11,9 @@
 
 bool write_binary_code(asm_t *asm_s)
 {
-	ssize_t len = my_strlen(asm_s->champ_code);
-
 	if (write(asm_s->champ_fd, &asm_s->header, sizeof(header_t)) < 0)
 		return (false);
-	if (write(asm_s->champ_fd, asm_s->champ_code, len) != len)
+	if (write(asm_s->champ_fd, asm_s->champ_code, PROG_SIZE) != PROG_SIZE)
 		return (false);
 	return (true);
 }

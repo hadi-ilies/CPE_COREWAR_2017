@@ -17,43 +17,54 @@
 ** .cor		0b 68 01 00 0f 00 01
 */
 
-bool write_instruct(size_t i, char *line, char *instruct, label_t *labels)
+void print_instruct(inst_t *instruct)
 {
-	int nparam = 0;
-	char reg = 0;
-	short ind = 0;
-	int dir = 0;
+	for (int i = 0; i < END_INSTRUCT; i++)
+		printf("%d ", instruct->instruct[i]);
+	printf("\n");
+}
 
-	if ((instruct[0] = get_id_instruct(labels, &line, i)) < 0)
+bool write_instruct(inst_t *instruct, asm_t *asm_s)
+{
+	if ((instruct->instruct[0] = get_id_instruct(instruct)) < 0)
 		return (false);
-	if (check_nbr_arg(instruct[0], line) == false)
+	if (check_nbr_arg(instruct->instruct[0], LINE) == false)
 		return (false);
-	for (int i = 0; line[i] != '\0'; i++) {
-		if ((reg = is_reg(line + i, instruct[0], nparam)) == -1)
-			return (-1);
-		if ((dir = is_dir(line + i, instruct[0], nparam)) == -1)
-			return (-1);
-		if ((ind = is_ind(line + i, instruct[0], nparam)) == -1)
-			return (-1);
+	printf("id : %d\n", instruct->instruct[0]);
+	for (; *LINE != '\0'; LINE += get_next_arg(LINE)) {
+		if (*LINE == 'r') {
+			printf("\targ : %s\n", LINE);
+			if (is_reg(LINE, instruct, asm_s) == false)
+				return (-1);
+		} else if (*LINE == DIRECT_CHAR) {
+			printf("\targ : %s\n", LINE);
+			if (is_dir(LINE, instruct, asm_s) == false)
+				return (-1);
+		} else if (IS_NUM(*LINE) || *LINE == LABEL_CHAR) {
+			printf("\targ : %s\n", LINE);
+			if (is_ind(LINE, instruct, asm_s) == false)
+				return (-1);
+		} else
+			return (false);
 	}
-//	if ((instruct[1] = write_args(line, instruct[0], instruct + 2)) == -1)
-//		return (false);
+	print_instruct(instruct);
 	return (true);
 }
 
 bool parser_instruction(asm_t *asm_s)
 {
-	char *line = NULL;
-	char instruct[2 + (MAX_ARGS_NUMBER * SIZE_ARG_MAX)] = {0};
-
 	for (size_t i = 2; ASM_CODE[i] != NULL; i++) {
-		line = ASM_CODE[i];
-		asm_s->line_err = line;
-		if (write_instruct(i, line, instruct, ASM_LABELS) == false)
+		inst_t instruct = {ASM_CODE[i], {'\0'}, 0, 0};
+
+		asm_s->line_err = instruct.line;
+		if (!write_instruct(&instruct, asm_s))
 			return (false);
-		PROG_SIZE += my_strlen(instruct);
-		if (my_strcat(CHAMP_CODE, instruct) == NULL)
+		printf("prog_size : %d\n", PROG_SIZE);
+		PROG_SIZE += instruct.pos;
+		if (my_strcat(CHAMP_CODE, instruct.instruct) == NULL)
 			return (false);
 	}
+	for (int i = 0; i < PROG_SIZE; i++)
+		printf("%d ", CHAMP_CODE[i]);
 	return (true);
 }

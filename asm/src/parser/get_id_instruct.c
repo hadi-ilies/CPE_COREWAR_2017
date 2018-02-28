@@ -22,21 +22,28 @@ int my_wordlen(char *str, char c)
 	return (i);
 }
 
-char get_id_instruct(label_t *labels, char **line, size_t nline)
+int need_coding(char *line)
 {
-	int i = 0;
-	char *mnemo = NULL;
+	if (!my_strncmp(line, "live", 4))
+		return (1);
+	if (!my_strncmp(line, "zjmp", 4))
+		return (1);
+	if (!my_strncmp(line, "fork", 4))
+		return (1);
+	if (!my_strncmp(line, "lfork", 5))
+		return (1);
+	return (2);
+}
 
-	if (line == NULL)
-		return (-1);
-	while (labels[i].label != NULL && labels[i].line != nline)
-		i++;
-	if (labels[i].line == nline)
-		*line += my_strlen(labels[i].label) + 2;
+char get_id_instruct(inst_t *inst)
+{
+	char *mnemo;
+
 	for (int i = 0; op_tab[i].mnemonique != NULL; i++) {
 		mnemo = op_tab[i].mnemonique;
-		if (!my_strncmp(*line, mnemo, my_wordlen(*line, ' '))) {
-			*line += my_wordlen(*line, ' ') + 1;
+		if (!my_strncmp(inst->line, mnemo, my_wordlen(inst->line, ' '))) {
+			inst->pos = need_coding(inst->line);
+			inst->line += get_next_arg(inst->line);
 			return (op_tab[i].code);
 		}
 	}

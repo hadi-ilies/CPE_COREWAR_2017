@@ -8,7 +8,6 @@
 #include <stdlib.h>
 #include "asm.h"
 #include "my.h"
-#include "op.h"
 
 int get_len_label(char *line)
 {
@@ -18,7 +17,7 @@ int get_len_label(char *line)
 	return (-1);
 }
 
-int get_label_nb(char **tab)
+int get_nlabel(char **tab)
 {
 	int nb = 0;
 
@@ -30,20 +29,22 @@ int get_label_nb(char **tab)
 	return (nb);
 }
 
-bool is_valid_char(char c)
-{
-	for (int i = 0; LABEL_CHARS[i] != '\0'; i++)
-		if (c == LABEL_CHARS[i])
-			return (true);
-	return (false);
-}
-
 char *get_valid_label(char *line, int len)
 {
 	for (int i = 0; line[i] != '\0' && i < len; i++)
-		if (!is_valid_char(line[i]))
+		if (is_valid_label_char(line[i]) == false)
 			return (NULL);
 	return (my_strndup(line, len));
+}
+
+char *erase_label(char *line, char *label)
+{
+	char *new;
+
+	if (!(new = my_strdup(line + my_strlen(label) + 2)))
+		return (NULL);
+	free(line);
+	return (new);
 }
 
 label_t *get_labels(char **tab)
@@ -51,22 +52,20 @@ label_t *get_labels(char **tab)
 	int len = 0;
 	int k = 0;
 	label_t *labels;
-	int nb_label = get_label_nb(tab);
 
-	if (tab == NULL || nb_label == 0)
-		return (NULL);
-	if ((labels = malloc(sizeof(label_t) * (nb_label + 1))) == NULL)
+	if (!tab || !(labels = malloc(sizeof(label_t) * (get_nlabel(tab) + 1))))
 		return (NULL);
 	for (int i = 0; tab[i] != NULL; i++) {
 		if ((len = get_len_label(tab[i])) != -1) {
-			labels[k].line = i;
-			labels[k].label = get_valid_label(tab[i], len);
-			if (labels[k].label == NULL)
+			if (!(labels[k].label = get_valid_label(tab[i], len)))
+				return (NULL);
+			labels[k].pos = get_pos_label(tab, i);
+			if (!(tab[i] = erase_label(tab[i], labels[k].label)))
 				return (NULL);
 			k++;
 		}
 	}
 	labels[k].label = NULL;
-	labels[k].line = 0;
+	labels[k].pos = 0;
 	return (labels);
 }
