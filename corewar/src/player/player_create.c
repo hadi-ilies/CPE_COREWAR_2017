@@ -30,8 +30,9 @@ player_t player_create(size_t num, size_t offset, char *file_name)
 	get_name(player.name, file_name);
 	for (size_t i = 0; i < REG_NUMBER; i++)
 		player.reg[i] = 0;
+	player.reg[0] = num;
 	player.offset = offset;
-	player.carry = false;
+	player.carry = true; /* tmp */ //false;
 	player.alive = false;
 	player.cycle = 0;
 	return (player);

@@ -11,7 +11,12 @@ void op_and(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
 	//06 64 01 00 00 00 00 01
 
-	char *r1 = NULL;
+	(void)tab;
+	(void)player;
+	(void)nb_player;
+	(void)player_num;
+	player[player_num].offset += 8;
+	/*char *r1 = NULL;
 	char *r2 = NULL;
 	char *r3 = NULL;
 	bool *carry = &player[player_num].carry;
@@ -26,5 +31,5 @@ void op_and(char tab[], player_t *player, size_t nb_player, size_t player_num)
 	(*r3) = (*r1) & (*r2);
 	if ((*registre_3) == 0)
 		(*carry) = ((*carry) ? false : true);
-	player[player_num].offset += 4;
+		player[player_num].offset += 4;*/
 }

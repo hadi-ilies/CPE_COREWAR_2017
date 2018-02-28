@@ -32,11 +32,18 @@
 
 void op_zjmp(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	short num = tab[player[player_num].offset + 1];
+	// 09 ff ff ff fb
+	int num = tab[player[player_num].offset + 1];
 
 	(void)nb_player;
 	num <<= 8;
 	num = tab[player[player_num].offset + 2];
+	num <<= 8;
+	num = tab[player[player_num].offset + 3];
+	num <<= 8;
+	num = tab[player[player_num].offset + 4];
 	if (player[player_num].carry)
 		player[player_num].offset += num;
+	else
+		player[player_num].offset += DIR_SIZE + 1;
 }
