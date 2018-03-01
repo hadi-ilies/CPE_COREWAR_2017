@@ -45,6 +45,7 @@ bool init_struct(asm_t *asm_s, char *path)
 		return (false);
 	if ((asm_s->champ_fd = create_champ_file(path)) < 0)
 		return (false);
+	my_memset(&asm_s->header, 0, sizeof(header_t));
 	asm_s->line_err = NULL;
 	asm_s->asm_code = NULL;
 	asm_s->champ_code = NULL;

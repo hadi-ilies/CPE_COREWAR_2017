@@ -12,20 +12,22 @@
 ** Return the value written after DIRECT_CHAR ('%') if it is valid
 */
 
-bool put_int_instruct(inst_t *instruct, int dir, char *buf)
+bool put_int_instruct(inst_t *inst, int dir, char *buf)
 {
 	char tmp = 0;
-	int i = instruct->pos + sizeof(dir);
+	int i = inst->pos + sizeof(dir);
 	int rev_dir = REV_ENDIAN(dir);
 
-	while (instruct->pos < i) {
+	while (inst->pos < i) {
 		tmp = rev_dir & 255;
-		instruct->instruct[instruct->pos] = tmp;
+		inst->instruct[inst->pos] = tmp;
 		rev_dir = rev_dir >> 8;
-		(instruct->pos)++;
+		(inst->pos)++;
 	}
-	if (instruct->pos >= END_INSTRUCT)
+	if (inst->pos >= END_INSTRUCT)
 		return (false);
+	if (inst->need_coding_byte)
+		inst->instruct[1] = (inst->instruct[1] + 2) << 2;
 	free(buf);
 	return (true);
 }

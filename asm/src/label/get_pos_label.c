@@ -20,19 +20,6 @@ bool is_label(char *line)
 	return (false);
 }
 
-bool need_coding_byte(char *line)
-{
-	if (my_strncmp(line, "live", 4))
-		return (true);
-	if (my_strncmp(line, "zjmp", 4))
-		return (true);
-	if (my_strncmp(line, "fork", 4))
-		return (true);
-	if (my_strncmp(line, "lfork", 5))
-		return (true);
-	return (false);
-}
-
 size_t get_pos_label(char **tab, size_t nline)
 {
 	size_t pos = 0;

@@ -43,10 +43,11 @@ typedef struct
 
 typedef struct
 {
-	char *line;
-	char instruct[2 + (MAX_ARGS_NUMBER * SIZE_ARG_MAX)];
-	int nparam;
-	int pos;
+	char	*line;
+	char	instruct[2 + (MAX_ARGS_NUMBER * SIZE_ARG_MAX)];
+	bool	need_coding_byte;
+	int	nparam;
+	int	pos;
 } inst_t;
 
 typedef struct
@@ -66,6 +67,7 @@ bool compile_asm(asm_t *asm_s);
 char *get_str_entrecote(char *str);
 void erase_comment(char *line, size_t error_line);
 bool fill_header(asm_t *asm_s);
+char *my_instruct_cat(asm_t *asm_s, inst_t *inst);
 bool write_binary_code(asm_t *asm_s);
 
 label_t *get_labels(char **tab);
@@ -76,9 +78,10 @@ size_t get_next_arg(char *line);
 
 bool parser_instruction(asm_t *asm_s);
 char get_id_instruct(inst_t *inst);
+bool need_coding_byte(char *line);
 bool check_nbr_arg(char id, char *line);
 char write_args(char *line, char id, char *instruct);
 
-bool is_reg(char *line, inst_t *instruct, asm_t *asm_s);
+bool is_reg(char *line, inst_t *instruct);
 bool is_ind(char *line, inst_t *instruct, asm_t *asm_s);
 bool is_dir(char *line, inst_t *instruct, asm_t *asm_s);

@@ -17,11 +17,13 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(LABEL_DIR)is_valid_label_char.c	\
 			$(PARSER_DIR)get_next_arg.c	\
 			$(PARSER_DIR)get_id_instruct.c	\
+			$(PARSER_DIR)need_coding_byte.c	\
 			$(PARSER_DIR)check_nbr_arg.c	\
 			$(PARSER_DIR)get_coding_byte.c	\
 			$(PARSER_DIR)is_dir.c	\
 			$(PARSER_DIR)is_ind.c	\
 			$(PARSER_DIR)is_reg.c	\
+			$(SRC_DIR)my_instruct_cat.c	\
 			$(SRC_DIR)write_binary_code.c
 
 SRC		+=	../$(COMMON_DIR)$(SRC_DIR)op.c

@@ -48,7 +48,6 @@ bool fill_comment_header(asm_t *asm_s)
 
 bool fill_header(asm_t *asm_s)
 {
-	my_memset(&asm_s->header, 0, sizeof(header_t));
 	asm_s->header.magic = REV_ENDIAN(COREWAR_EXEC_MAGIC);
 	if (!fill_name_header(asm_s) || !fill_comment_header(asm_s))
 		return (false);

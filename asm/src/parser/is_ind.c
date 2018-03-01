@@ -9,25 +9,27 @@
 #include "my.h"
 
 /*
-** Write the value written after DIRECT_CHAR ('%') if it is valid
+** Write the value written after a number or a LABEL_CHAR (':') if it is valid
 */
 
-bool put_short_instruct(inst_t *instruct, short ind, char *buf)
+bool put_short_instruct(inst_t *inst, short ind, char *buf)
 {
 	char tmp = 0;
-	int i = instruct->pos + sizeof(ind);
+	int i = inst->pos + sizeof(ind);
 	int rev_ind = REV_ENDIAN_SHORT(ind);
 
 	if (i == END_INSTRUCT)
 		return (false);
-	while (instruct->pos < i) {
+	while (inst->pos < i) {
 		tmp = rev_ind & 255;
-		instruct->instruct[i] = tmp;
+		inst->instruct[i] = tmp;
 		rev_ind = rev_ind >> 8;
-		(instruct->pos)++;
+		(inst->pos)++;
 	}
-	if (instruct->pos >= END_INSTRUCT)
+	if (inst->pos >= END_INSTRUCT)
 		return (false);
+	if (inst->need_coding_byte)
+		inst->instruct[1] = (inst->instruct[1] + 3) << 2;
 	free(buf);
 	return (true);
 }
