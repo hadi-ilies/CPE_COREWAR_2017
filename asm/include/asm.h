@@ -72,7 +72,7 @@ bool write_binary_code(asm_t *asm_s);
 
 label_t *get_labels(char **tab);
 ssize_t get_pos_label(char **tab, size_t nline);
-int get_sub_label(char *buf, inst_t *inst, asm_t *asm_s);
+int get_sub_label(char *buf, asm_t *asm_s);
 bool is_valid_label_char(char c);
 
 size_t get_next_arg(char *line);

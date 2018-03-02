@@ -49,12 +49,7 @@ bool is_dir(char *line, inst_t *inst, asm_t *asm_s)
 		for (; IS_LABEL_CHAR(line[i + 2]); i++);
 		if (!(buf = my_strndup(line + 2, i)))
 			return (false);
-		dir = get_sub_label(buf, inst, asm_s);
-#include <stdio.h>
-		printf("id : %d\n", inst->instruct[0]);
-		printf("pos : %d\n", inst->pos);
-		printf("prog_size : %d\n", PROG_SIZE);
-		printf("dir : %d\n\n", dir);
+		dir = get_sub_label(buf, asm_s);
 	} else
 		return (false);
 	return (put_int_instruct(inst, dir, buf));

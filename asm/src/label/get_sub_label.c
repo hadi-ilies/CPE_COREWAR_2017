@@ -20,16 +20,12 @@ int get_pos(char *name, label_t *labels)
 	return (-1);
 }
 
-int get_sub_label(char *buf, inst_t *inst, asm_t *asm_s)
+int get_sub_label(char *buf, asm_t *asm_s)
 {
-	int pos_label = 0;
+	int pos_def = 0;
 	int pos_call = PROG_SIZE;
 
-	(void) inst;
-	if ((pos_label = get_pos(buf, asm_s->labels)) == -1)
+	if ((pos_def = get_pos(buf, asm_s->labels)) == -1)
 		return (-1);
-#include <stdio.h>
-	printf("pos_label : %d\n", pos_label);
-	printf("pos_call : %d\n", pos_call);
-	return (pos_label - pos_call);
+	return (pos_def - pos_call);
 }

@@ -53,5 +53,5 @@ ssize_t get_pos_label(char **tab, size_t nline)
 		if (parse_label(line + j, &pos) == false)
 			return (-1);
 	}
-	return (i == 0 ? pos + i : pos + i - 1);
+	return (i == 0 ? 0 : pos + i);
 }
