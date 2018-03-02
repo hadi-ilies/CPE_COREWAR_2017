@@ -18,6 +18,7 @@ bool put_short_instruct(inst_t *inst, short ind, char *buf)
 	int i = inst->pos + sizeof(ind);
 	int rev_ind = REV_ENDIAN_SHORT(ind);
 
+	(inst->nparam)++;
 	if (i == END_INSTRUCT)
 		return (false);
 	while (inst->pos < i) {
@@ -58,6 +59,5 @@ bool is_ind(char *line, inst_t *inst, asm_t *asm_s)
 		//leur "distance"
 	} else
 		return (false);
-	(inst->nparam)++;
 	return (put_short_instruct(inst, ind, buf));
 }

@@ -39,9 +39,9 @@ char *get_valid_label(char *line, int len)
 
 char *erase_label(char *line, char *label)
 {
-	char *new;
+	char *new = my_strdup(line + my_strlen(label) + 2);
 
-	if (!(new = my_strdup(line + my_strlen(label) + 2)))
+	if (new == NULL)
 		return (NULL);
 	free(line);
 	return (new);
@@ -55,11 +55,12 @@ label_t *get_labels(char **tab)
 
 	if (!tab || !(labels = malloc(sizeof(label_t) * (get_nlabel(tab) + 1))))
 		return (NULL);
-	for (int i = 0; tab[i] != NULL; i++) {
+	for (size_t i = 0; tab[i] != NULL; i++) {
 		if ((len = get_len_label(tab[i])) != -1) {
 			if (!(labels[k].label = get_valid_label(tab[i], len)))
 				return (NULL);
-			labels[k].pos = get_pos_label(tab, i);
+			if ((labels[k].pos = get_pos_label(tab + 2, i)) == -1)
+				return (NULL);
 			if (!(tab[i] = erase_label(tab[i], labels[k].label)))
 				return (NULL);
 			k++;

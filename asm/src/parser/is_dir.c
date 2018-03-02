@@ -18,6 +18,7 @@ bool put_int_instruct(inst_t *inst, int dir, char *buf)
 	int i = inst->pos + sizeof(dir);
 	int rev_dir = REV_ENDIAN(dir);
 
+	(inst->nparam)++;
 	while (inst->pos < i) {
 		tmp = rev_dir & 255;
 		inst->instruct[inst->pos] = tmp;
@@ -38,7 +39,6 @@ bool is_dir(char *line, inst_t *inst, asm_t *asm_s)
 	int dir = 0;
 	char *buf = NULL;
 
-	(void) asm_s;
 	if (!IS_CORRECT_PARAM(inst->instruct[0] - 1, inst->nparam, T_DIR))
 		return (false);
 	if (line[1] != LABEL_CHAR) {
@@ -49,11 +49,13 @@ bool is_dir(char *line, inst_t *inst, asm_t *asm_s)
 		for (; IS_LABEL_CHAR(line[i + 2]); i++);
 		if (!(buf = my_strndup(line + 2, i)))
 			return (false);
-		dir = 15;
-		//récupérer la déclaration du label en question et soustraire
-		//leur "distance"
+		dir = get_sub_label(buf, inst, asm_s);
+#include <stdio.h>
+		printf("id : %d\n", inst->instruct[0]);
+		printf("pos : %d\n", inst->pos);
+		printf("prog_size : %d\n", PROG_SIZE);
+		printf("dir : %d\n\n", dir);
 	} else
 		return (false);
-	(inst->nparam)++;
 	return (put_int_instruct(inst, dir, buf));
 }

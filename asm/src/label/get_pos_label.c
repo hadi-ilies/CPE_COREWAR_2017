@@ -20,25 +20,38 @@ bool is_label(char *line)
 	return (false);
 }
 
-size_t get_pos_label(char **tab, size_t nline)
+bool parse_label(char *line, ssize_t *pos)
 {
-	size_t pos = 0;
+	for (; *line != '\0'; line += get_next_arg(line)) {
+		if (*line == 'r')
+			*pos += 1;
+		else if (*line == DIRECT_CHAR)
+			*pos += 4;
+		else if (IS_NUM(*line) || *line == LABEL_CHAR)
+			*pos += 2;
+		else
+			return (false);
+	}
+	return (true);
+}
 
-	for (size_t i = 2; tab[i] != NULL && i < nline; i++) {
-		i = (is_label(tab[i])) ? get_next_arg(tab[i]) : i;
-		pos += need_coding_byte(tab[i]);
-		i = get_next_arg(tab[i]);
-		if (tab[i][0] == 'r') {
-			i = get_next_arg(tab[i]);
-			pos++;
-		} else if (IS_NUM(tab[i][0]) || tab[i][0] == LABEL_CHAR) {
-			i = get_next_arg(tab[i]);
-			pos += 2;
-		} else if (tab[i][0] == DIRECT_CHAR) {
-			i = get_next_arg(tab[i]);
-			pos += 4;
-		} else
+ssize_t get_pos_label(char **tab, size_t nline)
+{
+	ssize_t pos = 0;
+	size_t i = 0;
+	size_t j = 0;
+	char *line;
+
+	if (tab == NULL)
+		return (-1);
+	for (; tab[i] != NULL && i < nline - 2; i++) {
+		line = tab[i];
+		if (is_label(line))
+			j += get_next_arg(line);
+		pos += need_coding_byte(line);
+		j += get_next_arg(line);
+		if (parse_label(line + j, &pos) == false)
 			return (-1);
 	}
-	return (pos);
+	return (i == 0 ? pos + i : pos + i - 1);
 }

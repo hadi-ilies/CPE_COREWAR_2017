@@ -15,18 +15,18 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(LABEL_DIR)get_labels.c	\
 			$(LABEL_DIR)get_pos_label.c	\
 			$(LABEL_DIR)is_valid_label_char.c	\
+			$(LABEL_DIR)get_sub_label.c	\
 			$(PARSER_DIR)get_next_arg.c	\
 			$(PARSER_DIR)get_id_instruct.c	\
 			$(PARSER_DIR)need_coding_byte.c	\
 			$(PARSER_DIR)check_nbr_arg.c	\
-			$(PARSER_DIR)get_coding_byte.c	\
 			$(PARSER_DIR)is_dir.c	\
 			$(PARSER_DIR)is_ind.c	\
 			$(PARSER_DIR)is_reg.c	\
 			$(SRC_DIR)my_instruct_cat.c	\
 			$(SRC_DIR)write_binary_code.c
 
-SRC		+=	../$(COMMON_DIR)$(SRC_DIR)op.c
+SRC		+=	$(COMMON_DIR)$(SRC_DIR)op.c
 
 SRC_DIR		=	src/
 PARSER_DIR	=	$(SRC_DIR)parser/
@@ -35,8 +35,8 @@ LABEL_DIR	=	$(SRC_DIR)label/
 LIB_DIR		=	../lib/
 
 INC_DIR		=	include/
-COMMON_DIR	=	common/
-COMMON_INC_DIR	=	../$(COMMON_DIR)include/
+COMMON_DIR	=	../common/
+COMMON_INC_DIR	=	$(COMMON_DIR)include/
 
 OBJ		=	$(SRC:.c=.o)
 

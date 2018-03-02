@@ -8,7 +8,7 @@
 #pragma once
 
 #include <stdbool.h>
-#include <stddef.h>
+#include <unistd.h>
 #include "op.h"
 
 #define FLAGS		(O_CREAT | O_WRONLY | O_TRUNC | O_APPEND)
@@ -38,7 +38,7 @@ extern const char DELIM[3];
 typedef struct
 {
 	char	*label;
-	size_t	pos;
+	ssize_t	pos;
 } label_t;
 
 typedef struct
@@ -71,7 +71,8 @@ char *my_instruct_cat(asm_t *asm_s, inst_t *inst);
 bool write_binary_code(asm_t *asm_s);
 
 label_t *get_labels(char **tab);
-size_t get_pos_label(char **tab, size_t line);
+ssize_t get_pos_label(char **tab, size_t nline);
+int get_sub_label(char *buf, inst_t *inst, asm_t *asm_s);
 bool is_valid_label_char(char c);
 
 size_t get_next_arg(char *line);
@@ -80,7 +81,6 @@ bool parser_instruction(asm_t *asm_s);
 char get_id_instruct(inst_t *inst);
 bool need_coding_byte(char *line);
 bool check_nbr_arg(char id, char *line);
-char write_args(char *line, char id, char *instruct);
 
 bool is_reg(char *line, inst_t *instruct);
 bool is_ind(char *line, inst_t *instruct, asm_t *asm_s);

@@ -6,7 +6,6 @@
 */
 
 #include <stdlib.h>
-#include <unistd.h>
 #include "asm.h"
 #include "my.h"
 
@@ -48,6 +47,7 @@ bool fill_comment_header(asm_t *asm_s)
 
 bool fill_header(asm_t *asm_s)
 {
+	PROG_SIZE = REV_ENDIAN(PROG_SIZE);
 	asm_s->header.magic = REV_ENDIAN(COREWAR_EXEC_MAGIC);
 	if (!fill_name_header(asm_s) || !fill_comment_header(asm_s))
 		return (false);
