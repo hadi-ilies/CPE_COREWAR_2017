@@ -47,7 +47,7 @@ char *erase_label(char *line, char *label)
 	return (new);
 }
 
-label_t *get_labels(char **tab)
+label_t *get_labels(asm_t *asm_s, char **tab)
 {
 	int len = 0;
 	int k = 0;
@@ -56,14 +56,14 @@ label_t *get_labels(char **tab)
 	if (!tab || !(labels = malloc(sizeof(label_t) * (get_nlabel(tab) + 1))))
 		return (NULL);
 	for (size_t i = 0; tab[i] != NULL; i++) {
+		asm_s->line_err = tab[i];
 		if ((len = get_len_label(tab[i])) != -1) {
 			if (!(labels[k].label = get_valid_label(tab[i], len)))
 				return (NULL);
 			if ((labels[k].pos = get_pos_label(tab + 2, i)) == -1)
 				return (NULL);
-			if (!(tab[i] = erase_label(tab[i], labels[k].label)))
+			if (!(tab[i] = erase_label(tab[i], labels[k++].label)))
 				return (NULL);
-			k++;
 		}
 	}
 	labels[k].label = NULL;

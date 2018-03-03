@@ -5,6 +5,7 @@
 ** get_pos_label
 */
 
+#include <stdlib.h>
 #include "asm.h"
 #include "my.h"
 
@@ -50,6 +51,7 @@ bool parse_label(char *line, int j, ssize_t *pos)
 			return (false);
 		nparam++;
 	}
+	free(mnemo);
 	return (true);
 }
 

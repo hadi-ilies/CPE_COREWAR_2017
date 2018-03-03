@@ -43,7 +43,7 @@ bool compile_asm(asm_t *asm_s)
 			return (false);
 		i++;
 	}
-	if ((ASM_LABELS = get_labels(ASM_CODE)) == NULL)
+	if ((ASM_LABELS = get_labels(asm_s, ASM_CODE)) == NULL)
 		return (false);
 	if (parser_instruction(asm_s) == false)
 		return (false);

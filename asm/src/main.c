@@ -20,9 +20,9 @@ int main(int argc, char **argv)
 		my_printf("Line : \n\033[0;31m%s\n \033[00m", asm_s.line_err);
 		return (EXIT_FAILURE);
 	}
-	if (fill_header(&asm_s) == false)
+	if (fill_header(&asm_s, argv) == false)
 		return (EXIT_FAILURE);
-	if (write_binary_code(&asm_s) == false)
+	if (write_binary_code(&asm_s, argv[1]) == false)
 		return (EXIT_FAILURE);
 	my_free_tab(asm_s.asm_code);
 	return (EXIT_SUCCESS);

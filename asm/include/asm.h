@@ -62,11 +62,11 @@ bool init_struct(asm_t *asm_s, char *path);
 bool compile_asm(asm_t *asm_s);
 char *get_str_entrecote(char *str);
 void erase_comment(char *line, size_t error_line);
-bool fill_header(asm_t *asm_s);
+bool fill_header(asm_t *asm_s, char **argv);
 char *my_instruct_cat(asm_t *asm_s, inst_t *inst);
-bool write_binary_code(asm_t *asm_s);
+bool write_binary_code(asm_t *asm_s, char *path);
 
-label_t *get_labels(char **tab);
+label_t *get_labels(asm_t *asm_s, char **tab);
 ssize_t get_pos_label(char **tab, size_t nline);
 bool get_sub_label(char *buf, asm_t *asm_s, int *dir, short *ind);
 bool is_valid_label_char(char c);
