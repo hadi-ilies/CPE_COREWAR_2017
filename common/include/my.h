@@ -13,7 +13,7 @@
 ssize_t my_putchar(char c);
 void my_put_nbr(int nb);
 ssize_t my_putnb_base(int nb, char *base);
-void my_putstr(char const *str);
+size_t my_putstr(char const *str);
 int my_strlen(char const *str);
 int my_printf(char const *format, ...);
 char *get_next_line(int fd);

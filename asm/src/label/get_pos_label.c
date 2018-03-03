@@ -20,17 +20,35 @@ bool is_label(char *line)
 	return (false);
 }
 
-bool parse_label(char *line, ssize_t *pos)
+bool is_an_index(int nparam, char *mnemo)
 {
+	if (!my_strncmp(mnemo, "zjmp", 4) && nparam == 0)
+		return (true);
+	if (!my_strncmp(mnemo, "ldi", 3) && (nparam == 1 || nparam == 2))
+		return (true);
+	if (!my_strncmp(mnemo, "sti", 3) && (nparam == 1 || nparam == 2))
+		return (true);
+	if (!my_strncmp(mnemo, "fork", 4) && nparam == 0)
+		return (true);
+	return (false);
+}
+
+bool parse_label(char *line, int j, ssize_t *pos)
+{
+	int nparam = 0;
+	char *mnemo = my_strndup(line, j);
+
+	line += j;
 	for (; *line != '\0'; line += get_next_arg(line)) {
 		if (*line == 'r')
 			*pos += 1;
 		else if (*line == DIRECT_CHAR)
-			*pos += 4;
+			*pos += (is_an_index(nparam, mnemo) ? 2 : 4);
 		else if (IS_NUM(*line) || *line == LABEL_CHAR)
 			*pos += 2;
 		else
 			return (false);
+		nparam++;
 	}
 	return (true);
 }
@@ -45,13 +63,14 @@ ssize_t get_pos_label(char **tab, size_t nline)
 	if (tab == NULL)
 		return (-1);
 	for (; tab[i] != NULL && i < nline - 2; i++) {
+		j = 0;
 		line = tab[i];
 		if (is_label(line))
 			j += get_next_arg(line);
 		pos += need_coding_byte(line);
 		j += get_next_arg(line);
-		if (parse_label(line + j, &pos) == false)
+		if (parse_label(line, j, &pos) == false)
 			return (-1);
 	}
-	return (pos + i);
+	return (pos + i + 1);
 }

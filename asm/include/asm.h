@@ -22,11 +22,11 @@
 #define CHAMP_CODE	asm_s->champ_code
 #define LINE		instruct->line
 
-#define IS_LABEL_CHAR(x)	(x == '_' || (x >= 'a' && x <= 'z') ||	\
-				(x >= '0' && x <= '9'))
 #define IS_NUM(x)		(x >= '0' && x <= '9')
 #define BIGGEST(x, y, z)	(x > y ? (x > z ? x : z) : (y > z ? y : z))
 #define IS_CORRECT_PARAM(x, y, z)	((op_tab[(int)x].type[y] & z) == z)
+#define IS_LABEL_CHAR(x)	(x == '_' || (x >= 'a' && x <= 'z') ||	\
+				(x >= '0' && x <= '9'))
 
 extern const char DELIM[3];
 

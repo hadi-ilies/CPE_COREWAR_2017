@@ -44,7 +44,7 @@ bool compile_asm(asm_t *asm_s)
 		i++;
 	}
 	if ((ASM_LABELS = get_labels(ASM_CODE)) == NULL)
-		return (NULL);
+		return (false);
 	if (parser_instruction(asm_s) == false)
 		return (false);
 	for (size_t i = 0; ASM_LABELS[i].label != NULL; i++)
