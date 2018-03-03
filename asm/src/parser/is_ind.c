@@ -6,6 +6,7 @@
 */
 
 #include <byteswap.h>
+#include <stdlib.h>
 #include "asm.h"
 #include "my.h"
 
@@ -43,7 +44,6 @@ bool is_ind(char *line, inst_t *inst, asm_t *asm_s)
 	int int_ind = 0;
 	char *buf;
 
-	(void) asm_s;
 	if (!IS_CORRECT_PARAM(inst->instruct[0] - 1, inst->nparam, T_IND))
 		return (-1);
 	if (IS_NUM(line[i])) {
@@ -56,8 +56,8 @@ bool is_ind(char *line, inst_t *inst, asm_t *asm_s)
 		for (; IS_LABEL_CHAR(line[i + 1]); i++);
 		if (!(buf = my_strndup(line + 1, i)))
 			return (false);
-		//récupérer la déclaration du label en question et soustraire
-		//leur "distance"
+		if (!get_sub_label(buf, asm_s, NULL, &ind))
+			return (false);
 	} else
 		return (false);
 	return (put_short_instruct(inst, ind, buf));

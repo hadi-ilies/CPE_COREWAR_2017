@@ -25,13 +25,13 @@ bool write_instruct(inst_t *instruct, asm_t *asm_s)
 	for (; *LINE != '\0'; LINE += get_next_arg(LINE)) {
 		if (*LINE == 'r') {
 			if (is_reg(LINE, instruct) == false)
-				return (-1);
+				return (false);
 		} else if (*LINE == DIRECT_CHAR) {
 			if (is_dir(LINE, instruct, asm_s) == false)
-				return (-1);
+				return (false);
 		} else if (IS_NUM(*LINE) || *LINE == LABEL_CHAR) {
 			if (is_ind(LINE, instruct, asm_s) == false)
-				return (-1);
+				return (false);
 		} else
 			return (false);
 	}

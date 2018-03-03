@@ -26,13 +26,13 @@ SRC	=	my_putchar.c	\
 
 COMMON_DIR	=	common/
 
-INC_DIR	=	../$(COMMON_DIR)include/
+INC_DIR		=	../$(COMMON_DIR)include/
 
-OBJ	=	$(SRC:.c=.o)
+OBJ		=	$(SRC:.c=.o)
 
-CFLAGS	=	-W -Wall -Wextra -Werror -I $(INC_DIR) -g
+CFLAGS		=	-W -Wall -Wextra -Werror -I $(INC_DIR)
 
-NAME	=	libmy.a
+NAME		=	libmy.a
 
 all: $(NAME)
 

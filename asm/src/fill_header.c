@@ -6,6 +6,7 @@
 */
 
 #include <byteswap.h>
+#include <stdlib.h>
 #include "asm.h"
 #include "my.h"
 
@@ -40,9 +41,7 @@ bool fill_comment_header(asm_t *asm_s)
 }
 
 /*
-** In the header of .cor : COREWAR_EXEC_MAGIC, NAME, ASM_SIZE - HEADER_SIZE
-** , COMMENT
-** PS : A confirmer auprès d'un AER ou d'un mec fort qui a réussi l'ASM
+** In the header of .cor : COREWAR_EXEC_MAGIC, NAME, ASM_SIZE, COMMENT
 */
 
 bool fill_header(asm_t *asm_s)

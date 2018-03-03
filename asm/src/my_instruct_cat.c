@@ -26,5 +26,6 @@ char *my_instruct_cat(asm_t *asm_s, inst_t *inst)
 		i++;
 		j++;
 	}
+	free(CHAMP_CODE);
 	return (new);
 }

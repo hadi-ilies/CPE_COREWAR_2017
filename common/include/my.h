@@ -8,7 +8,7 @@
 #pragma once
 
 #include <stdbool.h>
-#include <stdlib.h>
+#include <unistd.h>
 
 ssize_t my_putchar(char c);
 void my_put_nbr(int nb);

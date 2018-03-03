@@ -40,7 +40,7 @@ COMMON_INC_DIR	=	$(COMMON_DIR)include/
 
 OBJ		=	$(SRC:.c=.o)
 
-CFLAGS		=	-W -Wall -Wextra -Werror -fdiagnostics-color
+CFLAGS		=	-W -Wall -Wextra -Werror -fdiagnostics-color -g
 
 CFLAGS		+=	-I $(INC_DIR) -I $(COMMON_INC_DIR)
 

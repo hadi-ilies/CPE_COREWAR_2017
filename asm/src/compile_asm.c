@@ -47,5 +47,8 @@ bool compile_asm(asm_t *asm_s)
 		return (NULL);
 	if (parser_instruction(asm_s) == false)
 		return (false);
+	for (size_t i = 0; ASM_LABELS[i].label != NULL; i++)
+		free(ASM_LABELS[i].label);
+	free(ASM_LABELS);
 	return (true);
 }

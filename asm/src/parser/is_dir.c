@@ -6,6 +6,7 @@
 */
 
 #include <byteswap.h>
+#include <stdlib.h>
 #include "asm.h"
 #include "my.h"
 
