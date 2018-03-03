@@ -5,12 +5,13 @@
 ** write_binary_code
 */
 
+#include <byteswap.h>
 #include "asm.h"
 #include "my.h"
 
 bool write_binary_code(asm_t *asm_s)
 {
-	ssize_t len = REV_ENDIAN(PROG_SIZE);
+	int len = bswap_32(PROG_SIZE);
 
 	if (write(asm_s->champ_fd, &asm_s->header, sizeof(header_t)) < 0)
 		return (false);

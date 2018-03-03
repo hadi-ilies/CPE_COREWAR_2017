@@ -26,6 +26,5 @@ char *my_instruct_cat(asm_t *asm_s, inst_t *inst)
 		i++;
 		j++;
 	}
-	PROG_SIZE += inst->pos;
 	return (new);
 }

@@ -29,8 +29,8 @@ char *get_champ_name(char *path)
 
 int create_champ_file(char *path)
 {
-	char *champ_name = get_champ_name(path);
 	int fd = 0;
+	char *champ_name = get_champ_name(path);
 
 	if (champ_name == NULL)
 		return (-1);

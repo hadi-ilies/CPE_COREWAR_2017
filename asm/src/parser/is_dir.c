@@ -5,6 +5,7 @@
 ** is_dir
 */
 
+#include <byteswap.h>
 #include "asm.h"
 #include "my.h"
 
@@ -15,10 +16,14 @@
 bool put_int_instruct(inst_t *inst, int dir, char *buf)
 {
 	char tmp = 0;
-	int i = inst->pos + sizeof(dir);
-	int rev_dir = REV_ENDIAN(dir);
+	int i = inst->pos + sizeof(int);
+	short s_dir = dir;
+	int rev_dir = bswap_32(dir);
 
-	(inst->nparam)++;
+	if (inst->is_index[inst->nparam]) {
+		i = inst->pos + sizeof(short);
+		rev_dir = bswap_16(s_dir);
+	}
 	while (inst->pos < i) {
 		tmp = rev_dir & 255;
 		inst->instruct[inst->pos] = tmp;
@@ -29,6 +34,7 @@ bool put_int_instruct(inst_t *inst, int dir, char *buf)
 		return (false);
 	if (inst->need_coding_byte)
 		inst->instruct[1] = (inst->instruct[1] + 2) << 2;
+	(inst->nparam)++;
 	free(buf);
 	return (true);
 }
@@ -49,8 +55,10 @@ bool is_dir(char *line, inst_t *inst, asm_t *asm_s)
 		for (; IS_LABEL_CHAR(line[i + 2]); i++);
 		if (!(buf = my_strndup(line + 2, i)))
 			return (false);
-		dir = get_sub_label(buf, asm_s);
-	} else
+		if (!get_sub_label(buf, asm_s, &dir, NULL))
+			return (false);
+	}
+	else
 		return (false);
 	return (put_int_instruct(inst, dir, buf));
 }

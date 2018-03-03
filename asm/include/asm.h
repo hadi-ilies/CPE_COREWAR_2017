@@ -26,11 +26,6 @@
 				(x >= '0' && x <= '9'))
 #define IS_NUM(x)		(x >= '0' && x <= '9')
 #define BIGGEST(x, y, z)	(x > y ? (x > z ? x : z) : (y > z ? y : z))
-#define REV_ENDIAN(x)							\
-	((((x) & 0xff000000) >> 24) | (((x) & 0x00ff0000) >>  8) |	\
-	 (((x) & 0x0000ff00) <<  8) | (((x) & 0x000000ff) << 24))
-#define REV_ENDIAN_SHORT(x)						\
-	((unsigned short int) ((((x) >> 8) & 0xff) | (((x) & 0xff) << 8)))
 #define IS_CORRECT_PARAM(x, y, z)	((op_tab[(int)x].type[y] & z) == z)
 
 extern const char DELIM[3];
@@ -46,6 +41,7 @@ typedef struct
 	char	*line;
 	char	instruct[2 + (MAX_ARGS_NUMBER * SIZE_ARG_MAX)];
 	bool	need_coding_byte;
+	bool	is_index[MAX_ARGS_NUMBER];
 	int	nparam;
 	int	pos;
 } inst_t;
@@ -72,7 +68,7 @@ bool write_binary_code(asm_t *asm_s);
 
 label_t *get_labels(char **tab);
 ssize_t get_pos_label(char **tab, size_t nline);
-int get_sub_label(char *buf, asm_t *asm_s);
+bool get_sub_label(char *buf, asm_t *asm_s, int *dir, short *ind);
 bool is_valid_label_char(char c);
 
 size_t get_next_arg(char *line);

@@ -5,6 +5,7 @@
 ** is_ind
 */
 
+#include <byteswap.h>
 #include "asm.h"
 #include "my.h"
 
@@ -16,7 +17,7 @@ bool put_short_instruct(inst_t *inst, short ind, char *buf)
 {
 	char tmp = 0;
 	int i = inst->pos + sizeof(ind);
-	int rev_ind = REV_ENDIAN_SHORT(ind);
+	int rev_ind = bswap_16(ind);
 
 	(inst->nparam)++;
 	if (i == END_INSTRUCT)

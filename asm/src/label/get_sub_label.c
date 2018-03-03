@@ -20,12 +20,16 @@ int get_pos(char *name, label_t *labels)
 	return (-1);
 }
 
-int get_sub_label(char *buf, asm_t *asm_s)
+bool get_sub_label(char *buf, asm_t *asm_s, int *dir, short *ind)
 {
 	int pos_def = 0;
 	int pos_call = PROG_SIZE;
 
 	if ((pos_def = get_pos(buf, asm_s->labels)) == -1)
-		return (-1);
-	return (pos_def - pos_call);
+		return (false);
+	if (dir != NULL)
+		*dir = pos_def - pos_call - 1;
+	if (ind != NULL)
+		*ind = pos_def - pos_call - 1;
+	return (true);
 }

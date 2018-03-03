@@ -5,7 +5,7 @@
 ** write_header
 */
 
-#include <stdlib.h>
+#include <byteswap.h>
 #include "asm.h"
 #include "my.h"
 
@@ -47,8 +47,8 @@ bool fill_comment_header(asm_t *asm_s)
 
 bool fill_header(asm_t *asm_s)
 {
-	PROG_SIZE = REV_ENDIAN(PROG_SIZE);
-	asm_s->header.magic = REV_ENDIAN(COREWAR_EXEC_MAGIC);
+	PROG_SIZE = bswap_32(PROG_SIZE);
+	asm_s->header.magic = bswap_32(COREWAR_EXEC_MAGIC);
 	if (!fill_name_header(asm_s) || !fill_comment_header(asm_s))
 		return (false);
 	return (true);

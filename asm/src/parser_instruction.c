@@ -41,13 +41,14 @@ bool write_instruct(inst_t *instruct, asm_t *asm_s)
 bool parser_instruction(asm_t *asm_s)
 {
 	for (size_t i = 2; ASM_CODE[i] != NULL; i++) {
-		inst_t instruct = {ASM_CODE[i], {'\0'}, 0, 0, 0};
+		inst_t instruct = {ASM_CODE[i],	{'\0'},	false, {false},	0, 0};
 
 		asm_s->line_err = instruct.line;
 		if (!write_instruct(&instruct, asm_s))
 			return (false);
 		if (!(CHAMP_CODE = my_instruct_cat(asm_s, &instruct)))
 			return (false);
+		PROG_SIZE += instruct.pos;
 	}
 	return (true);
 }
