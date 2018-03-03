@@ -8,6 +8,11 @@
 #include <stdlib.h>
 #include "asm.h"
 
+/*
+** Concatenates each instruction to write the code of the
+** champion instruction by instruction.
+*/
+
 char *my_instruct_cat(asm_t *asm_s, inst_t *inst)
 {
 	int i = 0;

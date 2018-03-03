@@ -12,6 +12,8 @@ int get_pos(char *name, label_t *labels)
 {
 	int i = 0;
 
+	if (name == NULL || labels == NULL)
+		return (-1);
 	while (labels[i].label != NULL) {
 		if (!my_strcmp(labels[i].label, name))
 			return (labels[i].pos);

@@ -7,6 +7,10 @@
 
 #include <stddef.h>
 
+/*
+** Return the number of spaces between each token
+*/
+
 size_t get_next_arg(char *line)
 {
 	size_t i = 0;

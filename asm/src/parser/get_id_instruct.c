@@ -9,9 +9,10 @@
 #include "my.h"
 
 /*
-** Returns the id of the instruction on the line. If a label is declared
-** on the line, we move the pointer to erase it and get the instruction,
-** if it exists
+** Check if the instruction has a coding byte.
+** Check if it takes indexes as parameters)
+** Move the pointer to the first parameterMove the
+** Returns the id of the instruction on the line.
 */
 
 int my_wordlen(char *str)

@@ -11,7 +11,7 @@
 #include "my.h"
 
 /*
-** Write the value written after a number or a LABEL_CHAR (':') if it is valid
+** Write a number or the value written after a LABEL_CHAR (':') if it is valid
 */
 
 bool put_short_instruct(inst_t *inst, short ind, char *buf)
@@ -48,15 +48,13 @@ bool is_ind(char *line, inst_t *inst, asm_t *asm_s)
 		return (-1);
 	if (IS_NUM(line[i])) {
 		for (; IS_NUM(line[i]); i++);
-		buf = my_strndup(line, i);
 		if (!(buf = my_strndup(line, i)) || !my_atoi(&int_ind, buf))
-			return (-1);
+			return (false);
 		ind = int_ind;
 	} else if (line[1] == LABEL_CHAR) {
 		for (; IS_LABEL_CHAR(line[i + 1]); i++);
-		if (!(buf = my_strndup(line + 1, i)))
-			return (false);
-		if (!get_sub_label(buf, asm_s, NULL, &ind))
+		if (!(buf = my_strndup(line + 1, i)) ||
+		!get_sub_label(buf, asm_s, NULL, &ind))
 			return (false);
 	} else
 		return (false);
