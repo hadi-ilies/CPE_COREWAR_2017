@@ -13,7 +13,12 @@
 /*
 ** Return the value written after DIRECT_CHAR ('%') if it is valid
 */
-
+/*
+int this_is_not_a_bidouillage(int dir)
+{
+	return ();
+}
+*/
 bool put_int_instruct(inst_t *inst, int dir, char *buf)
 {
 	char tmp = 0;

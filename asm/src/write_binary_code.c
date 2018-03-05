@@ -18,10 +18,10 @@ char *get_champ_name(char *path)
 
 	if (cor == NULL)
 		return (NULL);
-	i = my_strlen(cor);
-	if (i > 2 && cor[i - 2] == '.' && cor[i - 1] == 's')
-		cor[i - 1] = '\0';
-	return (my_strcat(cor, "cor"));
+	for (; path[i] != '\0' && path[i] != '.'; i++);
+	if (path[i] != '\0')
+		cor[i] = '\0';
+	return (my_strcat(cor, ".cor"));
 }
 
 int create_champ_file(char *path)
