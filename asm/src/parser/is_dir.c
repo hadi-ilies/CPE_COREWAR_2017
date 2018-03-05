@@ -13,16 +13,11 @@
 /*
 ** Return the value written after DIRECT_CHAR ('%') if it is valid
 */
-/*
-int this_is_not_a_bidouillage(int dir)
-{
-	return ();
-}
-*/
-bool put_int_instruct(inst_t *inst, int dir, char *buf)
+
+bool put_int_instruct(inst_t *inst, int dir)
 {
 	char tmp = 0;
-	int i = inst->pos + sizeof(int);
+	int i = inst->pos + sizeof(dir);
 	short s_dir = dir;
 	int rev_dir = bswap_32(dir);
 
@@ -30,18 +25,16 @@ bool put_int_instruct(inst_t *inst, int dir, char *buf)
 		i = inst->pos + sizeof(short);
 		rev_dir = bswap_16(s_dir);
 	}
-	while (inst->pos < i) {
+	for (; inst->pos < i; (inst->pos)++) {
 		tmp = rev_dir & 255;
 		inst->instruct[inst->pos] = tmp;
 		rev_dir = rev_dir >> 8;
-		(inst->pos)++;
 	}
 	if (inst->pos >= END_INSTRUCT)
 		return (false);
 	if (inst->need_coding_byte)
 		inst->instruct[1] = (inst->instruct[1] + 2) << 2;
 	(inst->nparam)++;
-	free(buf);
 	return (true);
 }
 
@@ -63,8 +56,8 @@ bool is_dir(char *line, inst_t *inst, asm_t *asm_s)
 			return (false);
 		if (!get_sub_label(buf, asm_s, &dir, NULL))
 			return (false);
-	}
-	else
+	} else
 		return (false);
-	return (put_int_instruct(inst, dir, buf));
+	free(buf);
+	return (put_int_instruct(inst, dir));
 }
