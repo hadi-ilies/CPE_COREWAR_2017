@@ -45,11 +45,11 @@ bool parse_label(char *line, int j, ssize_t *pos)
 	for (; *line != '\0'; line += get_next_arg(line)) {
 		if (*line == 'r')
 			*pos += 1;
-		else if (*line == DIRECT_CHAR)
+		if (*line == DIRECT_CHAR)
 			*pos += (is_an_index(nparam, mnemo) ? 2 : 4);
-		else if (IS_NUM(*line) || *line == LABEL_CHAR)
+		if (IS_NUM(*line) || *line == LABEL_CHAR)
 			*pos += 2;
-		else
+		if (ERROR(*line))
 			return (false);
 		nparam++;
 	}

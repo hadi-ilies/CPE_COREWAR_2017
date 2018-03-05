@@ -25,6 +25,7 @@
 #define IS_NUM(x)		(x >= '0' && x <= '9')
 #define BIGGEST(x, y, z)	(x > y ? (x > z ? x : z) : (y > z ? y : z))
 #define IS_CORRECT_PARAM(x, y, z)	((op_tab[(int)x].type[y] & z) == z)
+#define ERROR(x) (x != 'r' && x != DIRECT_CHAR && !IS_NUM(x) && x != LABEL_CHAR)
 #define IS_LABEL_CHAR(x)	(x == '_' || (x >= 'a' && x <= 'z') ||	\
 				(x >= '0' && x <= '9'))
 

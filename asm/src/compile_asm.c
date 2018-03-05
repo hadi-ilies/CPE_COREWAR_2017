@@ -19,10 +19,11 @@ void erase_comment(char *line, size_t nline)
 	line[i] = '\0';
 }
 
-bool stock_line_in_tab(asm_t *asm_s, char *line)
+bool stock_line_in_tab(asm_t *asm_s, char *line, size_t i)
 {
 	if (*line != '\0') {
-		line = make_str_clean_again(line, DELIM);
+		if (i > 1)
+			line = make_str_clean_again(line, DELIM);
 		ASM_CODE = my_strcat_to_tab(ASM_CODE, line);
 		if (ASM_CODE == NULL)
 			return (false);
@@ -39,7 +40,7 @@ bool compile_asm(asm_t *asm_s)
 
 	while ((line = get_next_line(asm_s->asm_fd)) != NULL) {
 		erase_comment(line, i);
-		if (stock_line_in_tab(asm_s, line) == false)
+		if (stock_line_in_tab(asm_s, line, i) == false)
 			return (false);
 		i++;
 	}
