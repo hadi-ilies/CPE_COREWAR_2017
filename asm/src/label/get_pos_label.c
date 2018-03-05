@@ -27,6 +27,8 @@ bool is_an_index(int nparam, char *mnemo)
 		return (true);
 	if (!my_strncmp(mnemo, "ldi", 3) && (nparam == 0 || nparam == 1))
 		return (true);
+	if (!my_strncmp(mnemo, "lldi", 3) && (nparam == 0 || nparam == 1))
+		return (true);
 	if (!my_strncmp(mnemo, "sti", 3) && (nparam == 1 || nparam == 2))
 		return (true);
 	if (!my_strncmp(mnemo, "fork", 4) && nparam == 0)

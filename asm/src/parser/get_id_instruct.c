@@ -31,6 +31,10 @@ void is_index(bool index[MAX_ARGS_NUMBER], char *mnemo)
 		index[0] = true;
 		index[1] = true;
 	}
+	if (!my_strcmp(mnemo, "lldi")) {
+		index[0] = true;
+		index[1] = true;
+	}
 	if (!my_strcmp(mnemo, "sti")) {
 		index[1] = true;
 		index[2] = true;
