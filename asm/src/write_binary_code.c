@@ -18,9 +18,13 @@ char *get_champ_name(char *path)
 
 	if (cor == NULL)
 		return (NULL);
-	for (; path[i] != '\0' && path[i] != '.'; i++);
-	if (path[i] != '\0')
-		cor[i] = '\0';
+	i = my_strlen(path);
+	if (i > 2 && cor[i - 2] == '.' && cor[i - 1] == 's')
+		cor[i - 2] = '\0';
+	else {
+		free(cor);
+		return (NULL);
+	}
 	return (my_strcat(cor, ".cor"));
 }
 
