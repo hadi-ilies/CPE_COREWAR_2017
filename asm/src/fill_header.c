@@ -13,10 +13,14 @@
 bool fill_name_header(asm_t *asm_s)
 {
 	int i = 0;
+	char *tmp = ASM_CODE[0];
 	char *name = get_str_entrecote(ASM_CODE[0]);
 
 	asm_s->line_err = ASM_CODE[0];
-	if (name == NULL || my_strncmp(ASM_CODE[0], NAME_CMD_STRING, 5))
+	if (my_strlen(name) > PROG_NAME_LEN)
+		return (false);
+	for (; *tmp != '\0' && (*tmp == ' ' || *tmp == '\t'); tmp++);
+	if (name == NULL || my_strncmp(tmp, NAME_CMD_STRING, 5))
 		return (false);
 	my_memset(asm_s->header.prog_name, 0, PROG_NAME_LEN);
 	for (i = 0; name[i] != '\0'; i++)
@@ -28,10 +32,14 @@ bool fill_name_header(asm_t *asm_s)
 bool fill_comment_header(asm_t *asm_s)
 {
 	int i = 0;
+	char *tmp = ASM_CODE[1];
 	char *comment = get_str_entrecote(ASM_CODE[1]);
 
 	asm_s->line_err = ASM_CODE[1];
-	if (comment == NULL || my_strncmp(ASM_CODE[1], COMMENT_CMD_STRING, 8))
+	if (my_strlen(comment) > COMMENT_LEN)
+		return (false);
+	for (; *tmp != '\0' && (*tmp == ' ' || *tmp == '\t'); tmp++);
+	if (comment == NULL || my_strncmp(tmp, COMMENT_CMD_STRING, 8))
 		return (false);
 	my_memset(asm_s->header.comment, 0, COMMENT_LEN);
 	for (i = 0; comment[i] != '\0'; i++)
