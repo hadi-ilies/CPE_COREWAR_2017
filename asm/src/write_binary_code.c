@@ -50,6 +50,8 @@ bool write_binary_code(asm_t *asm_s, char *path)
 		return (false);
 	if (write(asm_s->champ_fd, asm_s->champ_code, len) != len)
 		return (false);
+	close(asm_s->asm_fd);
+	close(asm_s->champ_fd);
 	free(asm_s->champ_code);
 	return (true);
 }
