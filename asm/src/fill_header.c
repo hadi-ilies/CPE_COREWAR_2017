@@ -17,8 +17,10 @@ bool fill_name_header(asm_t *asm_s)
 	char *name = get_str_entrecote(ASM_CODE[0]);
 
 	asm_s->line_err = ASM_CODE[0];
-	if (my_strlen(name) > PROG_NAME_LEN)
+	if (my_strlen(name) > PROG_NAME_LEN) {
+		asm_s->line_err = "Name too long";
 		return (false);
+	}
 	for (; *tmp != '\0' && (*tmp == ' ' || *tmp == '\t'); tmp++);
 	if (name == NULL || my_strncmp(tmp, NAME_CMD_STRING, 5))
 		return (false);
@@ -36,8 +38,10 @@ bool fill_comment_header(asm_t *asm_s)
 	char *comment = get_str_entrecote(ASM_CODE[1]);
 
 	asm_s->line_err = ASM_CODE[1];
-	if (my_strlen(comment) > COMMENT_LEN)
+	if (my_strlen(comment) > COMMENT_LEN) {
+		asm_s->line_err = "Comment too long";
 		return (false);
+	}
 	for (; *tmp != '\0' && (*tmp == ' ' || *tmp == '\t'); tmp++);
 	if (comment == NULL || my_strncmp(tmp, COMMENT_CMD_STRING, 8))
 		return (false);
@@ -58,7 +62,7 @@ bool fill_header(asm_t *asm_s, char **argv)
 	asm_s->header.magic = bswap_32(COREWAR_EXEC_MAGIC);
 	if (!fill_name_header(asm_s) || !fill_comment_header(asm_s)) {
 		my_printf("\033[0;34m%s, %s\n\033[1;36m", argv[0], argv[1]);
-		my_printf("Line : \n\033[0;31m%s\n \033[00m", asm_s->line_err);
+		my_printf("Error : \n\033[0;31m%s\n \033[00m", asm_s->line_err);
 		return (false);
 	}
 	return (true);

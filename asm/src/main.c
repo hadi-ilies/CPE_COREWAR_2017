@@ -17,7 +17,7 @@ int main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (!compile_asm(&asm_s)) {
 		my_printf("\033[0;34m%s, %s\n\033[1;36m", argv[0], argv[1]);
-		my_printf("Line : \n\033[0;31m%s\n \033[00m", asm_s.line_err);
+		my_printf("Error : \n\033[0;31m%s\n \033[00m", asm_s.line_err);
 		return (EXIT_FAILURE);
 	}
 	if (fill_header(&asm_s, argv) == false)
