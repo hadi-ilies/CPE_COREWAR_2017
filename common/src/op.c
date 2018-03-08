@@ -16,7 +16,7 @@ const op_t op_tab[] =
 	{"sub", 3, {T_REG, T_REG, T_REG}, 5, 10, "soustraction"},
 	{"and", 3, {T_ALL, T_ALL, T_REG}, 6, 6, "r1 & r2 -> r3"},
 	{"or", 3, {T_ALL, T_ALL, T_REG}, 7, 6, "r1 | r2 -> r3"},
-	{"xor", 3, {T_ALL, T_ALL, T_REG}, 8, 6, "r1^r2 -> r3"},
+	{"xor", 3, {T_ALL, T_ALL, T_REG}, 8, 6, "r1 ^ r2 -> r3"},
 	{"zjmp", 1, {T_DIR}, 9, 20, "jump if zero"},
 	{"ldi", 3, {T_ALL, T_DIR | T_REG, T_REG}, 10, 25, "load index"},
 	{"sti", 3, {T_REG, T_ALL, T_DIR | T_REG}, 11, 25, "store index"},

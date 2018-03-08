@@ -5,31 +5,20 @@
 ** and
 */
 
-#include "player.h"
+#include "prototype.h"
 
 void op_and(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
 	//06 64 01 00 00 00 00 01
+	char code = get_char(tab, &player[player_num]);
+	char cb = get_char(tab, &player[player_num]);
+	int nb1 = get_int1(tab, &player[player_num], v3c(code, cb, 0));
+	int nb2 = get_int1(tab, &player[player_num], v3c(code, cb, 1));
+	int nb3 = get_int2(tab, &player[player_num], v3c(code, cb, 2));
 
-	(void)tab;
-	(void)player;
 	(void)nb_player;
-	(void)player_num;
-	player[player_num].offset += 8;
-	/*char *r1 = NULL;
-	char *r2 = NULL;
-	char *r3 = NULL;
-	bool *carry = &player[player_num].carry;
-	size_t type_1 = get_type_from_conding_byte(&r1, 0);
-	size_t type_2 = get_type_from_conding_byte(&r1, 1);
-	size_t type_3 = get_type_from_conding_byte(&r1, 2);
-
-	if (type_1 == T_REG)
-		(*r1) = &tab[player[player_num].offset + 1];
-	if (type_2 == T_REG)
-		(*r2) = &player[player_num.offset + 2];
-	(*r3) = (*r1) & (*r2);
-	if ((*registre_3) == 0)
-		(*carry) = ((*carry) ? false : true);
-		player[player_num].offset += 4;*/
+	for (size_t i = 0; i < REG_SIZE - 1; i++)
+		player[player_num].reg[nb3][i] = 0;
+	player[player_num].reg[nb3][REG_SIZE - 1] = (char)(nb1 & nb2);
+	player[player_num].carry = (nb1 & nb2 ? false : true);
 }

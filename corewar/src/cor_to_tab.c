@@ -11,6 +11,7 @@
 #include "prototype.h"
 #include "op.h"
 
+//   /!\ bool -> ssize_t /!\   //
 bool cor_to_tab(char tab[], char *file_name, int address)
 {
 	int fd = open(file_name, O_RDONLY);

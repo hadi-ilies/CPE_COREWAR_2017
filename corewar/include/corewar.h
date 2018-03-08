@@ -7,8 +7,10 @@
 
 #pragma once
 
+#include "op.h"
+
 typedef struct {
-	char tab[];
+	char tab[MEM_SIZE];
 	size_t nbr_cycle;
 } corewar_t;
 

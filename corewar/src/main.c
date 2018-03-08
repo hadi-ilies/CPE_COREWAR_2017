@@ -10,6 +10,7 @@
 #include "my.h"
 #include "op.h"
 #include "player.h"
+#include "corewar.h"
 #include "prototype.h"
 
 size_t get_dump(char **arg_tab, int *i)
@@ -50,17 +51,16 @@ int get_nb_arg(char **arg_tab)
 	return (i);
 }
 
-int main2(char **arg_tab, char tab[], size_t nb_player, player_t *player)
+int main2(char **arg_tab, corewar_t *core, size_t nb_player, player_t *player)
 {
 	int nb_arg = get_nb_arg(arg_tab);
-	size_t nbr_cycle = CYCLE_TO_DIE;
 	size_t num = 1;
 	size_t address = 0;
-	size_t player_index = 0;
+	size_t p_i = 0;
 
 	for (int i = 1; i < nb_arg; i++) {
 		if (!my_strcmp(arg_tab[i], "-dump") && nb_arg > i + 1)
-			nbr_cycle = get_dump(arg_tab, &i);
+			core->nbr_cycle = get_dump(arg_tab, &i);
 		else if (!my_strcmp(arg_tab[i], "-n") && nb_arg > i + 1)
 			num = get_num(arg_tab, &i);
 		else if (!my_strcmp(arg_tab[i], "-a") && nb_arg > i + 1)
@@ -70,9 +70,9 @@ int main2(char **arg_tab, char tab[], size_t nb_player, player_t *player)
 				return (84);
 			/*if (test_header(arg_tab[i]) == false)
 			  return (84);*/
-			if (cor_to_tab(tab, arg_tab[i], address) == false)
+			if (cor_to_tab(core->tab, arg_tab[i], address) == false)
 				return (84);
-			player[player_index++] = player_create(num, address, arg_tab[i]);
+			player[p_i++] = player_create(num, address, arg_tab[i]);
 			num++;
 			address += MEM_SIZE / nb_player;
 			address >= MEM_SIZE ? address -= MEM_SIZE : 0;
@@ -85,7 +85,7 @@ int main(int nb_arg, char **arg_tab)
 {
 	size_t nb_player = get_nb_player(nb_arg, arg_tab);
 	player_t *player;
-	char tab[MEM_SIZE] = {0};
+	corewar_t core = {.nbr_cycle = CYCLE_TO_DIE};
 
 	if (nb_arg == 1 || (nb_arg >= 1 && !my_strcmp(arg_tab[1], "-h"))) {
 		help(arg_tab[0]);
@@ -96,9 +96,9 @@ int main(int nb_arg, char **arg_tab)
 	player = malloc(sizeof(player_t) * nb_player);
 	if (player == NULL)
 		return (84);
-	if (main2(arg_tab, tab, nb_player, player) == 84)
+	if (main2(arg_tab, &core, nb_player, player) == 84)
 		return (84);
-	corewar(tab, nb_player, player);
+	corewar(&core, nb_player, player);
 	for (size_t i = 0; i < nb_player; i++)
 		player_destroy(player + i);
 	free(player);
