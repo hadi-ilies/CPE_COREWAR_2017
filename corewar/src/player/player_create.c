@@ -22,7 +22,7 @@ void get_name(char name[], char *file_name)
 	close(fd);
 }
 
-player_t player_create(size_t num, size_t offset, char *file_name)
+player_t player_create(size_t num, size_t offset, char *file_name, size_t nb_c)
 {
 	player_t player;
 
@@ -34,7 +34,8 @@ player_t player_create(size_t num, size_t offset, char *file_name)
 	set_reg(player.reg[0], num);
 	player.offset = offset;
 	player.carry = false;
-	player.alive = false;
+	player.live = false;
 	player.cycle = 0;
+	player.cycle_live = nb_c;
 	return (player);
 }

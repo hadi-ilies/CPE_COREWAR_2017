@@ -11,6 +11,7 @@ SRC_DIR		=	src/
 INC_DIR		=	include/
 COMMON_DIR	=	../common/
 LIB_DIR		=	../lib/
+CORE_DIR	=	$(SRC_DIR)corewar/
 PLAY_DIR	=	$(SRC_DIR)player/
 OP_DIR		=	$(SRC_DIR)op/
 COMMON_SRC_DIR	=	$(COMMON_DIR)$(SRC_DIR)
@@ -27,8 +28,9 @@ SRC		=	$(SRC_DIR)main.c \
 			$(SRC_DIR)get_arg.c \
 			$(SRC_DIR)get_int.c \
 			$(SRC_DIR)v3c.c \
+			$(CORE_DIR)corewar_create.c \
+			$(CORE_DIR)corewar_destroy.c \
 			$(PLAY_DIR)player_create.c \
-			$(PLAY_DIR)player_destroy.c \
 			$(PLAY_DIR)set_reg.c \
 			$(PLAY_DIR)offset_move.c \
 			$(OP_DIR)op_live.c \

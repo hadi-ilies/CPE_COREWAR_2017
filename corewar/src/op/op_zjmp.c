@@ -16,7 +16,7 @@ void op_zjmp(char tab[], player_t *player, size_t nb_player, size_t player_num)
 	num <<= 8;
 	num = tab[player[player_num].offset + 2];
 	if (player[player_num].carry)
-		player[player_num].offset += num;
+		offset_move(&player[player_num].offset, num % IDX_MOD);
 	else
 		player[player_num].offset += 3;
 }

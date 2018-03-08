@@ -5,8 +5,6 @@
 ** main
 */
 
-#include <stdio.h>    /* tmp */
-#include <stdlib.h>  /* tmp */
 #include "my.h"
 #include "op.h"
 #include "player.h"
@@ -51,12 +49,12 @@ int get_nb_arg(char **arg_tab)
 	return (i);
 }
 
-int main2(char **arg_tab, corewar_t *core, size_t nb_player, player_t *player)
+int main2(char **arg_tab, corewar_t *core)
 {
 	int nb_arg = get_nb_arg(arg_tab);
 	size_t num = 1;
 	size_t address = 0;
-	size_t p_i = 0;
+	size_t pi = 0;
 
 	for (int i = 1; i < nb_arg; i++) {
 		if (!my_strcmp(arg_tab[i], "-dump") && nb_arg > i + 1)
@@ -68,13 +66,13 @@ int main2(char **arg_tab, corewar_t *core, size_t nb_player, player_t *player)
 		else {
 			if ((int)i >= nb_arg)
 				return (84);
-			/*if (test_header(arg_tab[i]) == false)
-			  return (84);*/
+			if (test_header(arg_tab[i]) == false)
+				return (84);
 			if (cor_to_tab(core->tab, arg_tab[i], address) == false)
 				return (84);
-			player[p_i++] = player_create(num, address, arg_tab[i]);
+			core->player[pi++] = player_create(num, address, arg_tab[i], core->nbr_cycle);
 			num++;
-			address += MEM_SIZE / nb_player;
+			address += MEM_SIZE / core->nb_player;
 			address >= MEM_SIZE ? address -= MEM_SIZE : 0;
 		}
 	}
@@ -83,24 +81,22 @@ int main2(char **arg_tab, corewar_t *core, size_t nb_player, player_t *player)
 
 int main(int nb_arg, char **arg_tab)
 {
-	size_t nb_player = get_nb_player(nb_arg, arg_tab);
-	player_t *player;
-	corewar_t core = {.nbr_cycle = CYCLE_TO_DIE};
+	corewar_t core;
 
 	if (nb_arg == 1 || (nb_arg >= 1 && !my_strcmp(arg_tab[1], "-h"))) {
 		help(arg_tab[0]);
 		return (0);
 	}
-	if (nb_player < 2 || nb_player > MAX_NB_PLAYER)
+	core = corewar_create(get_nb_player(nb_arg, arg_tab));
+	core.nbr_cycle = CYCLE_TO_DIE;
+	core.nb_put_live = 0;
+	if (core.nb_player < 2 || core.nb_player > MAX_NB_PLAYER)
 		return (84);
-	player = malloc(sizeof(player_t) * nb_player);
-	if (player == NULL)
+	if (core.player == NULL)
 		return (84);
-	if (main2(arg_tab, &core, nb_player, player) == 84)
+	if (main2(arg_tab, &core) == 84)
 		return (84);
-	corewar(&core, nb_player, player);
-	for (size_t i = 0; i < nb_player; i++)
-		player_destroy(player + i);
-	free(player);
+	corewar(&core);
+	corewar_destroy(&core);
 	return (0);
 }

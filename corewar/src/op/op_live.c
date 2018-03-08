@@ -10,7 +10,7 @@
 
 void op_live(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	// 01 00 00 01
+	// 01 00 00 00 01
 	int num = tab[player[player_num].offset + 1];
 
 	num <<= 8;
@@ -21,8 +21,10 @@ void op_live(char tab[], player_t *player, size_t nb_player, size_t player_num)
 	num += tab[player[player_num].offset + 4];
 	for (size_t i = 0; i < nb_player; i++)
 		if ((size_t)num == player[i].num) {
-			my_printf("Le joueur %d (", num);
-			my_printf("%s) est en vie.\n", player[i].name);
+			player[i].live = true;
+			my_printf("The player %d(", num);
+			my_printf("%s) is alive.\n", player[i].name);
+			break;
 		}
 	player[player_num].offset += 5;
 }

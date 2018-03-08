@@ -5,7 +5,6 @@
 ** cor_to_tab
 */
 
-#include <stdio.h> /* tmp */
 #include <unistd.h>
 #include <fcntl.h>
 #include "prototype.h"
@@ -30,9 +29,5 @@ bool cor_to_tab(char tab[], char *file_name, int address)
 	}
 	while (n == sizeof(char));
 	close(fd);
-	for (i = 0; i < MEM_SIZE; i++) {      /* tmp */
-		printf("%x ", tab[i]);       /* tmp */
-	}                                   /* tmp */
-	printf("\n");                      /* tmp */
 	return (true);
 }

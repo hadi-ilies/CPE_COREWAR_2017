@@ -5,6 +5,7 @@
 ** test_header
 */
 
+#include <byteswap.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include "prototype.h"
@@ -22,7 +23,7 @@ bool test_header(char *file_name)
 		return (false);
 	}
 	close(fd);
-	if (corewar_exec_magic == COREWAR_EXEC_MAGIC)
+	if (bswap_32(corewar_exec_magic) == COREWAR_EXEC_MAGIC)
 		return (true);
 	return (false);
 }

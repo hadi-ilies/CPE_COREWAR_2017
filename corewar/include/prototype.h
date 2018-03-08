@@ -18,7 +18,8 @@ typedef struct {
 } vector3c_t;
 
 void help(char *exe);
-int corewar(corewar_t *core, size_t nb_player, player_t *player);
+bool test_header(char *file_name);
+int corewar(corewar_t *core);
 size_t get_nb_player(int nb_arg, char **arg_tab);
 bool cor_to_tab(char tab[], char *file_name, int address);
 char get_type_from_coding_byte(char code, char coding_byte, char arg_num);

@@ -14,11 +14,11 @@ void op_add(char tab[], player_t *player, size_t nb_player, size_t player_num)
 	char *registre_3 = &tab[player[player_num].offset + 3];
 	bool *carry = &player[player_num].carry;
 
-	(void)tab;
-	(void)player;
 	(void)nb_player;
 	(*registre_3) = (*registre_1) + (*registre_2);
 	if ((*registre_3) == 0)
-		(*carry) = ((*carry) ? false : true);
+		*carry = true;
+	else
+		*carry = false;
 	player[player_num].offset += 4;
 }
