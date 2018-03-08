@@ -11,42 +11,11 @@
 #include "corewar.h"
 #include "prototype.h"
 
-size_t get_dump(char **arg_tab, int *i)
+void incre_address(size_t *num, size_t *address, corewar_t *core)
 {
-	int tmp;
-
-	*i += 1;
-	if (!my_atoi(&tmp, arg_tab[*i]) || tmp <= 0)
-		return (84);
-	return (tmp);
-}
-
-size_t get_num(char **arg_tab, int *i)
-{
-	int tmp;
-
-	*i += 1;
-	if (my_atoi(&tmp, arg_tab[*i]) == false || tmp < 0)
-		return (84);
-	return (tmp);
-}
-
-size_t get_address(char **arg_tab, int *i)
-{
-	int tmp;
-
-	*i += 1;
-	if (my_atoi(&tmp, arg_tab[*i]) == false || tmp < 0 || tmp >= MEM_SIZE)
-		return (84);
-	return (tmp);
-}
-
-int get_nb_arg(char **arg_tab)
-{
-	int i = 0;
-
-	for (; arg_tab[i] != NULL; i++);
-	return (i);
+	(*num)++;
+	(*address) += MEM_SIZE / core->nb_player;
+	(*address) >= MEM_SIZE ? (*address) -= MEM_SIZE : 0;
 }
 
 int main2(char **arg_tab, corewar_t *core)
@@ -64,16 +33,10 @@ int main2(char **arg_tab, corewar_t *core)
 		else if (!my_strcmp(arg_tab[i], "-a") && nb_arg > i + 1)
 			address = get_address(arg_tab, &i);
 		else {
-			if ((int)i >= nb_arg)
+			if (COND)
 				return (84);
-			if (test_header(arg_tab[i]) == false)
-				return (84);
-			if (cor_to_tab(core->tab, arg_tab[i], address) == false)
-				return (84);
-			core->player[pi++] = player_create(num, address, arg_tab[i], core->nbr_cycle);
-			num++;
-			address += MEM_SIZE / core->nb_player;
-			address >= MEM_SIZE ? address -= MEM_SIZE : 0;
+			C_P;
+			incre_address(&num, &address, core);
 		}
 	}
 	return (0);
