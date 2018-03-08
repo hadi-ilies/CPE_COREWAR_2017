@@ -9,7 +9,6 @@
 
 void op_sti(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	//0b 68 01 00 0f 00 01
 	size_t i_code = player[player_num].offset;
 	char code = get_char(tab, &player[player_num]);
 	char cb = get_char(tab, &player[player_num]);

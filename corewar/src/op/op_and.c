@@ -9,7 +9,6 @@
 
 void op_and(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	//06 64 01 00 00 00 00 01
 	char code = get_char(tab, &player[player_num]);
 	char cb = get_char(tab, &player[player_num]);
 	int nb1 = get_int1(tab, &player[player_num], v3c(code, cb, 0));
