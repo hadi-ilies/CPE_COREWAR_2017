@@ -38,17 +38,29 @@ bool write_instruct(inst_t *instruct, asm_t *asm_s)
 	return (true);
 }
 
+int stall_left_coding_byte(int id)
+{
+	if (id == 2)
+		return (2);
+	if (id == 3)
+		return (2);
+	if (id == 13)
+		return (2);
+	return (0);
+}
+
 bool parser_instruction(asm_t *asm_s)
 {
 	for (size_t i = 2; ASM_CODE[i] != NULL; i++) {
-		inst_t instruct = {ASM_CODE[i],	{'\0'},	false, {false},	0, 0};
+		inst_t inst = {ASM_CODE[i],{'\0'},false, {false},0, 0};
 
-		asm_s->line_err = instruct.line;
-		if (!write_instruct(&instruct, asm_s))
+		asm_s->line_err = inst.line;
+		if (!write_instruct(&inst, asm_s))
 			return (false);
-		if (!(CHAMP_CODE = my_instruct_cat(asm_s, &instruct)))
+		inst.instruct[1] <<= stall_left_coding_byte(inst.instruct[0]);
+		if (!(CHAMP_CODE = my_instruct_cat(asm_s, &inst)))
 			return (false);
-		PROG_SIZE += instruct.pos;
+		PROG_SIZE += inst.pos;
 	}
 	return (true);
 }

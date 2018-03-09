@@ -41,11 +41,11 @@ void sub_nbr_cycle(corewar_t *core)
 
 bool test_win(size_t nb_player, player_t *player)
 {
-	if (nb_player_alive(nb_player, player) == 0)
-		return (true);
-	if (nb_player_alive(nb_player, player) == 1) {
-		player_t player_won = get_player_win(nb_player, player);
+	if (nb_player_alive(nb_player, player) <= 1) {
+		player_t player_won = player[0];
 
+		if (nb_player_alive(nb_player, player) == 1)
+			player_won = get_player_win(nb_player, player);
 		my_printf("The player %d(", player_won.num);
 		my_printf("%s) has won.\n", player_won.name);
 		return (true);
