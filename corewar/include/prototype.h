@@ -13,6 +13,7 @@
 
 #define COND (int)i >= nb_arg || test_header(arg_tab[i]) == false \
 		|| cor_to_tab(core->tab, arg_tab[i], address) == false
+#define COND_AD else if (!my_strcmp(arg_tab[i], "-n") && nb_arg > i + 1)
 #define C_P core->player[pi++] = player_create(num, address, arg_tab[i], \
 				core->nbr_cycle)
 typedef struct {

@@ -18,7 +18,7 @@ void incre_address(size_t *num, size_t *address, corewar_t *core)
 	(*address) >= MEM_SIZE ? (*address) -= MEM_SIZE : 0;
 }
 
-int main2(char **arg_tab, corewar_t *core)
+int insert_adress(char **arg_tab, corewar_t *core)
 {
 	int nb_arg = get_nb_arg(arg_tab);
 	size_t num = 1;
@@ -28,8 +28,8 @@ int main2(char **arg_tab, corewar_t *core)
 	for (int i = 1; i < nb_arg; i++) {
 		if (!my_strcmp(arg_tab[i], "-dump") && nb_arg > i + 1)
 			core->nbr_cycle = get_dump(arg_tab, &i);
-		else if (!my_strcmp(arg_tab[i], "-n") && nb_arg > i + 1)
-			num = get_num(arg_tab, &i);
+		COND_AD
+		num = get_num(arg_tab, &i);
 		else if (!my_strcmp(arg_tab[i], "-a") && nb_arg > i + 1)
 			address = get_address(arg_tab, &i);
 		else {
@@ -57,7 +57,7 @@ int main(int nb_arg, char **arg_tab)
 		return (84);
 	if (core.player == NULL)
 		return (84);
-	if (main2(arg_tab, &core) == 84)
+	if (insert_adress(arg_tab, &core) == 84)
 		return (84);
 	corewar(&core);
 	corewar_destroy(&core);
