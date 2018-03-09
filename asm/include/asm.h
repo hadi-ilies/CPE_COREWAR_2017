@@ -28,6 +28,8 @@
 #define ERROR(x) (x != 'r' && x != DIRECT_CHAR && !IS_NUM(x) && x != LABEL_CHAR)
 #define IS_LABEL_CHAR(x)	(x == '_' || (x >= 'a' && x <= 'z') ||	\
 				(x >= '0' && x <= '9'))
+#define LABEL(k)		labels[k].label
+
 
 extern const char DELIM[3];
 

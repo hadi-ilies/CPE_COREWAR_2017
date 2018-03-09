@@ -9,8 +9,6 @@
 #include "asm.h"
 #include "my.h"
 
-#define LABEL(k) labels[k].label
-
 int get_len_label(char *line)
 {
 	for (int j = 0; line[j] != '\0'; j++)
