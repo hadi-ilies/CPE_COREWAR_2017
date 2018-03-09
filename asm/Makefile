@@ -13,6 +13,7 @@ SRC		=	$(SRC_DIR)main.c	\
 			$(SRC_DIR)compile_asm.c	\
 			$(SRC_DIR)parser_instruction.c	\
 			$(LABEL_DIR)get_labels.c	\
+			$(LABEL_DIR)already_exist.c	\
 			$(LABEL_DIR)get_pos_label.c	\
 			$(LABEL_DIR)is_valid_label_char.c	\
 			$(LABEL_DIR)get_sub_label.c	\
