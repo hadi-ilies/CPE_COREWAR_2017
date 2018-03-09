@@ -34,7 +34,8 @@ size_t get_address(char **arg_tab, int i)
 {
 	int tmp = 0;
 
-	if (my_atoi(&tmp, arg_tab[i + 1]) == false || tmp < 0 || tmp >= MEM_SIZE)
+	if (my_atoi(&tmp, arg_tab[i + 1]) == false || tmp < 0
+	|| tmp >= MEM_SIZE)
 		return (84);
 	return (tmp);
 }

@@ -56,7 +56,7 @@ int insert_adress(char **arg_tab, corewar_t *core)
 			a_option(arg_tab, &i, &address);
 		}
 		if (i >= nb_arg || !test_header(arg_tab[i]) ||
-		    !cor_to_tab(core->tab, arg_tab[i], address))
+		!cor_to_tab(core->tab, arg_tab[i], address))
 			return (84);
 		else {
 			core->player[pi++] = CREATE_PLAYER;
