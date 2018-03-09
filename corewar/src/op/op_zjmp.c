@@ -9,9 +9,10 @@
 
 void op_zjmp(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	short num = tab[player[player_num].offset + 1];
+	short num = 0;
 
 	(void)nb_player;
+	num += tab[player[player_num].offset + 1];
 	num <<= 8;
 	num = tab[player[player_num].offset + 2];
 	if (player[player_num].carry)
