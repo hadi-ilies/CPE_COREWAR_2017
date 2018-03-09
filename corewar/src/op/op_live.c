@@ -10,7 +10,6 @@
 
 void op_live(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	// 01 00 00 00 01
 	int num = tab[player[player_num].offset + 1];
 
 	num <<= 8;

@@ -9,7 +9,6 @@
 
 void op_zjmp(char tab[], player_t *player, size_t nb_player, size_t player_num)
 {
-	// 09 ff fb
 	short num = tab[player[player_num].offset + 1];
 
 	(void)nb_player;
