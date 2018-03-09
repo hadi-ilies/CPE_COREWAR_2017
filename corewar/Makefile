@@ -58,7 +58,7 @@ OBJ		=	$(SRC:.c=.o)
 
 CFLAGS		+=	-I $(INC_DIR)
 CFLAGS          +=	-I $(COMMON_INC_DIR)
-CFLAGS		+=	-W -Wall -Wextra -g
+CFLAGS		+=	-W -Wall -Wextra
 CFLAGS		+=	-fdiagnostics-color
 
 LDFLAGS		=	-L $(LIB_DIR) -lmy
