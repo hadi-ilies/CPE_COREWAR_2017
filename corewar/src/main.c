@@ -11,37 +11,6 @@
 #include "corewar.h"
 #include "prototype.h"
 
-void incre_address(size_t *num, size_t *address, corewar_t *core)
-{
-	(*num)++;
-	(*address) += MEM_SIZE / core->nb_player;
-	(*address) >= MEM_SIZE ? (*address) -= MEM_SIZE : 0;
-}
-
-int insert_adress(char **arg_tab, corewar_t *core)
-{
-	int nb_arg = get_nb_arg(arg_tab);
-	size_t num = 1;
-	size_t address = 0;
-	size_t pi = 0;
-
-	for (int i = 1; i < nb_arg; i++) {
-		if (!my_strcmp(arg_tab[i], "-dump") && nb_arg > i + 1)
-			core->nbr_cycle = get_dump(arg_tab, &i);
-		COND_AD
-		num = get_num(arg_tab, &i);
-		else if (!my_strcmp(arg_tab[i], "-a") && nb_arg > i + 1)
-			address = get_address(arg_tab, &i);
-		else {
-			if (COND)
-				return (84);
-			C_P;
-			incre_address(&num, &address, core);
-		}
-	}
-	return (0);
-}
-
 int main(int nb_arg, char **arg_tab)
 {
 	corewar_t core;

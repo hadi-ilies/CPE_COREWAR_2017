@@ -12,32 +12,29 @@
 #include "corewar.h"
 #include "prototype.h"
 
-size_t get_dump(char **arg_tab, int *i)
+size_t get_dump(char **arg_tab, int i)
 {
-	int tmp;
+	int tmp = 0;
 
-	*i += 1;
-	if (!my_atoi(&tmp, arg_tab[*i]) || tmp <= 0)
+	if (!my_atoi(&tmp, arg_tab[i + 1]) || tmp <= 0)
 		return (84);
 	return (tmp);
 }
 
-size_t get_num(char **arg_tab, int *i)
+size_t get_num(char **arg_tab, int i)
 {
-	int tmp;
+	int tmp = 0;
 
-	*i += 1;
-	if (my_atoi(&tmp, arg_tab[*i]) == false || tmp < 0)
+	if (my_atoi(&tmp, arg_tab[i + 1]) == false || tmp < 0)
 		return (84);
 	return (tmp);
 }
 
-size_t get_address(char **arg_tab, int *i)
+size_t get_address(char **arg_tab, int i)
 {
-	int tmp;
+	int tmp = 0;
 
-	*i += 1;
-	if (my_atoi(&tmp, arg_tab[*i]) == false || tmp < 0 || tmp >= MEM_SIZE)
+	if (my_atoi(&tmp, arg_tab[i + 1]) == false || tmp < 0 || tmp >= MEM_SIZE)
 		return (84);
 	return (tmp);
 }

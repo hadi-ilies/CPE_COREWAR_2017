@@ -18,10 +18,11 @@ COMMON_SRC_DIR	=	$(COMMON_DIR)$(SRC_DIR)
 COMMON_INC_DIR	=	$(COMMON_DIR)$(INC_DIR)
 
 SRC		=	$(SRC_DIR)main.c \
+			$(SRC_DIR)options.c \
+			$(SRC_DIR)play.c \
 			$(SRC_DIR)get_para.c \
 			$(SRC_DIR)help.c \
 			$(SRC_DIR)corewar.c \
-			$(SRC_DIR)corewar2.c \
 			$(SRC_DIR)get_nb_player.c \
 			$(SRC_DIR)test_header.c \
 			$(SRC_DIR)cor_to_tab.c \
