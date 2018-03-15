@@ -43,6 +43,8 @@ bool compile_asm(asm_t *asm_s)
 		if (stock_line_in_tab(asm_s, line, &i) == false)
 			return (false);
 	}
+	if (my_tablen(ASM_CODE) < 3)
+		return (false);
 	if ((ASM_LABELS = get_labels(asm_s, ASM_CODE)) == NULL)
 		return (false);
 	if (parser_instruction(asm_s) == false)

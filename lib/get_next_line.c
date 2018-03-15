@@ -74,6 +74,8 @@ char *get_next_line(int fd)
 
 	if ((pos_back_n = check_back_n(tmp)) == -1) {
 		if ((size = read(fd, buffer, BUFSIZ)) > 0) {
+			if (*buffer == '\0')
+				return (NULL);
 			buffer[size] = '\0';
 			tmp = concat(tmp, buffer);
 			return (get_next_line(fd));

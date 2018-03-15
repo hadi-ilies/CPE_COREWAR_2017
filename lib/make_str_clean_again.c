@@ -60,6 +60,8 @@ char *make_str_clean_again(char *str, const char *delim)
 			clean_str[j++] = ' ';
 			tmp = false;
 		}
+	if (j == 0)
+		return (NULL);
 	clean_str[(clean_str[j - 1] == ' ') ? j - 1 : j] = '\0';
 	free(str);
 	return (clean_str);

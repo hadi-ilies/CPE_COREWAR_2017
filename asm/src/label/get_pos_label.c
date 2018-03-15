@@ -41,6 +41,8 @@ bool parse_label(char *line, int j, ssize_t *pos)
 	int nparam = 0;
 	char *mnemo = my_strndup(line, j);
 
+	if (mnemo == NULL)
+		return (false);
 	line += j;
 	for (; *line != '\0'; line += get_next_arg(line)) {
 		if (*line == 'r')
